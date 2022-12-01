@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "678433047441",
+    "project_id": "ticket-wisata-donorojo",
+    "storage_bucket": "ticket-wisata-donorojo.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:678433047441:android:7e7f89c8bb98e2d75d9030",
+        "android_client_info": {
+          "package_name": "com.hadiwi.ticket_wisata_donorojo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "678433047441-uhgids01kltip37gb9d4qko37gd6uvvv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDopzsT_IOETGzFms0Bff5sWyI1z_5ZnSw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "678433047441-uhgids01kltip37gb9d4qko37gd6uvvv.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "678433047441-ake7fbtg74u51l3cgul5uv62gmddbfmh.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.hadiwi.ticketWisataDonorojo"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
