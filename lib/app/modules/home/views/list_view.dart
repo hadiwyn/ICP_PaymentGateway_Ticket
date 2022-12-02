@@ -44,7 +44,7 @@ class listView extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) {
-                    return DetailWisata(detail);
+                    return DetailWisata(detail: detail);
                   }),
                 );
               },

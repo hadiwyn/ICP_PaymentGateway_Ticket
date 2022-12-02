@@ -8,7 +8,7 @@ class DetailWisata extends StatefulWidget {
 
   var detail;
 
-  DetailWisata(this.detail);
+  DetailWisata({Key? key, required this.detail}) : super(key: key);
 
   @override
   State<DetailWisata> createState() => _DetailWisataState();
@@ -17,8 +17,14 @@ class DetailWisata extends StatefulWidget {
 class _DetailWisataState extends State<DetailWisata> {
   TextEditingController dateInput = TextEditingController();
 
+  final peopleInput = TextEditingController();
+
+  int _quantity = 1;
+
+  @override
   void initState() {
-    dateInput.text = ""; //set the initial value of text field
+    dateInput.text = "";
+    peopleInput.text = "1"; //set the initial value of text field
     super.initState();
   }
 
@@ -43,7 +49,7 @@ class _DetailWisataState extends State<DetailWisata> {
                 child: Column(children: [
                   // ignore: prefer_const_constructors
                   Text(
-                    "nama",
+                    widget.detail["nama"],
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   ),
                   Padding(
@@ -85,19 +91,68 @@ class _DetailWisataState extends State<DetailWisata> {
                   ),
                   Padding(
                     padding:
-                        const EdgeInsets.only(top: 15, left: 10, right: 10),
-                    child: TextField(
-                      decoration:
-                          // ignore: prefer_const_constructors
-                          InputDecoration(
-                              icon: Icon(Icons.people),
-                              labelText: "Jumlah Orang"),
-                      keyboardType: TextInputType.number,
-                      inputFormatters: <TextInputFormatter>[
-                        FilteringTextInputFormatter.digitsOnly
-                      ], // Only numbers can be entered
+                        const EdgeInsets.only(left: 10, right: 10, top: 40),
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: TextField(
+                            controller: peopleInput,
+                            enabled: false,
+                            decoration:
+                                // ignore: prefer_const_constructors
+                                InputDecoration(
+                                    icon: Icon(Icons.people),
+                                    labelText:
+                                        "Jumlah Orang"), // Only numbers can be entered
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(right: 15, left: 20),
+                          child: Container(
+                            width: 50,
+                            height: 50,
+                            child: OutlinedButton(
+                              onPressed: () {
+                                setState(() {
+                                  _quantity -= 1;
+                                  peopleInput.text = _quantity.toString();
+                                });
+                                print(_quantity);
+                                print(peopleInput.text);
+                              },
+                              child: Icon(
+                                Icons.remove,
+                                size: 20,
+                                color: Colors.black,
+                              ),
+                            ),
+                          ),
+                        ),
+                        Container(
+                          width: 50,
+                          height: 50,
+                          child: OutlinedButton(
+                            onPressed: () {
+                              setState(() {
+                                _quantity += 1;
+                                peopleInput.text = _quantity.toString();
+                              });
+                              print(_quantity);
+                              print(peopleInput.text);
+                            },
+                            child: Icon(
+                              Icons.add,
+                              size: 20,
+                              color: Colors.black,
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
+
+                  Text(dateInput.text),
+                  Text(peopleInput.text),
                 ]),
               ),
             ),
