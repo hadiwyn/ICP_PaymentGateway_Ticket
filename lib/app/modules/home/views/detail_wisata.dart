@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
@@ -16,20 +18,24 @@ class DetailWisata extends StatefulWidget {
 
 class _DetailWisataState extends State<DetailWisata> {
   TextEditingController dateInput = TextEditingController();
-
-  final peopleInput = TextEditingController();
+  TextEditingController peopleInput = TextEditingController();
+  TextEditingController totalHarga = TextEditingController();
 
   int _quantity = 1;
+  int totalPrice = 0;
 
   @override
   void initState() {
     dateInput.text = "";
-    peopleInput.text = "1"; //set the initial value of text field
+    peopleInput.text = "1";
+    totalHarga.text = "Rp. ${widget.detail["harga"]}";
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+    int harga = int.parse(widget.detail["harga"]);
+
     return Scaffold(
         appBar: AppBar(
           title: const Text('DetailWisataView'),
@@ -116,7 +122,11 @@ class _DetailWisataState extends State<DetailWisata> {
                                 setState(() {
                                   _quantity -= 1;
                                   peopleInput.text = _quantity.toString();
+                                  totalHarga.text = totalPrice.toString();
                                 });
+                                for (int i = 0; i > _quantity; i--) {
+                                  totalPrice -= harga;
+                                }
                                 print(_quantity);
                                 print(peopleInput.text);
                               },
@@ -136,9 +146,14 @@ class _DetailWisataState extends State<DetailWisata> {
                               setState(() {
                                 _quantity += 1;
                                 peopleInput.text = _quantity.toString();
+                                totalHarga.text = totalPrice.toString();
                               });
+                              for (int i = 0; i < _quantity; i++) {
+                                totalPrice += harga;
+                              }
                               print(_quantity);
-                              print(peopleInput.text);
+                              print(totalPrice);
+                              print(harga);
                             },
                             child: Icon(
                               Icons.add,
@@ -148,6 +163,20 @@ class _DetailWisataState extends State<DetailWisata> {
                           ),
                         ),
                       ],
+                    ),
+                  ),
+                  Padding(
+                    padding:
+                        const EdgeInsets.only(top: 30, left: 10, right: 10),
+                    child: TextField(
+                      controller: totalHarga,
+                      enabled: false,
+                      decoration:
+                          // ignore: prefer_const_constructors
+                          InputDecoration(
+                              icon: const Icon(Icons.price_change),
+                              labelText:
+                                  "Total Harga"), // Only numbers can be entered
                     ),
                   ),
 
