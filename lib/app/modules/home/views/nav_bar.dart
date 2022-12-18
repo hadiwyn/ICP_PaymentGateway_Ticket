@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 class navBar extends StatelessWidget {
@@ -13,8 +12,8 @@ class navBar extends StatelessWidget {
             decoration: BoxDecoration(
               color: Colors.amber,
             ),
-            accountName: Text("Coba"),
-            accountEmail: Text("Email"),
+            accountName: Text("Hadi Wiyono"),
+            accountEmail: Text("hadiyw400@gmail.com"),
             currentAccountPicture: CircleAvatar(
               child: ClipOval(
                 child: Image.network('https://picsum.photos/250?image=9'),
@@ -22,22 +21,22 @@ class navBar extends StatelessWidget {
             ),
           ),
           ListTile(
-            leading: Icon(Icons.access_time),
-            title: Text("Coba"),
+            leading: Icon(Icons.person),
+            title: Text("Akun"),
           ),
           ListTile(
-            leading: Icon(Icons.access_time),
-            title: Text("Coba"),
-          ),
-          Divider(),
-          ListTile(
-            leading: Icon(Icons.access_time),
-            title: Text("Coba"),
+            leading: Icon(Icons.settings),
+            title: Text("Pengaturan"),
           ),
           Divider(),
           ListTile(
-            leading: Icon(Icons.access_time),
-            title: Text("Coba"),
+            leading: Icon(Icons.feedback),
+            title: Text("Masukan"),
+          ),
+          Divider(),
+          ListTile(
+            leading: Icon(Icons.logout),
+            title: Text("Keluar"),
           ),
         ],
       ),

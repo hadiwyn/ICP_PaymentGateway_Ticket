@@ -1,8 +1,13 @@
-import 'dart:ffi';
+import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
+import 'package:ticket_wisata_donorojo/app/modules/home/views/snap_view.dart';
+import 'package:webview_flutter/webview_flutter.dart';
+
+const CHENNEL = "com.hadiwi.ticket_wisata_donorojo";
+const KEY_NATIVE = "ShowTiketWisata";
 
 // ignore: must_be_immutable
 class DetailWisata extends StatefulWidget {
@@ -21,13 +26,18 @@ class _DetailWisataState extends State<DetailWisata> {
   TextEditingController peopleInput = TextEditingController();
   TextEditingController totalHarga = TextEditingController();
 
-  int _quantity = 1;
+  final controller = Completer<WebViewController>();
+
+  static const platform = const MethodChannel(CHENNEL);
+
+  int _quantity = 0;
   int totalPrice = 0;
 
   @override
   void initState() {
+    totalPrice.toInt();
     dateInput.text = "";
-    peopleInput.text = "1";
+    peopleInput.text = "0";
     totalHarga.text = "Rp. ${widget.detail["harga"]}";
     super.initState();
   }
@@ -123,10 +133,11 @@ class _DetailWisataState extends State<DetailWisata> {
                                   _quantity -= 1;
                                   peopleInput.text = _quantity.toString();
                                   totalHarga.text = totalPrice.toString();
-                                });
-                                for (int i = 0; i > _quantity; i--) {
                                   totalPrice -= harga;
-                                }
+                                });
+                                // for (int i = 0; i > _quantity; i--) {
+                                //   totalPrice -= harga;
+                                // }
                                 print(_quantity);
                                 print(peopleInput.text);
                               },
@@ -147,10 +158,11 @@ class _DetailWisataState extends State<DetailWisata> {
                                 _quantity += 1;
                                 peopleInput.text = _quantity.toString();
                                 totalHarga.text = totalPrice.toString();
-                              });
-                              for (int i = 0; i < _quantity; i++) {
                                 totalPrice += harga;
-                              }
+                              });
+                              // for (int i = 0; i < _quantity; i++) {
+                              //   totalPrice += harga;
+                              // }
                               print(_quantity);
                               print(totalPrice);
                               print(harga);
@@ -179,6 +191,26 @@ class _DetailWisataState extends State<DetailWisata> {
                                   "Total Harga"), // Only numbers can be entered
                     ),
                   ),
+                  OutlinedButton(
+                      onPressed: (() {
+                        String? url =
+                            "https://sample-demo-dot-midtrans-support-tools.et.r.appspot.com/snap-redirect/";
+
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) {
+                            return SnapWebViewScreen();
+                          }),
+                        );
+
+                        // Navigator.of(context).pushNamed(
+                        //   SnapWebViewScreen.routeName,
+                        //   arguments: {
+                        //     'url': url,
+                        //   },
+                        // );
+                      }),
+                      child: Text("Beli")),
 
                   Text(dateInput.text),
                   Text(peopleInput.text),
@@ -187,5 +219,13 @@ class _DetailWisataState extends State<DetailWisata> {
             ),
           ),
         ));
+  }
+
+  Future<Null> _showNativeView() async {
+    await platform.invokeMethod(KEY_NATIVE, {
+      "name": widget.detail["nama"],
+      "price": widget.detail["harga"],
+      "quantity": _quantity,
+    });
   }
 }

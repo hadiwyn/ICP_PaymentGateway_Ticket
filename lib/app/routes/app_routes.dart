@@ -9,6 +9,7 @@ abstract class Routes {
   static const LIST_VIEW = _Paths.LIST_VIEW;
   static const ADD_DATA = _Paths.ADD_DATA;
   static const DETAIL_WISATA = _Paths.DETAIL_WISATA;
+  static const SNAP_VIEW = _Paths.SNAP_VIEW;
 }
 
 abstract class _Paths {
@@ -19,4 +20,5 @@ abstract class _Paths {
   static const LIST_VIEW = '/list-view';
   static const ADD_DATA = '/add-data';
   static const DETAIL_WISATA = '/detail-wisata';
+  static const SNAP_VIEW = '/snap-view';
 }

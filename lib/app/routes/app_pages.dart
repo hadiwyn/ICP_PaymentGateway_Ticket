@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:ticket_wisata_donorojo/app/modules/home/views/snap_view.dart';
 
 import '../modules/add_data/bindings/add_data_binding.dart';
 import '../modules/add_data/views/add_data_view.dart';

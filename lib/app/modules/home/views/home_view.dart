@@ -1,14 +1,16 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/material.dart';
+import 'package:ticket_wisata_donorojo/app/modules/add_data/views/add_data_view.dart';
 import 'package:ticket_wisata_donorojo/app/modules/home/views/page_view.dart';
-import 'list_view.dart';
+import 'package:webview_flutter/webview_flutter.dart';
+import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import '../../../routes/app_pages.dart';
 import '../controllers/home_controller.dart';
 
+import 'list_view.dart';
 import 'nav_bar.dart';
 
 class HomeView extends GetView<HomeController> {
@@ -18,6 +20,11 @@ class HomeView extends GetView<HomeController> {
 
   @override
   Widget build(BuildContext context) {
+    bool isDesktop(BuildContext context) =>
+        MediaQuery.of(context).size.width >= 600;
+    bool isMobile(BuildContext context) =>
+        MediaQuery.of(context).size.width < 600;
+
     return Scaffold(
       key: scaffoldKey,
       drawer: navBar(),
@@ -41,27 +48,29 @@ class HomeView extends GetView<HomeController> {
               return SingleChildScrollView(
                 child: Column(
                   children: [
-                    Row(
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        Expanded(
-                          child: Padding(
-                            padding: EdgeInsetsDirectional.only(top: 12),
-                            child: Container(
-                              width: MediaQuery.of(context).size.width * 0.5,
-                              height: 150,
-                              child: Stack(
-                                // ignore: prefer_const_literals_to_create_immutables
-                                children: [
-                                  pageView(),
-                                ],
+                    if (isMobile(context))
+                      Row(
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          Expanded(
+                            child: Padding(
+                              padding: EdgeInsetsDirectional.only(top: 12),
+                              child: Container(
+                                width: MediaQuery.of(context).size.width * 0.5,
+                                height: 150,
+                                child: Stack(
+                                  // ignore: prefer_const_literals_to_cre
+                                  // ate_immutables
+                                  children: [
+                                    pageView(),
+                                  ],
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                      ],
-                    ),
-                    listView(listAllDocument),
+                        ],
+                      ),
+                    if (isMobile(context)) listView(listAllDocument),
                   ],
                 ),
               );
@@ -71,7 +80,7 @@ class HomeView extends GetView<HomeController> {
             );
           }),
       floatingActionButton: Visibility(
-          visible: true,
+          visible: false,
           child: FloatingActionButton(
             onPressed: () => Get.toNamed(Routes.ADD_DATA),
             child: Icon(Icons.add),
