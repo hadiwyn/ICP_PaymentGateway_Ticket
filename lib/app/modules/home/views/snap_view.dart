@@ -17,11 +17,6 @@ class _WebViewAppState extends State<SnapWebViewScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // final routeArgs =
-    // ModalRoute
-    //     .of(context)!
-    //     .settings
-    //     .arguments as Map<String, String>;
     final url = 'https://sample-demo-dot-midtrans-support-tools.et.r.appspot.com/snap-redirect/';
     return Scaffold(
       body: SafeArea(

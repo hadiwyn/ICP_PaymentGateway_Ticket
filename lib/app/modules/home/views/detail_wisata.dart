@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
+import 'package:ticket_wisata_donorojo/app/modules/home/views/midtrans_view.dart';
 import 'package:ticket_wisata_donorojo/app/modules/home/views/snap_view.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
@@ -30,15 +31,17 @@ class _DetailWisataState extends State<DetailWisata> {
 
   static const platform = const MethodChannel(CHENNEL);
 
-  int _quantity = 0;
+  int _quantity = 1;
   int totalPrice = 0;
 
   @override
   void initState() {
-    totalPrice.toInt();
     dateInput.text = "";
-    peopleInput.text = "0";
+    peopleInput.text = "1";
     totalHarga.text = "Rp. ${widget.detail["harga"]}";
+    totalPrice = int.parse(widget.detail["harga"]);
+    print(_quantity);
+    print(totalPrice);
     super.initState();
   }
 
@@ -131,15 +134,17 @@ class _DetailWisataState extends State<DetailWisata> {
                               onPressed: () {
                                 setState(() {
                                   _quantity -= 1;
+                                  totalPrice = totalPrice - harga;
                                   peopleInput.text = _quantity.toString();
-                                  totalHarga.text = totalPrice.toString();
-                                  totalPrice -= harga;
+                                  totalHarga.text =
+                                      "Rp. ${totalPrice.toString()}";
                                 });
                                 // for (int i = 0; i > _quantity; i--) {
                                 //   totalPrice -= harga;
                                 // }
                                 print(_quantity);
-                                print(peopleInput.text);
+                                print(totalPrice);
+                                print(harga);
                               },
                               child: Icon(
                                 Icons.remove,
@@ -156,13 +161,12 @@ class _DetailWisataState extends State<DetailWisata> {
                             onPressed: () {
                               setState(() {
                                 _quantity += 1;
+                                totalPrice = int.parse(widget.detail["harga"]);
+                                totalPrice *= _quantity;
                                 peopleInput.text = _quantity.toString();
-                                totalHarga.text = totalPrice.toString();
-                                totalPrice += harga;
+                                totalHarga.text =
+                                    "Rp. ${totalPrice.toString()}";
                               });
-                              // for (int i = 0; i < _quantity; i++) {
-                              //   totalPrice += harga;
-                              // }
                               print(_quantity);
                               print(totalPrice);
                               print(harga);
@@ -191,17 +195,14 @@ class _DetailWisataState extends State<DetailWisata> {
                                   "Total Harga"), // Only numbers can be entered
                     ),
                   ),
+                  SizedBox(
+                    height: 30,
+                  ),
                   OutlinedButton(
                       onPressed: (() {
-                        String? url =
-                            "https://sample-demo-dot-midtrans-support-tools.et.r.appspot.com/snap-redirect/";
-
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) {
-                            return SnapWebViewScreen();
-                          }),
-                        );
+                        Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  return MidtransView(count: harga, name_product: widget.detail["nama"], quantity: _quantity);
+                }));
 
                         // Navigator.of(context).pushNamed(
                         //   SnapWebViewScreen.routeName,
@@ -211,9 +212,6 @@ class _DetailWisataState extends State<DetailWisata> {
                         // );
                       }),
                       child: Text("Beli")),
-
-                  Text(dateInput.text),
-                  Text(peopleInput.text),
                 ]),
               ),
             ),
