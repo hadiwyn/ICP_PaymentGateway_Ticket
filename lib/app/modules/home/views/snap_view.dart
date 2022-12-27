@@ -8,6 +8,8 @@ class SnapWebViewScreen extends StatefulWidget {
 
   const SnapWebViewScreen({Key? key}) : super(key: key);
 
+  
+
   @override
   State<SnapWebViewScreen> createState() => _WebViewAppState();
 }

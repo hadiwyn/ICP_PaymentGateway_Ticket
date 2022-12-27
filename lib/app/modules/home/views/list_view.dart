@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ticket_wisata_donorojo/app/modules/home/views/detail_wisata.dart';
 
-
 // ignore: camel_case_types, must_be_immutable
 class listView extends StatelessWidget {
   // ignore: prefer_typing_uninitialized_variables

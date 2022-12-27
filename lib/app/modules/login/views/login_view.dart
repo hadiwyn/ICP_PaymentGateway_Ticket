@@ -20,20 +20,41 @@ class LoginView extends GetView<LoginController> {
           children: [
             loginText(),
             textField(),
+            SizedBox(
+              height: 50,
+            ),
+            loginButton(),
+            SizedBox(
+              height: 10,
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                // ignore: prefer_const_constructors
-                SizedBox(
-                  height: 120,
+              children: <Widget>[
+                const Text(
+                  "Belum mempunyai Akun ? ",
+                  style: TextStyle(color: Color.fromARGB(255, 0, 0, 0)),
                 ),
-                loginButton(),
-                const SizedBox(
-                  width: 30,
-                ),
-                registerButton(),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) {
+                          return Container();
+                        },
+                      ),
+                    );
+                  },
+                  child: const Text(
+                    "Daftar",
+                    style: TextStyle(
+                      color: Color.fromARGB(255, 107, 53, 165),
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                )
               ],
-            )
+            ),
           ],
         ),
       ),
@@ -51,7 +72,7 @@ class LoginView extends GetView<LoginController> {
             // ignore: prefer_const_literals_to_create_immutables
             children: [
               const Text(
-                "Selamat Datang",
+                "Selamat Datang Di",
                 style: TextStyle(
                   fontSize: 20,
                 ),
@@ -59,7 +80,7 @@ class LoginView extends GetView<LoginController> {
               Text(""),
               // ignore: prefer_const_constructors
               Text(
-                "E-Tiket Wisata Pacitan",
+                "E-Ticketing Wisata Donorojo",
                 // ignore: prefer_const_constructors
                 style: TextStyle(
                     fontSize: 25,
@@ -110,20 +131,32 @@ class LoginView extends GetView<LoginController> {
   Widget loginButton() {
     return SizedBox(
       width: 150,
-      child: TextButton(
-          onPressed: (() async {
-            // User? user = await loginUsingEmailPassword(
-            //     email: emailController.text,
-            //     password: passwordController.text,
-            //     context: context);
-            // print(user);
-            // if (user != null) {
-            //   // ignore: use_build_context_synchronously
-            //   Navigator.of(context).pushReplacement(
-            //       MaterialPageRoute(builder: (context) => home()));
-            // }
-          }),
-          child: Text('Masuk')),
+      child: Hero(
+        tag: "login_btn",
+        child: ElevatedButton(
+          // style: ButtonStyle(
+          //   backgroundColor: MaterialStatePropertyAll<Color>(Colors.white)),
+          onPressed: () {},
+          child: Text(
+            style: const TextStyle(color: Color.fromARGB(255, 255, 255, 255)),
+            "Login".toUpperCase(),
+          ),
+        ),
+      ),
+      // textButton(
+      //     onPressed: (() async {
+      //       // User? user = await loginUsingEmailPassword(
+      //       //     email: emailController.text,
+      //       //     password: passwordController.text,
+      //       //     context: context);
+      //       // print(user);
+      //       // if (user != null) {
+      //       //   // ignore: use_build_context_synchronously
+      //       //   Navigator.of(context).pushReplacement(
+      //       //       MaterialPageRoute(builder: (context) => home()));
+      //       // }T
+      //     }),
+      //     child: Text('Masuk')),
     );
   }
 

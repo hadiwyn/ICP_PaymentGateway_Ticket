@@ -22,6 +22,7 @@ class AddDataController extends GetxController {
         "harga": price,
         "deskripsi": deskripsi,
         "time": cdate2
+        
       });
 
       Get.defaultDialog(

@@ -1,10 +1,9 @@
 import 'package:get/get.dart';
-import 'package:ticket_wisata_donorojo/app/modules/home/views/snap_view.dart';
-
 import '../modules/add_data/bindings/add_data_binding.dart';
 import '../modules/add_data/views/add_data_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
+import '../modules/home/views/snap_view.dart';
 import '../modules/login/bindings/login_binding.dart';
 import '../modules/login/views/login_view.dart';
 import '../modules/register/bindings/register_binding.dart';

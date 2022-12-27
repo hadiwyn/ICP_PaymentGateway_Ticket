@@ -20,6 +20,7 @@ class AddDataView extends GetView<AddDataController> {
           padding: const EdgeInsets.all(8.0),
           child: Column(
             children: [
+
               fieldNama(),
               // ignore: prefer_const_constructors
               SizedBox(

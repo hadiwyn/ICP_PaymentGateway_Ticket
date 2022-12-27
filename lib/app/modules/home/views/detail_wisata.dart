@@ -200,9 +200,13 @@ class _DetailWisataState extends State<DetailWisata> {
                   ),
                   OutlinedButton(
                       onPressed: (() {
-                        Navigator.push(context, MaterialPageRoute(builder: (context) {
-                  return MidtransView(count: harga, name_product: widget.detail["nama"], quantity: _quantity);
-                }));
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) {
+                          return MidtransView(
+                              count: harga,
+                              name_product: widget.detail["nama"],
+                              quantity: _quantity);
+                        }));
 
                         // Navigator.of(context).pushNamed(
                         //   SnapWebViewScreen.routeName,

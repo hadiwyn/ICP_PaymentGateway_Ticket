@@ -80,7 +80,7 @@ class HomeView extends GetView<HomeController> {
             );
           }),
       floatingActionButton: Visibility(
-          visible: false,
+          visible: true,
           child: FloatingActionButton(
             onPressed: () => Get.toNamed(Routes.ADD_DATA),
             child: Icon(Icons.add),
