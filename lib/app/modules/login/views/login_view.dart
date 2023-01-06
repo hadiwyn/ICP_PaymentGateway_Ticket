@@ -1,174 +1,233 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:ticket_wisata_donorojo/app/modules/user/register/register.dart';
+import 'package:ticket_wisata_donorojo/app/routes/app_pages.dart';
 
+import '../../user/dashboard/home.dart';
 import '../controllers/login_controller.dart';
 
 class LoginView extends GetView<LoginController> {
   LoginView({Key? key}) : super(key: key);
+
+  final _formKey = GlobalKey<FormState>();
+
+  bool loading = false;
 
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      resizeToAvoidBottomInset: false,
-      backgroundColor: Colors.grey[100],
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            loginText(),
-            textField(),
-            SizedBox(
-              height: 50,
-            ),
-            loginButton(),
-            SizedBox(
-              height: 10,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                const Text(
-                  "Belum mempunyai Akun ? ",
-                  style: TextStyle(color: Color.fromARGB(255, 0, 0, 0)),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) {
-                          return Container();
-                        },
-                      ),
-                    );
-                  },
-                  child: const Text(
-                    "Daftar",
-                    style: TextStyle(
-                      color: Color.fromARGB(255, 107, 53, 165),
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                )
-              ],
-            ),
-          ],
+    return Theme(
+      data: ThemeData(
+        primaryColor: const Color(0xFF6F35A5),
+        scaffoldBackgroundColor: Colors.white,
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            elevation: 0,
+            backgroundColor: const Color(0xFF6F35A5),
+            shape: const StadiumBorder(),
+            maximumSize: const Size(double.infinity, 56),
+            minimumSize: const Size(double.infinity, 56),
+          ),
+        ),
+        inputDecorationTheme: const InputDecorationTheme(
+          filled: true,
+          fillColor: Color(0xFFF1E6FF),
+          iconColor: Color(0xFF6F35A5),
+          prefixIconColor: Color(0xFF6F35A5),
+          contentPadding:
+              EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.all(Radius.circular(30)),
+            borderSide: BorderSide.none,
+          ),
         ),
       ),
-    );
-  }
-
-  Widget loginText() {
-    return Row(
-      children: [
-        Padding(
-          padding:
-              const EdgeInsets.only(left: 20, top: 150, right: 0, bottom: 100),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            // ignore: prefer_const_literals_to_create_immutables
-            children: [
-              const Text(
-                "Selamat Datang Di",
-                style: TextStyle(
-                  fontSize: 20,
+      child: Scaffold(
+        resizeToAvoidBottomInset: false,
+        body: SizedBox(
+          width: double.infinity,
+          height: MediaQuery.of(context).size.height,
+          child: Stack(
+            alignment: Alignment.center,
+            children: <Widget>[
+              // Padding(
+              //   padding: const EdgeInsets.only(top: 80),
+              //   child: Column(children: [
+              //     Image.asset(
+              //       "assets/image/logo-pacitan.webp",
+              //       width: 200,
+              //     ),
+              //   ]),
+              // ),
+              SafeArea(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(bottom: 30),
+                          child: Text(
+                            "E-Ticketing Wisata",
+                            style: GoogleFonts.lato(
+                                textStyle: TextStyle(
+                              fontSize: 30,
+                              fontWeight: FontWeight.bold,
+                            )),
+                          ),
+                        ),
+                        Row(
+                          children: [
+                            const Spacer(),
+                            Expanded(
+                              flex: 3,
+                              child:
+                                  Image.asset("assets/image/logo-pacitan.webp"),
+                            ),
+                            const Spacer(),
+                          ],
+                        ),
+                        const SizedBox(height: 16.0),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        const Spacer(),
+                        Expanded(
+                          flex: 8,
+                          child: Form(
+                            key: _formKey,
+                            child: Column(
+                              children: [
+                                TextFormField(
+                                  controller: controller.emailC,
+                                  keyboardType: TextInputType.emailAddress,
+                                  cursorColor: const Color(0xFF6F35A5),
+                                  validator: _requeiredValidatorEmail,
+                                  decoration: const InputDecoration(
+                                    hintText: "Email",
+                                    prefixIcon: Padding(
+                                      padding: EdgeInsets.all(16.0),
+                                      child: Icon(Icons.person),
+                                    ),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      vertical: 16.0),
+                                  child: TextFormField(
+                                    controller: controller.passC,
+                                    textInputAction: TextInputAction.done,
+                                    obscureText: true,
+                                    cursorColor: const Color(0xFF6F35A5),
+                                    decoration: const InputDecoration(
+                                      hintText: "Password",
+                                      prefixIcon: Padding(
+                                        padding: EdgeInsets.all(16.0),
+                                        child: Icon(Icons.lock),
+                                      ),
+                                    ),
+                                    validator: _requeiredValidatorPass,
+                                  ),
+                                ),
+                                const SizedBox(height: 16.0 / 2),
+                                ElevatedButton(
+                                  onPressed: () async {
+                                    if (_formKey.currentState != null &&
+                                        _formKey.currentState!.validate()) {
+                                      User? user = await controller
+                                          .loginUsingEmailPassword(
+                                              email: controller.emailC.text,
+                                              password: controller.passC.text,
+                                              context: context);
+                                      print(user);
+                                      if (user != null) {
+                                        controller.getData();
+                                        // Get.toNamed(Routes.HOME);
+                                        // Navigator.push(
+                                        //     context,
+                                        //     MaterialPageRoute(
+                                        //         builder: (context) => Home()));
+                                      } else {
+                                        Get.defaultDialog(
+                                          title: "Gagal Login",
+                                          middleText:
+                                              "Email atau kata sandi salah",
+                                          onConfirm: () {
+                                            // controller.emailC.clear();
+                                            // controller.passC.clear();
+                                            Get.back();
+                                          },
+                                          textConfirm: "Okey",
+                                        );
+                                      }
+                                    }
+                                  },
+                                  child: Text("Masuk".toUpperCase()),
+                                ),
+                                const SizedBox(height: 16.0),
+                                Padding(
+                                  padding: const EdgeInsets.only(bottom: 70),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: <Widget>[
+                                      const Text(
+                                        "Belum mempunyai Akun ? ",
+                                        style:
+                                            TextStyle(color: Color(0xFF6F35A5)),
+                                      ),
+                                      GestureDetector(
+                                        onTap: () => Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    Register())),
+                                        child: const Text(
+                                          "Daftar",
+                                          style: TextStyle(
+                                            color: Color(0xFF6F35A5),
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        const Spacer(),
+                      ],
+                    ),
+                  ],
                 ),
-              ),
-              Text(""),
-              // ignore: prefer_const_constructors
-              Text(
-                "E-Ticketing Wisata Donorojo",
-                // ignore: prefer_const_constructors
-                style: TextStyle(
-                    fontSize: 25,
-                    fontWeight: FontWeight.bold,
-                    fontFamily: 'Roboto'),
               ),
             ],
           ),
         ),
-      ],
-    );
-  }
-
-  Widget textField() {
-    return Column(
-      children: [
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: TextFormField(
-            controller: emailController,
-            decoration: InputDecoration(
-              labelText: 'Email',
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(30),
-              ),
-              suffixIcon: const Icon(Icons.person),
-            ),
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: TextFormField(
-            obscureText: true,
-            controller: passwordController,
-            decoration: InputDecoration(
-              labelText: 'Password',
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(30),
-              ),
-              suffixIcon: Icon(Icons.lock),
-            ),
-          ),
-        ),
-      ],
-    );
-  }
-
-  Widget loginButton() {
-    return SizedBox(
-      width: 150,
-      child: Hero(
-        tag: "login_btn",
-        child: ElevatedButton(
-          // style: ButtonStyle(
-          //   backgroundColor: MaterialStatePropertyAll<Color>(Colors.white)),
-          onPressed: () {},
-          child: Text(
-            style: const TextStyle(color: Color.fromARGB(255, 255, 255, 255)),
-            "Login".toUpperCase(),
-          ),
-        ),
       ),
-      // textButton(
-      //     onPressed: (() async {
-      //       // User? user = await loginUsingEmailPassword(
-      //       //     email: emailController.text,
-      //       //     password: passwordController.text,
-      //       //     context: context);
-      //       // print(user);
-      //       // if (user != null) {
-      //       //   // ignore: use_build_context_synchronously
-      //       //   Navigator.of(context).pushReplacement(
-      //       //       MaterialPageRoute(builder: (context) => home()));
-      //       // }T
-      //     }),
-      //     child: Text('Masuk')),
     );
   }
 
-  Widget registerButton() {
-    return SizedBox(
-      width: 150,
-      child: OutlinedButton(
-          onPressed: () {
-            // Navigator.push(
-            //     context, MaterialPageRoute(builder: (context) => Register()));
-          },
-          child: Text('Daftar')),
-    );
+  String? _requeiredValidatorEmail(String? value) {
+    if (value == null || value.trim().isEmpty) {
+      return 'Email tidak boleh kosong';
+    } else {
+      return null;
+    }
+  }
+
+  String? _requeiredValidatorPass(String? value) {
+    if (value == null || value.trim().isEmpty) {
+      return 'Kata sandi tidak boleh kosong';
+    } else {
+      return null;
+    }
   }
 }

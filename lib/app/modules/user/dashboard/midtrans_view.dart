@@ -28,24 +28,24 @@ class _MidtransViewState extends State<MidtransView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        // appBar: AppBar(
-        //   title: const Text("WebView"),
-        //   actions: const [],
-        // ),
         body: Stack(
       children: [
-        WebView(
-          javascriptMode: JavascriptMode.unrestricted,
-          onProgress: (value) {
-            if (value == 100) {
-              setState(() {
-                isLoading = false;
-              });
-            }
-          },
-          initialUrl:
-              'https://apipayment.mr-code.my.id/?count=${widget.count}&name_product=${widget.name_product}&jumlah=${widget.quantity}',
+        SizedBox(
+          height: 500,
         ),
+        WebView(
+            javascriptMode: JavascriptMode.unrestricted,
+            onProgress: (value) {
+              if (value == 100) {
+                setState(() {
+                  isLoading = false;
+                });
+              }
+            },
+            initialUrl: 
+            // 'https://apipayment.mr-code.my.id/'
+            'https://apipayment.mr-code.my.id/?count=${widget.count}&name_product=${widget.name_product}&jumlah=${widget.quantity}',
+            ),
         isLoading
             ? const Center(
                 child: CircularProgressIndicator(),

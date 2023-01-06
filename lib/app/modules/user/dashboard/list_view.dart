@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ticket_wisata_donorojo/app/modules/home/views/detail_wisata.dart';
+import 'package:ticket_wisata_donorojo/app/modules/user/dashboard/detail_wisata.dart';
 
 // ignore: camel_case_types, must_be_immutable
 class listView extends StatelessWidget {
@@ -11,10 +11,11 @@ class listView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-      shrinkWrap: true,
+      //shrinkWrap: true,
+      scrollDirection: Axis.vertical,
       itemCount: listAllDocument.length,
       itemBuilder: (BuildContext context, int index) => Padding(
-        padding: const EdgeInsetsDirectional.fromSTEB(0, 12, 0, 0),
+        padding: const EdgeInsets.only(bottom: 15),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
@@ -100,9 +101,10 @@ class listView extends StatelessWidget {
                         textAlign: TextAlign.justify,
                       ),
                     ),
+                    Spacer(),
                     Padding(
                       // ignore: prefer_const_constructors
-                      padding: EdgeInsetsDirectional.fromSTEB(12, 5, 0, 0),
+                      padding: EdgeInsets.only(left: 12, bottom: 10, right: 12),
                       child: Row(
                         mainAxisSize: MainAxisSize.max,
                         // ignore: prefer_const_literals_to_create_immutables
@@ -128,6 +130,7 @@ class listView extends StatelessWidget {
                               ),
                             ),
                           ),
+                          Spacer(),
                           // ignore: prefer_const_constructors
                           Padding(
                             padding: EdgeInsets.only(left: 10),

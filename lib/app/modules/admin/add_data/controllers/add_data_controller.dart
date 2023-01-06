@@ -1,9 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
-class RegisterController extends GetxController {
+class AddDataController extends GetxController {
   late TextEditingController nameC;
   late TextEditingController priceC;
   late TextEditingController deskripsiC;
@@ -24,6 +24,7 @@ class RegisterController extends GetxController {
         "time": cdate2
         
       });
+      
 
       Get.defaultDialog(
         title: "Berhasil",
@@ -45,21 +46,19 @@ class RegisterController extends GetxController {
     }
   }
 
-  final count = 0.obs;
   @override
   void onInit() {
+    nameC = TextEditingController();
+    priceC = TextEditingController();
+    deskripsiC = TextEditingController();
     super.onInit();
   }
 
   @override
-  void onReady() {
-    super.onReady();
-  }
-
-  @override
   void onClose() {
+    nameC.dispose();
+    priceC.dispose();
+    deskripsiC.dispose();
     super.onClose();
   }
-
-  void increment() => count.value++;
 }

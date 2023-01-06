@@ -2,9 +2,9 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:ticket_wisata_donorojo/app/modules/user/dashboard/midtrans_view.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:intl/intl.dart';
-import 'package:ticket_wisata_donorojo/app/modules/home/views/midtrans_view.dart';
-import 'package:ticket_wisata_donorojo/app/modules/home/views/snap_view.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 const CHENNEL = "com.hadiwi.ticket_wisata_donorojo";
@@ -208,12 +208,10 @@ class _DetailWisataState extends State<DetailWisata> {
                               quantity: _quantity);
                         }));
 
-                        // Navigator.of(context).pushNamed(
-                        //   SnapWebViewScreen.routeName,
-                        //   arguments: {
-                        //     'url': url,
-                        //   },
-                        // );
+                        // Navigator.push(
+                        //     context,
+                        //     MaterialPageRoute(
+                        //         builder: (context) => SnapWebViewScreen()));
                       }),
                       child: Text("Beli")),
                 ]),
@@ -221,13 +219,5 @@ class _DetailWisataState extends State<DetailWisata> {
             ),
           ),
         ));
-  }
-
-  Future<Null> _showNativeView() async {
-    await platform.invokeMethod(KEY_NATIVE, {
-      "name": widget.detail["nama"],
-      "price": widget.detail["harga"],
-      "quantity": _quantity,
-    });
   }
 }
