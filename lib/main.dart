@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:provider/provider.dart';
-import 'package:ticket_wisata_donorojo/app/modules/user/dashboard/home.dart';
 import 'package:ticket_wisata_donorojo/app/modules/splash/splash_screen.dart';
 // import 'package:ticket_wisata_donorojo/app/modules/home/views/home_view.dart';
 

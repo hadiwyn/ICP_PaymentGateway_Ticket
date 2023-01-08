@@ -1,10 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/instance_manager.dart';
+import 'package:ticket_wisata_donorojo/app/modules/user/account_user/account_user.dart';
 import 'package:ticket_wisata_donorojo/app/modules/user/dashboard/dashboard.dart';
-import 'package:ticket_wisata_donorojo/app/modules/user/dashboard/nav_bar.dart';
 import 'package:ticket_wisata_donorojo/app/modules/user/dashboard/riwayat_tiket.dart';
-import 'package:ticket_wisata_donorojo/app/modules/splash/splash_screen.dart';
+import 'package:ticket_wisata_donorojo/app/modules/splash/first_page.dart';
+import 'package:get/get.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -21,6 +22,7 @@ class _HomeState extends State<Home> {
   static List<Widget> _widgetOptions = <Widget>[
     Dashboard(),
     RiwayatTiket(),
+    AccountUser()
   ];
 
   void _onItemTapped(int index) {
@@ -55,8 +57,7 @@ class _HomeState extends State<Home> {
               onPressed: () {
                 FirebaseAuth.instance.signOut();
                 Get.deleteAll();
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => SplashScreen()));
+                Get.off(FirstPage());
               },
               icon: Icon(Icons.logout)),
           // )
@@ -74,6 +75,10 @@ class _HomeState extends State<Home> {
           BottomNavigationBarItem(
             icon: Icon(Icons.history),
             label: 'Ticket',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person),
+            label: 'Akun',
           ),
         ],
         currentIndex: _selectedIndex,

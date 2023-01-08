@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:get/instance_manager.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ticket_wisata_donorojo/app/modules/user/register/registerService.dart';
 
@@ -278,7 +279,11 @@ class _RegisterState extends State<Register> {
                       Text("Akun kamu sudah dibuat, kamu bisa masuk sekarang"),
                   actions: [
                     TextButton(
-                      onPressed: () => Navigator.of(context).pop(),
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                        FirebaseAuth.instance.signOut();
+                        Get.deleteAll();
+                      },
                       child: Text("Oke"),
                     )
                   ]));

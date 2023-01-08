@@ -4,9 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ticket_wisata_donorojo/app/modules/user/register/register.dart';
-import 'package:ticket_wisata_donorojo/app/routes/app_pages.dart';
-
-import '../../user/dashboard/home.dart';
 import '../controllers/login_controller.dart';
 
 class LoginView extends GetView<LoginController> {
@@ -14,10 +11,6 @@ class LoginView extends GetView<LoginController> {
 
   final _formKey = GlobalKey<FormState>();
 
-  bool loading = false;
-
-  TextEditingController emailController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -75,6 +68,7 @@ class LoginView extends GetView<LoginController> {
                           child: Text(
                             "E-Ticketing Wisata",
                             style: GoogleFonts.lato(
+                                // ignore: prefer_const_constructors
                                 textStyle: TextStyle(
                               fontSize: 30,
                               fontWeight: FontWeight.bold,
@@ -145,14 +139,8 @@ class LoginView extends GetView<LoginController> {
                                               email: controller.emailC.text,
                                               password: controller.passC.text,
                                               context: context);
-                                      print(user);
                                       if (user != null) {
                                         controller.getData();
-                                        // Get.toNamed(Routes.HOME);
-                                        // Navigator.push(
-                                        //     context,
-                                        //     MaterialPageRoute(
-                                        //         builder: (context) => Home()));
                                       } else {
                                         Get.defaultDialog(
                                           title: "Gagal Login",
@@ -186,7 +174,7 @@ class LoginView extends GetView<LoginController> {
                                             context,
                                             MaterialPageRoute(
                                                 builder: (context) =>
-                                                    Register())),
+                                                    const Register())),
                                         child: const Text(
                                           "Daftar",
                                           style: TextStyle(

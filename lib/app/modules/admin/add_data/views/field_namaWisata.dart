@@ -9,12 +9,20 @@ import '../controllers/add_data_controller.dart';
 class fieldNama extends GetView<AddDataController> {
   @override
   Widget build(BuildContext context) {
-    return TextField(
-      controller: controller.nameC,
-      autocorrect: false,
-      textInputAction: TextInputAction.next,
-      // ignore: prefer_const_constructors
-      decoration: InputDecoration(labelText: "Nama Wisata"),
+    return Expanded(
+      child: TextField(
+        controller: controller.nameC,
+        autocorrect: false,
+        textInputAction: TextInputAction.next,
+        // ignore: prefer_const_constructors
+        decoration: const InputDecoration(
+          icon: const Icon(
+            Icons.abc,
+            size: 24.0,
+          ),
+          labelText: "Nama Wisata",
+        ),
+      ),
     );
   }
 }
