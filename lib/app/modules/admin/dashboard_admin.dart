@@ -1,8 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/instance_manager.dart';
-import 'package:ticket_wisata_donorojo/app/modules/admin/add_data/views/add_data_view.dart';
 import 'package:ticket_wisata_donorojo/app/modules/user/dashboard/page_view.dart';
 
 import '../../routes/app_pages.dart';
@@ -113,10 +111,10 @@ class _DashboardAdminState extends State<DashboardAdmin> {
                         ),
                       ],
                     ),
-                    SizedBox(
-                        height: 400,
-                        width: double.infinity,
-                        child: listView(listAllDocument)),
+                    // SizedBox(
+                    //     height: 400,
+                    //     width: double.infinity,
+                    //     child: listView(listAllDocument)),
                   ],
                 ),
               );

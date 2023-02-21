@@ -1,223 +1,188 @@
-import 'dart:async';
+// ignore_for_file: must_be_immutable
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:ticket_wisata_donorojo/app/modules/user/dashboard/midtrans_view.dart';
-import 'package:url_launcher/url_launcher.dart';
-import 'package:intl/intl.dart';
-import 'package:webview_flutter/webview_flutter.dart';
+import 'package:get/get.dart';
+import 'package:ticket_wisata_donorojo/app/modules/user/dashboard/home.dart';
+import 'package:ticket_wisata_donorojo/app/modules/user/dashboard/page_view.dart';
+import 'package:ticket_wisata_donorojo/app/modules/user/dashboard/pesan_tiket.dart';
+import 'package:ticket_wisata_donorojo/app/routes/app_pages.dart';
 
-const CHENNEL = "com.hadiwi.ticket_wisata_donorojo";
-const KEY_NATIVE = "ShowTiketWisata";
-
-// ignore: must_be_immutable
 class DetailWisata extends StatefulWidget {
-  // ignore: prefer_typing_uninitialized_variables
-
   var detail;
 
-  DetailWisata({Key? key, required this.detail}) : super(key: key);
+  DetailWisata(this.detail, {super.key});
 
   @override
   State<DetailWisata> createState() => _DetailWisataState();
 }
 
 class _DetailWisataState extends State<DetailWisata> {
-  TextEditingController dateInput = TextEditingController();
-  TextEditingController peopleInput = TextEditingController();
-  TextEditingController totalHarga = TextEditingController();
-
-  final controller = Completer<WebViewController>();
-
-  static const platform = const MethodChannel(CHENNEL);
-
-  int _quantity = 1;
-  int totalPrice = 0;
-
-  @override
-  void initState() {
-    dateInput.text = "";
-    peopleInput.text = "1";
-    totalHarga.text = "Rp. ${widget.detail["harga"]}";
-    totalPrice = int.parse(widget.detail["harga"]);
-    print(_quantity);
-    print(totalPrice);
-    super.initState();
-  }
-
   @override
   Widget build(BuildContext context) {
-    int harga = int.parse(widget.detail["harga"]);
-
     return Scaffold(
-        appBar: AppBar(
-          title: const Text('DetailWisataView'),
-          centerTitle: true,
-        ),
-        body: Container(
-          height: double.infinity,
-          width: double.infinity,
-          child: Padding(
-            padding: EdgeInsets.all(20),
-            child: Card(
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20)),
-              elevation: 2,
-              child: Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Column(children: [
-                  // ignore: prefer_const_constructors
-                  Text(
-                    widget.detail["nama"],
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                  ),
-                  Padding(
-                    padding:
-                        const EdgeInsets.only(top: 30, left: 10, right: 10),
-                    child: TextField(
-                      controller: dateInput,
-                      //editing controller of this TextField
-                      // ignore: prefer_const_constructors
-                      decoration: InputDecoration(
-                          // ignore: prefer_const_constructors
-                          icon: Icon(Icons.calendar_today), //icon of text field
-                          labelText: "Pilih Jadwal Wisata" //label text of field
-                          ),
-                      readOnly: true,
-                      //set it true, so that user will not able to edit text
-                      onTap: () async {
-                        DateTime? pickedDate = await showDatePicker(
-                            context: context,
-                            initialDate: DateTime.now(),
-                            firstDate: DateTime(1950),
-                            //DateTime.now() - not to allow to choose before today.
-                            lastDate: DateTime(2100));
-
-                        if (pickedDate != null) {
-                          print(
-                              pickedDate); //pickedDate output format => 2021-03-10 00:00:00.000
-                          String formattedDate =
-                              DateFormat('yyyy-MM-dd').format(pickedDate);
-                          print(
-                              formattedDate); //formatted date output using intl package =>  2021-03-16
-                          setState(() {
-                            dateInput.text =
-                                formattedDate; //set output date to TextField value.
-                          });
-                        }
-                      },
-                    ),
-                  ),
-                  Padding(
-                    padding:
-                        const EdgeInsets.only(left: 10, right: 10, top: 40),
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child: TextField(
-                            controller: peopleInput,
-                            enabled: false,
-                            decoration:
-                                // ignore: prefer_const_constructors
-                                InputDecoration(
-                                    icon: Icon(Icons.people),
-                                    labelText:
-                                        "Jumlah Orang"), // Only numbers can be entered
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(right: 15, left: 20),
-                          child: Container(
-                            width: 50,
-                            height: 50,
-                            child: OutlinedButton(
-                              onPressed: () {
-                                setState(() {
-                                  _quantity -= 1;
-                                  totalPrice = totalPrice - harga;
-                                  peopleInput.text = _quantity.toString();
-                                  totalHarga.text =
-                                      "Rp. ${totalPrice.toString()}";
-                                });
-                                // for (int i = 0; i > _quantity; i--) {
-                                //   totalPrice -= harga;
-                                // }
-                                print(_quantity);
-                                print(totalPrice);
-                                print(harga);
-                              },
-                              child: Icon(
-                                Icons.remove,
-                                size: 20,
-                                color: Colors.black,
-                              ),
-                            ),
-                          ),
-                        ),
-                        Container(
-                          width: 50,
-                          height: 50,
-                          child: OutlinedButton(
-                            onPressed: () {
-                              setState(() {
-                                _quantity += 1;
-                                totalPrice = int.parse(widget.detail["harga"]);
-                                totalPrice *= _quantity;
-                                peopleInput.text = _quantity.toString();
-                                totalHarga.text =
-                                    "Rp. ${totalPrice.toString()}";
-                              });
-                              print(_quantity);
-                              print(totalPrice);
-                              print(harga);
-                            },
-                            child: Icon(
-                              Icons.add,
-                              size: 20,
-                              color: Colors.black,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Padding(
-                    padding:
-                        const EdgeInsets.only(top: 30, left: 10, right: 10),
-                    child: TextField(
-                      controller: totalHarga,
-                      enabled: false,
-                      decoration:
-                          // ignore: prefer_const_constructors
-                          InputDecoration(
-                              icon: const Icon(Icons.price_change),
-                              labelText:
-                                  "Total Harga"), // Only numbers can be entered
-                    ),
-                  ),
-                  SizedBox(
-                    height: 30,
-                  ),
-                  OutlinedButton(
-                      onPressed: (() {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (context) {
-                          return MidtransView(
-                              count: harga,
-                              name_product: widget.detail["nama"],
-                              quantity: _quantity);
-                        }));
-
-                        // Navigator.push(
-                        //     context,
-                        //     MaterialPageRoute(
-                        //         builder: (context) => SnapWebViewScreen()));
-                      }),
-                      child: Text("Beli")),
-                ]),
+        body: Stack(
+      children: [
+        Container(height: 430, child: pageView()),
+        // Container(
+        //   height: 430,
+        //   width: double.infinity,
+        //   decoration: BoxDecoration(
+        //     image: DecorationImage(
+        //         image: AssetImage('assets/image/pangasan.jpeg'),
+        //         fit: BoxFit.cover),
+        //   ),
+        // ),
+        Positioned(
+          left: 15,
+          top: 35,
+          child: InkWell(
+            onTap: () {
+              Navigator.of(context).pop();
+            },
+            child: Container(
+              height: 45,
+              width: 45,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(30),
+                  color: Colors.black.withOpacity(0.2)),
+              child: Center(
+                child: const Icon(
+                  Icons.arrow_back,
+                  color: Colors.white,
+                ),
               ),
             ),
           ),
-        ));
+        ),
+        Container(
+          margin: EdgeInsets.only(top: 380),
+          height: double.infinity,
+          width: double.infinity,
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(40),
+                topRight: Radius.circular(40),
+              ),
+              color: Colors.white),
+          child: Padding(
+            padding: const EdgeInsets.only(top: 15, left: 10, right: 10),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Center(
+                  child: Text(
+                    widget.detail['nama'],
+                    style: const TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 10),
+                  child: Row(
+                    children: [
+                      Spacer(),
+                      const Icon(
+                        Icons.location_pin,
+                        size: 24.0,
+                        color: Colors.black54,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 5, right: 20),
+                        child: Text(
+                          "Location",
+                          style: const TextStyle(color: Colors.black54),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 10, left: 10),
+                  child: Text(
+                    "Overview",
+                    style: const TextStyle(
+                        color: Color.fromARGB(255, 93, 193, 255), fontSize: 16),
+                  ),
+                ),
+                Container(
+                  height: 200,
+                  width: double.infinity,
+                  child: Padding(
+                    padding: const EdgeInsets.all(10),
+                    child: Text(
+                      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+                      style: const TextStyle(color: Colors.black54),
+                    ),
+                  ),
+                ),
+                Spacer(),
+                Padding(
+                  padding: const EdgeInsets.only(left: 10, right: 10),
+                  child: Row(
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            children: [
+                              const Icon(
+                                Icons.price_change,
+                                size: 24.0,
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(left: 5.0),
+                                child: Text(
+                                  widget.detail['harga'],
+                                  style: const TextStyle(fontSize: 18),
+                                ),
+                              ),
+                            ],
+                          ),
+                          Text("Per Orang"),
+                        ],
+                      ),
+                      Spacer(),
+                      InkWell(
+                        onTap: () {
+                          Get.off(PesanTiket(widget.detail));
+                        },
+                        child: Container(
+                          width: 150,
+                          height: 40,
+                          decoration: BoxDecoration(
+                            color: Color.fromARGB(255, 93, 193, 255),
+                            // ignore: prefer_const_literals_to_create_immutables
+                            boxShadow: [
+                              // ignore: prefer_const_constructors
+                              BoxShadow(
+                                blurRadius: 6,
+                                color: Color(0x34000000),
+                                offset: Offset(0, 3),
+                              )
+                            ],
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          child: Center(
+                            child: Text(
+                              "Pesan Sekarang",
+                              style: const TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Spacer()
+              ],
+            ),
+          ),
+        )
+      ],
+    ));
   }
 }

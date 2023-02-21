@@ -26,6 +26,7 @@ dependencies:
   get_storage: ^2.0.3
   simple_animations: ^3.0.0-nullsafety.1
   page_transition: ^2.0.9
+  firebase_storage: ^10.3.11
 
 dev_dependencies: 
   flutter_lints: 2.0.1
@@ -41,5 +42,6 @@ flutter:
   - assets/image/pangasan.jpeg
   - assets/image/srau.jpeg
   - assets/image/one.png
+  - assets/image/image-travel.webp
   - assets/image/
 

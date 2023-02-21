@@ -23,14 +23,14 @@ class AppPages {
     //   binding: HomeBinding(),
     // ),
     GetPage(
-      name: _Paths.LOGIN,
-      page: () => LoginView(),
-      binding: LoginBinding(),
-    ),
-    GetPage(
       name: _Paths.ADD_DATA,
       page: () => const AddDataView(),
       binding: AddDataBinding(),
+    ),
+    GetPage(
+      name: _Paths.LOGIN,
+      page: () => LoginView(),
+      binding: LoginBinding(),
     ),
   ];
 }

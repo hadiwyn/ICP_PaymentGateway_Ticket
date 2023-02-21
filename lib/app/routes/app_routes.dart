@@ -4,21 +4,21 @@ part of 'app_pages.dart';
 abstract class Routes {
   Routes._();
   static const HOME = _Paths.HOME;
-  static const LOGIN = _Paths.LOGIN;
   static const REGISTER = _Paths.REGISTER;
   static const LIST_VIEW = _Paths.LIST_VIEW;
   static const ADD_DATA = _Paths.ADD_DATA;
   static const DETAIL_WISATA = _Paths.DETAIL_WISATA;
   static const SNAP_VIEW = _Paths.SNAP_VIEW;
+  static const LOGIN = _Paths.LOGIN;
 }
 
 abstract class _Paths {
   _Paths._();
   static const HOME = '/home';
-  static const LOGIN = '/login';
   static const REGISTER = '/register';
   static const LIST_VIEW = '/list-view';
   static const ADD_DATA = '/add-data';
   static const DETAIL_WISATA = '/detail-wisata';
   static const SNAP_VIEW = '/snap-view';
+  static const LOGIN = '/login';
 }

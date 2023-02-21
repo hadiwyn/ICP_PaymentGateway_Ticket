@@ -14,6 +14,7 @@ class AddDataView extends GetView<AddDataController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        resizeToAvoidBottomInset: false,
         appBar: AppBar(
           iconTheme: IconThemeData(
             color: Colors.blueGrey,

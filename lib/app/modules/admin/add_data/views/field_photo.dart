@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:get/get_state_manager/src/simple/get_view.dart';
+import '../controllers/add_data_controller.dart';
 
-class FieldPhoto extends StatelessWidget {
-  const FieldPhoto({super.key});
-
+class FieldPhoto extends GetView<AddDataController> {
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [
         Expanded(
           child: TextField(
+            controller: controller.imgC,
             enabled: false,
             decoration:
                 // ignore: prefer_const_constructors
@@ -21,7 +22,9 @@ class FieldPhoto extends StatelessWidget {
           padding: const EdgeInsets.only(left: 20),
           child: ElevatedButton(
             child: Text("Upload Foto"),
-            onPressed: () {},
+            onPressed: () {
+              controller.getImage();
+            },
           ),
         ),
       ],

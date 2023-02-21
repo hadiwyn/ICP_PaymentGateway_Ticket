@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:ticket_wisata_donorojo/app/modules/user/register/register.dart';
+
+import '../../user/register/register.dart';
 import '../controllers/login_controller.dart';
 
 class LoginView extends GetView<LoginController> {
@@ -11,9 +12,9 @@ class LoginView extends GetView<LoginController> {
 
   final _formKey = GlobalKey<FormState>();
 
-
   @override
   Widget build(BuildContext context) {
+    Get.put(LoginController());
     return Theme(
       data: ThemeData(
         primaryColor: const Color(0xFF6F35A5),

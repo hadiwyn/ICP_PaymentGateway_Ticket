@@ -1,9 +1,14 @@
+import 'package:get/get.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/instance_manager.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:ticket_wisata_donorojo/app/modules/login/views/login_view.dart';
+import 'package:ticket_wisata_donorojo/app/modules/user/dashboard/dashboard.dart';
 import 'package:ticket_wisata_donorojo/app/modules/user/register/registerService.dart';
+import 'package:ticket_wisata_donorojo/app/routes/app_pages.dart';
 
 class Register extends StatefulWidget {
   const Register({super.key});
@@ -77,13 +82,20 @@ class _RegisterState extends State<Register> {
                     children: <Widget>[
                       Padding(
                         padding: const EdgeInsets.only(bottom: 30),
-                        child: Text("DAFTAR".toUpperCase(),
+                        child: Text("daftar Akun".toUpperCase(),
                             style: GoogleFonts.roboto(
                               fontSize: 30,
                               fontWeight: FontWeight.bold,
                             )),
                       ),
                       const SizedBox(height: 32.0),
+                      // CircleAvatar(
+                      //   radius: 40.0,
+                      //   backgroundImage: NetworkImage(
+                      //     "https://i.ibb.co/PGv8ZzG/me.jpg",
+                      //   ),
+                      // ),
+                      // const SizedBox(height: 40.0),
                       Row(
                         children: [
                           const Spacer(),
@@ -280,14 +292,13 @@ class _RegisterState extends State<Register> {
                   actions: [
                     TextButton(
                       onPressed: () {
-                        Navigator.of(context).pop();
+                        Get.offNamed(Routes.LOGIN);
                         FirebaseAuth.instance.signOut();
                         Get.deleteAll();
                       },
                       child: Text("Oke"),
                     )
                   ]));
-      Navigator.of(context).pop();
     } on FirebaseAuthException catch (e) {
       _handleSigupError(e);
       setState(() {

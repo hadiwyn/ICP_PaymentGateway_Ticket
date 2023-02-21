@@ -12,7 +12,6 @@ class Dashboard extends StatefulWidget {
 }
 
 class _DashboardState extends State<Dashboard> {
-
   FirebaseFirestore firestore = FirebaseFirestore.instance;
 
   Future<QuerySnapshot<Object?>> getData() {
@@ -36,58 +35,57 @@ class _DashboardState extends State<Dashboard> {
             return SingleChildScrollView(
               child: Column(
                 children: [
-                    Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.only(
-                            bottomLeft: Radius.circular(20),
-                            bottomRight: Radius.circular(20)),
-                        color: Colors.white,
-                        boxShadow: [
-                          BoxShadow(
-                              color: Colors.black38,
-                              spreadRadius: 0,
-                              blurRadius: 10),
-                        ],
-                      ),
-                      // decoration: BoxDecoration(
-                      //   borderRadius: BorderRadius.only(
-                      //       bottomRight: Radius.circular(30),
-                      //       bottomLeft: Radius.circular(30)),
-                      //   // boxShadow: [
-                      //   //   BoxShadow(
-                      //   //       color: Colors.black38,
-                      //   //       spreadRadius: 0,
-                      //   //       blurRadius: 10),
-                      //   // ],
-                      // ),
-                      child: Column(children: [
-                        Row(
-                          mainAxisSize: MainAxisSize.max,
-                          children: [
-                            Expanded(
-                              child: Padding(
-                                padding: EdgeInsetsDirectional.only(top: 12),
-                                child: Container(
-                                  width:
-                                      MediaQuery.of(context).size.width * 0.5,
-                                  height: 150,
-                                  child: Stack(
-                                    // ignore: prefer_const_literals_to_cre
-                                    // ate_immutables
-                                    children: [
-                                      pageView(),
-                                    ],
-                                  ),
+                  Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.only(
+                          bottomLeft: Radius.circular(20),
+                          bottomRight: Radius.circular(20)),
+                      color: Colors.white,
+                      boxShadow: [
+                        BoxShadow(
+                            color: Colors.black38,
+                            spreadRadius: 0,
+                            blurRadius: 10),
+                      ],
+                    ),
+                    // decoration: BoxDecoration(
+                    //   borderRadius: BorderRadius.only(
+                    //       bottomRight: Radius.circular(30),
+                    //       bottomLeft: Radius.circular(30)),
+                    //   // boxShadow: [
+                    //   //   BoxShadow(
+                    //   //       color: Colors.black38,
+                    //   //       spreadRadius: 0,
+                    //   //       blurRadius: 10),
+                    //   // ],
+                    // ),
+                    child: Column(children: [
+                      Row(
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          Expanded(
+                            child: Padding(
+                              padding: EdgeInsetsDirectional.only(top: 12),
+                              child: Container(
+                                width: MediaQuery.of(context).size.width * 0.5,
+                                height: 150,
+                                child: Stack(
+                                  // ignore: prefer_const_literals_to_cre
+                                  // ate_immutables
+                                  children: [
+                                    pageView(),
+                                  ],
                                 ),
                               ),
                             ),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 30,
-                        )
-                      ]),
-                    ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 30,
+                      )
+                    ]),
+                  ),
                   SizedBox(
                     height: 30,
                   ),
@@ -108,10 +106,10 @@ class _DashboardState extends State<Dashboard> {
                       ),
                     ],
                   ),
-                  SizedBox(
-                      height: 400,
-                      width: double.infinity,
-                      child: listView(listAllDocument)),
+                  // SizedBox(
+                  //     height: 400,
+                  //     width: double.infinity,
+                  //     child: listView(listAllDocument)),
                 ],
               ),
             );

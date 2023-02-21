@@ -8,7 +8,6 @@ import 'package:ticket_wisata_donorojo/app/routes/app_pages.dart';
 import '../admin/home_admin.dart';
 import '../animations/fade_animations.dart';
 import '../user/dashboard/home.dart';
-import '../login/views/login_view.dart';
 import 'first_page.dart';
 
 class FirstPage extends StatefulWidget {

@@ -2,8 +2,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:ticket_wisata_donorojo/app/modules/admin/home_admin.dart';
-import 'package:ticket_wisata_donorojo/app/modules/user/dashboard/home.dart';
+
+import '../../admin/home_admin.dart';
+import '../../user/dashboard/home.dart';
 
 class LoginController extends GetxController {
   late TextEditingController emailC;
@@ -59,10 +60,8 @@ class LoginController extends GetxController {
     }
   }
 
-  final count = 0.obs;
   @override
   void onInit() {
-    
     emailC = TextEditingController();
     passC = TextEditingController();
     super.onInit();
@@ -78,5 +77,4 @@ class LoginController extends GetxController {
     super.onClose();
   }
 
-  void increment() => count.value++;
 }
