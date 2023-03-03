@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:ticket_wisata_donorojo/app/modules/login/views/resetPassword.dart';
 
 import '../../user/register/register.dart';
 import '../controllers/login_controller.dart';
@@ -165,27 +166,47 @@ class LoginView extends GetView<LoginController> {
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: <Widget>[
-                                      const Text(
-                                        "Belum mempunyai Akun ? ",
-                                        style:
-                                            TextStyle(color: Color(0xFF6F35A5)),
-                                      ),
                                       GestureDetector(
-                                        onTap: () => Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    const Register())),
+                                        onTap: () {
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: ((context) =>
+                                                      ResetPassword())));
+                                        },
                                         child: const Text(
-                                          "Daftar",
+                                          "Lupa kata sandi",
                                           style: TextStyle(
                                             color: Color(0xFF6F35A5),
-                                            fontWeight: FontWeight.bold,
                                           ),
                                         ),
                                       )
                                     ],
                                   ),
+                                ),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: <Widget>[
+                                    const Text(
+                                      "Belum mempunyai Akun ? ",
+                                      style:
+                                          TextStyle(color: Color(0xFF6F35A5)),
+                                    ),
+                                    GestureDetector(
+                                      onTap: () => Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  const Register())),
+                                      child: const Text(
+                                        "Daftar",
+                                        style: TextStyle(
+                                          color: Color(0xFF6F35A5),
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    )
+                                  ],
                                 ),
                               ],
                             ),

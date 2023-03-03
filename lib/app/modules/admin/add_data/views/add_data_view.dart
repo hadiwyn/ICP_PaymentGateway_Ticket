@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -58,7 +59,7 @@ class AddDataView extends GetView<AddDataController> {
                 onPressed: () => controller.addProduct(controller.nameC.text,
                     controller.priceC.text, controller.deskripsiC.text),
                 // ignore: prefer_const_constructors
-                child: Text("Add Product"),
+                child: Text("Tambah Data"),
               ),
               Spacer(
                 flex: 2,
@@ -67,4 +68,6 @@ class AddDataView extends GetView<AddDataController> {
           ),
         ));
   }
+
+
 }

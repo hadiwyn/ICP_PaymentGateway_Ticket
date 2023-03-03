@@ -1,5 +1,5 @@
 
-
+import 'dart:convert';
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
@@ -8,6 +8,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:intl/intl.dart';
 
+
 class AddDataController extends GetxController {
   late TextEditingController nameC;
   late TextEditingController priceC;
@@ -15,6 +16,8 @@ class AddDataController extends GetxController {
   late TextEditingController imgC;
   late String imgUrl;
   late XFile? imgFile;
+
+  
 
   CollectionReference? dbRef;
 
@@ -40,21 +43,23 @@ class AddDataController extends GetxController {
     } catch (error) {}
   }
 
-  void addProduct(String name, String price, String deskripsi) {
+  Future<void> addProduct(String name, String price, String deskripsi) async {
     CollectionReference product = firestore.collection("wisata");
-
     String cdate2 = DateFormat("MMMM, dd, yyyy").format(DateTime.now());
-    
 
     try {
       String dateNow = DateTime.now().toIso8601String();
-      product.add({
+      final DocumentReference doc = await product.add({
+        
         "nama": name,
         "harga": price,
         "deskripsi": deskripsi,
-        "image" : imgUrl,
-        "time": cdate2
+        "image": imgUrl,
+        "time": cdate2,
       });
+
+      final String ID = doc.id;
+      doc.update({'id': ID});
 
       Get.defaultDialog(
         title: "Berhasil",

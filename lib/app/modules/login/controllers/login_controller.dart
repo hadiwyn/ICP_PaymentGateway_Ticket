@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -34,12 +36,11 @@ class LoginController extends GetxController {
       required BuildContext context}) async {
     FirebaseAuth auth = FirebaseAuth.instance;
 
-    print(email);
-    print(password);
+    String encodePass = base64.encode(utf8.encode(password));
 
     try {
       UserCredential userCredential = await auth.signInWithEmailAndPassword(
-          email: email, password: password);
+          email: email, password: encodePass);
       user = userCredential.user;
     } on FirebaseAuthException catch (e) {
       _handleSigupError(e);
@@ -76,5 +77,4 @@ class LoginController extends GetxController {
   void onClose() {
     super.onClose();
   }
-
 }

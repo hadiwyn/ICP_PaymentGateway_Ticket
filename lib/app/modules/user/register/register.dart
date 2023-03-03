@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:get/get.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -272,9 +274,11 @@ class _RegisterState extends State<Register> {
       loading = true;
     });
     try {
+      String encodedPass = base64.encode(utf8.encode(passwdC.text));
+
       await FirebaseAuth.instance.createUserWithEmailAndPassword(
-          email: emailC.text, password: passwdC.text);
-      registerUser(nameC.text, no_tlpC.text, emailC.text, passwdC.text);
+          email: emailC.text, password: encodedPass);
+      registerUser(nameC.text, no_tlpC.text, emailC.text, encodedPass);
       // await FirebaseFirestore.instance.collection('users').add({
       //   'nama_lengkap': nameC.text,
       //   'no_tlp': no_tlpC.text,

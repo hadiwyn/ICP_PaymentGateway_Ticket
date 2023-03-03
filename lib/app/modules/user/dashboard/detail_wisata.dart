@@ -1,8 +1,11 @@
 // ignore_for_file: must_be_immutable
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ticket_wisata_donorojo/app/modules/user/dashboard/home.dart';
+import 'package:ticket_wisata_donorojo/app/modules/user/dashboard/midtrans_view.dart';
 import 'package:ticket_wisata_donorojo/app/modules/user/dashboard/page_view.dart';
 import 'package:ticket_wisata_donorojo/app/modules/user/dashboard/pesan_tiket.dart';
 import 'package:ticket_wisata_donorojo/app/routes/app_pages.dart';
@@ -17,6 +20,8 @@ class DetailWisata extends StatefulWidget {
 }
 
 class _DetailWisataState extends State<DetailWisata> {
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -164,12 +169,17 @@ class _DetailWisataState extends State<DetailWisata> {
                             ],
                             borderRadius: BorderRadius.circular(20),
                           ),
-                          child: Center(
-                            child: Text(
-                              "Pesan Sekarang",
-                              style: const TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white),
+                          child: InkWell(
+                            onTap: () {
+                              Get.off(PesanTiket(widget.detail));
+                            },
+                            child: Center(
+                              child: Text(
+                                "Pesan Sekarang",
+                                style: const TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white),
+                              ),
                             ),
                           ),
                         ),

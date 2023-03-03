@@ -7,11 +7,13 @@ class FieldDeskripsi extends GetView<AddDataController> {
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      child: TextField(
+      child: TextFormField(
+        maxLines: 5,
         controller: controller.deskripsiC,
         textInputAction: TextInputAction.next,
         decoration: InputDecoration(
           labelText: "Deskripsi",
+          border: OutlineInputBorder(),
           icon: const Icon(
             Icons.description,
             size: 24.0,
