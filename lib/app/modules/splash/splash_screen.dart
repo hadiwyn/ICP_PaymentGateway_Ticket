@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 import 'package:ticket_wisata_donorojo/app/modules/splash/first_page.dart';
 
 import '../../routes/app_pages.dart';
-import '../admin/home_admin.dart';
+import '../admin/dashboard/home_admin.dart';
 import '../user/dashboard/home.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -25,6 +25,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Image.asset('assets/background/bg.jpg').color,
       body: Column(children: [
         Spacer(),
         Spacer(),

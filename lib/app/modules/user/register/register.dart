@@ -35,74 +35,63 @@ class _RegisterState extends State<Register> {
 
   @override
   Widget build(BuildContext context) {
-    return Theme(
-      data: ThemeData(
-        primaryColor: const Color(0xFF6F35A5),
-        scaffoldBackgroundColor: Colors.white,
-        elevatedButtonTheme: ElevatedButtonThemeData(
-          style: ElevatedButton.styleFrom(
-            elevation: 0,
-            backgroundColor: const Color(0xFF6F35A5),
-            shape: const StadiumBorder(),
-            maximumSize: const Size(double.infinity, 56),
-            minimumSize: const Size(double.infinity, 56),
-          ),
-        ),
-        inputDecorationTheme: const InputDecorationTheme(
-          filled: true,
-          fillColor: Color(0xFFF1E6FF),
-          iconColor: Color(0xFF6F35A5),
-          prefixIconColor: Color(0xFF6F35A5),
-          contentPadding:
-              EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.all(Radius.circular(30)),
-            borderSide: BorderSide.none,
-          ),
-        ),
-      ),
-      child: Scaffold(
-        resizeToAvoidBottomInset: true,
-        body: SizedBox(
-          width: double.infinity,
-          height: MediaQuery.of(context).size.height,
-          child: Stack(
-            alignment: Alignment.center,
-            children: <Widget>[
-              // Positioned(
-              //   top: 0,
-              //   left: 0,
-              //   child: Image.network(
-              //     "https://capekngoding.com/uploads/62f680369803f_main_top.png",
-              //     width: 120,
-              //   ),
-              // ),
-              SafeArea(
-                child: SingleChildScrollView(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Padding(
-                        padding: const EdgeInsets.only(bottom: 30),
-                        child: Text("daftar Akun".toUpperCase(),
-                            style: GoogleFonts.roboto(
-                              fontSize: 30,
-                              fontWeight: FontWeight.bold,
-                            )),
+    return Scaffold(
+      resizeToAvoidBottomInset: true,
+      body: SingleChildScrollView(
+        child: SafeArea(
+          child: Column(
+            children: [
+              Container(
+                height: 120,
+                width: MediaQuery.of(context).size.width,
+                decoration: BoxDecoration(
+                  color: Color.fromARGB(255, 93, 193, 255),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.only(bottom: 20.0),
+                  child: Center(
+                    child: Text(
+                      'WisataKu',
+                      style: GoogleFonts.patuaOne(
+                        textStyle: const TextStyle(
+                          fontSize: 40,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        ),
                       ),
-                      const SizedBox(height: 32.0),
-                      // CircleAvatar(
-                      //   radius: 40.0,
-                      //   backgroundImage: NetworkImage(
-                      //     "https://i.ibb.co/PGv8ZzG/me.jpg",
-                      //   ),
-                      // ),
-                      // const SizedBox(height: 40.0),
+                    ),
+                  ),
+                ),
+              ),
+              Container(
+                height: 700,
+                transform: Matrix4.translationValues(0.0, -30, 0),
+                width: MediaQuery.of(context).size.width,
+                decoration: const BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(32.0),
+                  ),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: Column(
+                    children: [
+                      const Text(
+                        "Buat Akun Kamu",
+                        style: TextStyle(
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 20.0,
+                      ),
+                      const Spacer(),
                       Row(
                         children: [
-                          const Spacer(),
                           Expanded(
-                            flex: 8,
+                            flex: 4,
                             child: Form(
                               key: _formKey,
                               child: Column(
@@ -207,7 +196,7 @@ class _RegisterState extends State<Register> {
                                       child: Text("Daftar".toUpperCase()),
                                     ),
                                   ],
-                                  const SizedBox(height: 16.0),
+                                  const SizedBox(height: 25.0),
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: <Widget>[
@@ -234,9 +223,12 @@ class _RegisterState extends State<Register> {
                               ),
                             ),
                           ),
-                          const Spacer(),
                         ],
                       ),
+                      const SizedBox(
+                        height: 50,
+                      ),
+                      const Spacer(),
                     ],
                   ),
                 ),
@@ -274,11 +266,11 @@ class _RegisterState extends State<Register> {
       loading = true;
     });
     try {
-      String encodedPass = base64.encode(utf8.encode(passwdC.text));
+      // String encodedPass = base64.encode(utf8.encode(passwdC.text));
 
       await FirebaseAuth.instance.createUserWithEmailAndPassword(
-          email: emailC.text, password: encodedPass);
-      registerUser(nameC.text, no_tlpC.text, emailC.text, encodedPass);
+          email: emailC.text, password: passwdC.text);
+      registerUser(nameC.text, no_tlpC.text, emailC.text, passwdC.text);
       // await FirebaseFirestore.instance.collection('users').add({
       //   'nama_lengkap': nameC.text,
       //   'no_tlp': no_tlpC.text,

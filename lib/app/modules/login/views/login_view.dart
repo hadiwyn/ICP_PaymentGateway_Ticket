@@ -16,206 +16,211 @@ class LoginView extends GetView<LoginController> {
   @override
   Widget build(BuildContext context) {
     Get.put(LoginController());
-    return Theme(
-      data: ThemeData(
-        primaryColor: const Color(0xFF6F35A5),
-        scaffoldBackgroundColor: Colors.white,
-        elevatedButtonTheme: ElevatedButtonThemeData(
-          style: ElevatedButton.styleFrom(
-            elevation: 0,
-            backgroundColor: const Color(0xFF6F35A5),
-            shape: const StadiumBorder(),
-            maximumSize: const Size(double.infinity, 56),
-            minimumSize: const Size(double.infinity, 56),
-          ),
-        ),
-        inputDecorationTheme: const InputDecorationTheme(
-          filled: true,
-          fillColor: Color(0xFFF1E6FF),
-          iconColor: Color(0xFF6F35A5),
-          prefixIconColor: Color(0xFF6F35A5),
-          contentPadding:
-              EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.all(Radius.circular(30)),
-            borderSide: BorderSide.none,
-          ),
-        ),
-      ),
-      child: Scaffold(
-        resizeToAvoidBottomInset: false,
-        body: SizedBox(
-          width: double.infinity,
-          height: MediaQuery.of(context).size.height,
-          child: Stack(
-            alignment: Alignment.center,
-            children: <Widget>[
-              // Padding(
-              //   padding: const EdgeInsets.only(top: 80),
-              //   child: Column(children: [
-              //     Image.asset(
-              //       "assets/image/logo-pacitan.webp",
-              //       width: 200,
-              //     ),
-              //   ]),
-              // ),
-              SafeArea(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Column(
+    return Scaffold(
+      backgroundColor: Colors.white,
+      body: SingleChildScrollView(
+        child: SafeArea(
+          child: Column(
+            children: [
+              Container(
+                height: 120,
+                width: MediaQuery.of(context).size.width,
+                decoration: BoxDecoration(
+                  color: Color.fromARGB(255, 93, 193, 255),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.only(bottom: 20.0),
+                  child: Center(
+                    child: Text(
+                      'WisataKu',
+                      style: GoogleFonts.patuaOne(
+                        textStyle: const TextStyle(
+                          fontSize: 40,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              Container(
+                height: 650,
+                transform: Matrix4.translationValues(0.0, -30, 0),
+                width: MediaQuery.of(context).size.width,
+                decoration: const BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(32.0),
+                  ),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: Form(
+                    key: _formKey,
+                    child: Column(
                       children: [
-                        Padding(
-                          padding: const EdgeInsets.only(bottom: 30),
-                          child: Text(
-                            "E-Ticketing Wisata",
-                            style: GoogleFonts.lato(
-                                // ignore: prefer_const_constructors
-                                textStyle: TextStyle(
-                              fontSize: 30,
-                              fontWeight: FontWeight.bold,
-                            )),
+                        Image.asset(
+                          "assets/image/logo.png",
+                          width: 200.0,
+                          height: 200.0,
+                          fit: BoxFit.cover,
+                        ),
+                        const SizedBox(
+                          height: 20.0,
+                        ),
+                        const Spacer(),
+                        Container(
+                          padding: const EdgeInsets.all(12),
+                          margin: const EdgeInsets.only(),
+                          child: TextFormField(
+                            validator: _requeiredValidatorEmail,
+                            controller: controller.emailC,
+                            decoration: const InputDecoration(
+                              labelText: 'Email',
+                              labelStyle: TextStyle(
+                                color: Colors.blueGrey,
+                              ),
+                              suffixIcon: Icon(
+                                Icons.email,
+                              ),
+                              enabledBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Colors.blueGrey,
+                                ),
+                              ),
+                              helperText: 'Masukkan alamat email',
+                            ),
+                            onChanged: (value) {},
                           ),
+                        ),
+                        Container(
+                          padding: const EdgeInsets.all(12),
+                          margin: const EdgeInsets.only(),
+                          child: TextFormField(
+                            validator: _requeiredValidatorPass,
+                            controller: controller.passC,
+                            maxLength: 20,
+                            obscureText: true,
+                            decoration: const InputDecoration(
+                              labelText: 'Password',
+                              labelStyle: TextStyle(
+                                color: Colors.blueGrey,
+                              ),
+                              suffixIcon: Icon(
+                                Icons.password,
+                              ),
+                              enabledBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Colors.blueGrey,
+                                ),
+                              ),
+                              helperText: 'Masukkan kata sandi',
+                            ),
+                            onChanged: (value) {},
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.only(right: 14.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              TextButton(
+                                onPressed: () {
+                                  Get.off(ResetPassword());
+                                },
+                                child: Text(
+                                  "Lupa kata sandi",
+                                  style: const TextStyle(
+                                      color: Colors.black, fontSize: 12),
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 40.0,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 14.0),
+                          child: Row(
+                            children: [
+                              Flexible(
+                                flex: 1,
+                                fit: FlexFit.tight,
+                                child: SizedBox(
+                                  height: 50,
+                                  child: ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(12),
+                                      ),
+                                      backgroundColor:
+                                          Color.fromARGB(255, 93, 193, 255),
+                                    ),
+                                    onPressed: () async {
+                                      if (_formKey.currentState != null &&
+                                          _formKey.currentState!.validate()) {
+                                        User? user = await controller
+                                            .loginUsingEmailPassword(
+                                                email: controller.emailC.text,
+                                                password: controller.passC.text,
+                                                context: context);
+                                        if (user != null) {
+                                          controller.getData();
+                                        } else {
+                                          Get.defaultDialog(
+                                            title: "Gagal Login",
+                                            middleText:
+                                                "Email atau kata sandi salah",
+                                            onConfirm: () {
+                                              // controller.emailC.clear();
+                                              // controller.passC.clear();
+                                              Get.back();
+                                            },
+                                            textConfirm: "Okey",
+                                          );
+                                        }
+                                      }
+                                    },
+                                    child: const Text('Masuk'),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Spacer(
+                          flex: 1,
                         ),
                         Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            const Spacer(),
-                            Expanded(
-                              flex: 3,
-                              child:
-                                  Image.asset("assets/image/logo-pacitan.webp"),
+                            const Text(
+                              "Belum punya akun? ",
+                              style: TextStyle(
+                                fontSize: 14.0,
+                              ),
                             ),
-                            const Spacer(),
+                            InkWell(
+                              onTap: () => Get.to(const Register()),
+                              child: Text(
+                                "Register",
+                                style: TextStyle(
+                                  color: Colors.blue,
+                                  fontSize: 14.0,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
                           ],
                         ),
-                        const SizedBox(height: 16.0),
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        const Spacer(),
-                        Expanded(
-                          flex: 8,
-                          child: Form(
-                            key: _formKey,
-                            child: Column(
-                              children: [
-                                TextFormField(
-                                  controller: controller.emailC,
-                                  keyboardType: TextInputType.emailAddress,
-                                  cursorColor: const Color(0xFF6F35A5),
-                                  validator: _requeiredValidatorEmail,
-                                  decoration: const InputDecoration(
-                                    hintText: "Email",
-                                    prefixIcon: Padding(
-                                      padding: EdgeInsets.all(16.0),
-                                      child: Icon(Icons.person),
-                                    ),
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      vertical: 16.0),
-                                  child: TextFormField(
-                                    controller: controller.passC,
-                                    textInputAction: TextInputAction.done,
-                                    obscureText: true,
-                                    cursorColor: const Color(0xFF6F35A5),
-                                    decoration: const InputDecoration(
-                                      hintText: "Password",
-                                      prefixIcon: Padding(
-                                        padding: EdgeInsets.all(16.0),
-                                        child: Icon(Icons.lock),
-                                      ),
-                                    ),
-                                    validator: _requeiredValidatorPass,
-                                  ),
-                                ),
-                                const SizedBox(height: 16.0 / 2),
-                                ElevatedButton(
-                                  onPressed: () async {
-                                    if (_formKey.currentState != null &&
-                                        _formKey.currentState!.validate()) {
-                                      User? user = await controller
-                                          .loginUsingEmailPassword(
-                                              email: controller.emailC.text,
-                                              password: controller.passC.text,
-                                              context: context);
-                                      if (user != null) {
-                                        controller.getData();
-                                      } else {
-                                        Get.defaultDialog(
-                                          title: "Gagal Login",
-                                          middleText:
-                                              "Email atau kata sandi salah",
-                                          onConfirm: () {
-                                            // controller.emailC.clear();
-                                            // controller.passC.clear();
-                                            Get.back();
-                                          },
-                                          textConfirm: "Okey",
-                                        );
-                                      }
-                                    }
-                                  },
-                                  child: Text("Masuk".toUpperCase()),
-                                ),
-                                const SizedBox(height: 16.0),
-                                Padding(
-                                  padding: const EdgeInsets.only(bottom: 70),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: <Widget>[
-                                      GestureDetector(
-                                        onTap: () {
-                                          Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                  builder: ((context) =>
-                                                      ResetPassword())));
-                                        },
-                                        child: const Text(
-                                          "Lupa kata sandi",
-                                          style: TextStyle(
-                                            color: Color(0xFF6F35A5),
-                                          ),
-                                        ),
-                                      )
-                                    ],
-                                  ),
-                                ),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: <Widget>[
-                                    const Text(
-                                      "Belum mempunyai Akun ? ",
-                                      style:
-                                          TextStyle(color: Color(0xFF6F35A5)),
-                                    ),
-                                    GestureDetector(
-                                      onTap: () => Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  const Register())),
-                                      child: const Text(
-                                        "Daftar",
-                                        style: TextStyle(
-                                          color: Color(0xFF6F35A5),
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
-                                    )
-                                  ],
-                                ),
-                              ],
-                            ),
-                          ),
+                        const Spacer(
+                          flex: 2,
                         ),
-                        const Spacer(),
                       ],
                     ),
-                  ],
+                  ),
                 ),
               ),
             ],

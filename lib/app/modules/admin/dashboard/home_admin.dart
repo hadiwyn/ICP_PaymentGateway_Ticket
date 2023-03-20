@@ -2,11 +2,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/instance_manager.dart';
-import 'package:ticket_wisata_donorojo/app/modules/admin/account_admin.dart';
-import 'package:ticket_wisata_donorojo/app/modules/admin/homeView_admin.dart';
+import 'package:ticket_wisata_donorojo/app/modules/admin/account_admin/account_admin.dart';
+import 'package:ticket_wisata_donorojo/app/modules/admin/dashboard/homeView_admin.dart';
 import 'package:ticket_wisata_donorojo/app/modules/user/dashboard/riwayat_tiket.dart';
 import 'package:ticket_wisata_donorojo/app/modules/splash/first_page.dart';
-
 
 class HomeAdmin extends StatefulWidget {
   const HomeAdmin({super.key});

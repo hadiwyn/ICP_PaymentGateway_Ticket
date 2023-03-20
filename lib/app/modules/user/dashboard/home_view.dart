@@ -55,7 +55,7 @@ class _HomeViewState extends State<HomeView> {
           //   ),
           // ),
           Positioned(
-            top: 40,
+            top: 50,
             left: 15,
             child: Text(
               "Selamat Datang",
@@ -63,10 +63,22 @@ class _HomeViewState extends State<HomeView> {
             ),
           ),
           Positioned(
-            top: 60,
+            top: 65,
             left: 15,
             child: Text(
               nama!,
+              style: TextStyle(
+                fontSize: 24,
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+          Positioned(
+            top: 55,
+            right: 40,
+            child: Text(
+              "WisataKu",
               style: TextStyle(
                 fontSize: 24,
                 color: Colors.white,
@@ -130,7 +142,7 @@ class _HomeViewState extends State<HomeView> {
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Icon(
-                      Icons.search,
+                      Icons.travel_explore,
                       color: Color.fromARGB(255, 255, 255, 255),
                     ),
                   ),

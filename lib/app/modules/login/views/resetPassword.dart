@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:ticket_wisata_donorojo/app/modules/login/views/login_view.dart';
 import 'package:ticket_wisata_donorojo/app/routes/app_pages.dart';
 
 class ResetPassword extends StatefulWidget {
@@ -69,7 +70,11 @@ class _ResetPasswordState extends State<ResetPassword> {
                                   actions: [
                                     TextButton(
                                       onPressed: () {
-                                        Get.off(Routes.LOGIN);
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    LoginView()));
                                       },
                                       child: Text("Oke"),
                                     )

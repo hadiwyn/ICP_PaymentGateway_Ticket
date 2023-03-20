@@ -10,14 +10,14 @@ import 'package:image_picker/image_picker.dart';
 
 import '../../splash/first_page.dart';
 
-class AccountUser extends StatefulWidget {
-  AccountUser({super.key});
+class AccountAdmin extends StatefulWidget {
+  AccountAdmin({super.key});
 
   @override
-  State<AccountUser> createState() => _AccountUserState();
+  State<AccountAdmin> createState() => _AccountAdminState();
 }
 
-class _AccountUserState extends State<AccountUser> {
+class _AccountAdminState extends State<AccountAdmin> {
   String? uName = "";
   String? uEmail = "";
   String? uPhone = "";
@@ -42,7 +42,6 @@ class _AccountUserState extends State<AccountUser> {
       print(uEmail);
       print(uPhone);
     });
-    
   }
 
   @override

@@ -2,10 +2,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:ticket_wisata_donorojo/app/routes/app_pages.dart';
 
-import '../admin/home_admin.dart';
+import '../admin/dashboard/home_admin.dart';
 import '../animations/fade_animations.dart';
 import '../user/dashboard/home.dart';
 import 'first_page.dart';
@@ -15,8 +16,7 @@ class FirstPage extends StatefulWidget {
   _FirstPageState createState() => _FirstPageState();
 }
 
-class _FirstPageState extends State<FirstPage>
-    with TickerProviderStateMixin {
+class _FirstPageState extends State<FirstPage> with TickerProviderStateMixin {
   AnimationController? _scaleController;
   AnimationController? _scale2Controller;
   AnimationController? _widthController;
@@ -107,145 +107,163 @@ class _FirstPageState extends State<FirstPage>
     final double width = MediaQuery.of(context).size.width;
 
     return Scaffold(
-      backgroundColor: Color.fromRGBO(3, 9, 23, 1),
-      body: Container(
-        width: double.infinity,
-        child: Stack(
-          children: <Widget>[
-            Positioned(
-              top: -50,
-              left: 0,
-              child: FadeAnimation(
-                  1,
-                  Container(
-                    width: width,
-                    height: 400,
-                    decoration: BoxDecoration(
-                        image: DecorationImage(
-                            image: AssetImage('assets/image/one.png'),
-                            fit: BoxFit.cover)),
-                  )),
-            ),
-            Positioned(
-              top: -100,
-              left: 0,
-              child: FadeAnimation(
-                  1.3,
-                  Container(
-                    width: width,
-                    height: 400,
-                    decoration: BoxDecoration(
-                        image: DecorationImage(
-                            image: AssetImage('assets/image/one.png'),
-                            fit: BoxFit.cover)),
-                  )),
-            ),
-            Positioned(
-              top: -150,
-              left: 0,
-              child: FadeAnimation(
-                  1.6,
-                  Container(
-                    width: width,
-                    height: 400,
-                    decoration: BoxDecoration(
-                        image: DecorationImage(
-                            image: AssetImage('assets/image/one.png'),
-                            fit: BoxFit.cover)),
-                  )),
+        backgroundColor: Color.fromRGBO(3, 9, 23, 1),
+        body: Stack(
+          children: [
+            Image.asset(
+              "assets/background/bg.jpg",
+              width: double.infinity,
+              height: double.infinity,
+              fit: BoxFit.fill,
             ),
             Container(
-              padding: EdgeInsets.all(20.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.end,
-                crossAxisAlignment: CrossAxisAlignment.start,
+              width: double.infinity,
+              child: Stack(
                 children: <Widget>[
-                  FadeAnimation(
-                      1,
-                      Text(
-                        "Selamat Datang",
-                        style: TextStyle(color: Colors.white, fontSize: 50),
-                      )),
-                  SizedBox(
-                    height: 50,
+                  Positioned(
+                    top: -50,
+                    left: 0,
+                    child: FadeAnimation(
+                        1,
+                        Container(
+                          width: width,
+                          height: 400,
+                          decoration: BoxDecoration(
+                              image: DecorationImage(
+                                  image: AssetImage('assets/image/one.png'),
+                                  fit: BoxFit.cover)),
+                        )),
                   ),
-                  FadeAnimation(
-                      1.3,
-                      Text(
-                        "Mau healing kemana kamu hari ini ? \npesan tiket di WisataKu aja",
-                        style: TextStyle(
-                            color: Colors.white.withOpacity(.7),
-                            height: 1.4,
-                            fontSize: 20),
-                      )),
-                  SizedBox(
-                    height: 180,
+                  Positioned(
+                    top: -100,
+                    left: 0,
+                    child: FadeAnimation(
+                        1.3,
+                        Container(
+                          width: width,
+                          height: 400,
+                          decoration: BoxDecoration(
+                              image: DecorationImage(
+                                  image: AssetImage('assets/image/one.png'),
+                                  fit: BoxFit.cover)),
+                        )),
                   ),
-                  FadeAnimation(
-                      1.6,
-                      AnimatedBuilder(
-                        animation: _scaleController!,
-                        builder: (context, child) => Transform.scale(
-                            scale: _scaleAnimation?.value,
-                            child: Center(
-                              child: AnimatedBuilder(
-                                animation: _widthController!,
-                                builder: (context, child) => Container(
-                                  width: _widthAnimation?.value,
-                                  height: 80,
-                                  padding: EdgeInsets.all(10),
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(50),
-                                      color: Colors.blue.withOpacity(.4)),
-                                  child: InkWell(
-                                    onTap: () {
-                                      _scaleController?.forward();
-                                    },
-                                    child: Stack(children: <Widget>[
-                                      AnimatedBuilder(
-                                        animation: _positionController!,
-                                        builder: (context, child) => Positioned(
-                                          left: _positionAnimation?.value,
-                                          child: AnimatedBuilder(
-                                            animation: _scale2Controller!,
-                                            builder: (context, child) =>
-                                                Transform.scale(
-                                                    scale:
-                                                        _scale2Animation?.value,
-                                                    child: Container(
-                                                      width: 60,
-                                                      height: 60,
-                                                      decoration: BoxDecoration(
-                                                          shape:
-                                                              BoxShape.circle,
-                                                          color: Colors.blue),
-                                                      child: hideIcon == false
-                                                          ? Icon(
-                                                              Icons
-                                                                  .arrow_forward,
-                                                              color:
-                                                                  Colors.white,
-                                                            )
-                                                          : Container(),
-                                                    )),
-                                          ),
+                  Positioned(
+                    top: -150,
+                    left: 0,
+                    child: FadeAnimation(
+                        1.6,
+                        Container(
+                          width: width,
+                          height: 400,
+                          decoration: BoxDecoration(
+                              image: DecorationImage(
+                                  image: AssetImage('assets/image/one.png'),
+                                  fit: BoxFit.cover)),
+                        )),
+                  ),
+                  Container(
+                    padding: EdgeInsets.all(20.0),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        FadeAnimation(
+                          1,
+                          Text("Selamat Datang",
+                              style: GoogleFonts.patuaOne(
+                                  textStyle: TextStyle(
+                                color: Colors.white,
+                                fontSize: 60,
+                              ))),
+                        ),
+                        SizedBox(
+                          height: 50,
+                        ),
+                        FadeAnimation(
+                            1.3,
+                            Text(
+                              "Mau healing kemana kamu hari ini ? \npesan tiket di WisataKu aja",
+                              style: TextStyle(
+                                  color: Colors.white.withOpacity(.7),
+                                  height: 1.4,
+                                  fontSize: 20),
+                            )),
+                        SizedBox(
+                          height: 180,
+                        ),
+                        FadeAnimation(
+                            1.6,
+                            AnimatedBuilder(
+                              animation: _scaleController!,
+                              builder: (context, child) => Transform.scale(
+                                  scale: _scaleAnimation?.value,
+                                  child: Center(
+                                    child: AnimatedBuilder(
+                                      animation: _widthController!,
+                                      builder: (context, child) => Container(
+                                        width: _widthAnimation?.value,
+                                        height: 80,
+                                        padding: EdgeInsets.all(10),
+                                        decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(50),
+                                            color: Colors.blue.withOpacity(.4)),
+                                        child: InkWell(
+                                          onTap: () {
+                                            _scaleController?.forward();
+                                          },
+                                          child: Stack(children: <Widget>[
+                                            AnimatedBuilder(
+                                              animation: _positionController!,
+                                              builder: (context, child) =>
+                                                  Positioned(
+                                                left: _positionAnimation?.value,
+                                                child: AnimatedBuilder(
+                                                  animation: _scale2Controller!,
+                                                  builder: (context, child) =>
+                                                      Transform.scale(
+                                                          scale:
+                                                              _scale2Animation
+                                                                  ?.value,
+                                                          child: Container(
+                                                            width: 60,
+                                                            height: 60,
+                                                            decoration:
+                                                                BoxDecoration(
+                                                                    shape: BoxShape
+                                                                        .circle,
+                                                                    color: Colors
+                                                                        .blue),
+                                                            child: hideIcon ==
+                                                                    false
+                                                                ? Icon(
+                                                                    Icons
+                                                                        .arrow_forward,
+                                                                    color: Colors
+                                                                        .white,
+                                                                  )
+                                                                : Container(),
+                                                          )),
+                                                ),
+                                              ),
+                                            ),
+                                          ]),
                                         ),
                                       ),
-                                    ]),
-                                  ),
-                                ),
-                              ),
+                                    ),
+                                  )),
                             )),
-                      )),
-                  SizedBox(
-                    height: 60,
-                  ),
+                        SizedBox(
+                          height: 60,
+                        ),
+                      ],
+                    ),
+                  )
                 ],
               ),
-            )
+            ),
           ],
-        ),
-      ),
-    );
+        ));
   }
 }

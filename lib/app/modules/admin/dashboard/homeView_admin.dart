@@ -3,10 +3,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
-import 'package:ticket_wisata_donorojo/app/modules/admin/listView_admin.dart';
+import 'package:ticket_wisata_donorojo/app/modules/admin/dashboard/listView_admin.dart';
 import 'package:ticket_wisata_donorojo/app/modules/user/dashboard/list_view.dart';
 
-import '../../routes/app_pages.dart';
+import '../../../routes/app_pages.dart';
 
 class HomeViewAdmin extends StatefulWidget {
   const HomeViewAdmin({super.key});
