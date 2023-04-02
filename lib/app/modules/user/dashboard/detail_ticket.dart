@@ -33,7 +33,13 @@ class _DetailTicketState extends State<DetailTicket> {
   @override
   Widget build(BuildContext context) {
 // Mengambil tanggal dan waktu sekarang
-    final now = DateTime.now();
+    final now = DateTime.now().subtract(Duration(
+      hours: DateTime.now().hour,
+      minutes: DateTime.now().minute,
+      seconds: DateTime.now().second,
+      milliseconds: DateTime.now().millisecond,
+      microseconds: DateTime.now().microsecond,
+    ));
 
 // Membuat formatter untuk tanggal dengan format 'dd MMM yyyy'
     final formatter = DateFormat('dd MMM yyyy');
@@ -42,9 +48,9 @@ class _DetailTicketState extends State<DetailTicket> {
     final targetDate = formatter.parse(widget.date_visit);
 
     print(now);
-
+    print(targetDate);
 // Menentukan teks yang akan ditampilkan
-    final textToShow = now.compareTo(targetDate) >= 0 ? 'expired !' : '';
+    final textToShow = now.compareTo(targetDate) > 0 ? 'expired !' : '';
 
     return Scaffold(
         appBar: AppBar(

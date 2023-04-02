@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:ticket_wisata_donorojo/app/modules/admin/add_location/location.dart';
 import 'package:ticket_wisata_donorojo/app/modules/admin/update_data/update_data.dart';
 import 'package:ticket_wisata_donorojo/app/modules/user/dashboard/home.dart';
 import 'package:ticket_wisata_donorojo/app/modules/user/dashboard/page_view.dart';
@@ -28,39 +29,9 @@ class _DetailWisataAdminState extends State<DetailWisataAdmin> {
       body: Stack(
         children: [
           Container(
-              height: 430,
-              child: PageView(
-                scrollDirection: Axis.horizontal,
-                children: [
-                  ClipRRect(
-                    // borderRadius: BorderRadius.circular(20),
-                    child: Image.network(
-                      widget.detail['image'],
-                      width: 100,
-                      height: 100,
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                  // ClipRRect(
-                  //   // borderRadius: BorderRadius.circular(20),
-                  //   child: Image.asset(
-                  //     'assets/image/pangasan.jpeg',
-                  //     width: 100,
-                  //     height: 100,
-                  //     fit: BoxFit.cover,
-                  //   ),
-                  // ),
-                  // ClipRRect(
-                  //   // borderRadius: BorderRadius.circular(20),
-                  //   child: Image.asset(
-                  //     'assets/image/srau.jpeg',
-                  //     width: 100,
-                  //     height: 100,
-                  //     fit: BoxFit.cover,
-                  //   ),
-                  // ),
-                ],
-              )),
+            height: 430,
+            child: PageViewAutoSlide(widget.detail),
+          ),
           // Container(
           //   height: 430,
           //   width: double.infinity,
@@ -121,16 +92,29 @@ class _DetailWisataAdminState extends State<DetailWisataAdmin> {
                     child: Row(
                       children: [
                         Spacer(),
-                        const Icon(
+                        Icon(
                           Icons.location_pin,
                           size: 24.0,
-                          color: Colors.black54,
+                          color: widget.detail['location'] != null
+                              ? Colors.black54
+                              : Colors.red,
                         ),
                         Padding(
                           padding: const EdgeInsets.only(left: 5, right: 20),
-                          child: Text(
-                            "Location",
-                            style: const TextStyle(color: Colors.black54),
+                          child: InkWell(
+                            onTap: () {
+                              Get.off(AddScreenLocation());
+                            },
+                            child: Text(
+                              widget.detail['location'] != null
+                                  ? "Location"
+                                  : "Location Required !",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: widget.detail['location'] != null
+                                      ? Colors.black54
+                                      : Colors.red),
+                            ),
                           ),
                         ),
                       ],

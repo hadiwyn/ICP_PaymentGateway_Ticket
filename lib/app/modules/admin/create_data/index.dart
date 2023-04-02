@@ -71,9 +71,10 @@ class _CreateDataState extends State<CreateData> {
                 height: 20,
               ),
               Row(
+                mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  Expanded(
-                    child: Text("text"),
+                  Spacer(
+                    flex: 10,
                   ),
                   Padding(
                     padding: const EdgeInsets.only(left: 20),
@@ -85,6 +86,13 @@ class _CreateDataState extends State<CreateData> {
                       },
                     ),
                   ),
+                  Spacer(),
+                  if (images.isNotEmpty)
+                    const Icon(
+                      Icons.verified,
+                      size: 30.0,
+                      color: Colors.green,
+                    ),
                 ],
               ),
               SizedBox(
@@ -147,6 +155,7 @@ class _CreateDataState extends State<CreateData> {
         "deskripsi": deskripsi,
         // "image": imgUrl,
         "time": cdate2,
+        "total_gambar": imageUrls.length
       });
 
       final String ID = doc.id;

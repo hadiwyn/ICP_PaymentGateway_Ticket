@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:ticket_wisata_donorojo/app/modules/admin/detailWisata_admin.dart';
+import 'package:ticket_wisata_donorojo/app/modules/admin/detail%20wisata/detailWisata_admin.dart';
 import 'package:ticket_wisata_donorojo/app/modules/user/dashboard/detail_wisata.dart';
 import 'package:ticket_wisata_donorojo/app/modules/user/dashboard/pesan_tiket.dart';
 
@@ -15,6 +15,7 @@ class ListViewAdmin extends StatefulWidget {
 
 class _listViewAdminState extends State<ListViewAdmin> {
   FirebaseFirestore firestore = FirebaseFirestore.instance;
+  late double count;
 
   Future<QuerySnapshot<Object?>> getData() {
     CollectionReference wisata = firestore.collection("wisata");
@@ -27,6 +28,20 @@ class _listViewAdminState extends State<ListViewAdmin> {
     return wisata.orderBy("time", descending: true).snapshots();
   }
 
+  Future<void> lenghtData() async {
+    CollectionReference wisataCollection =
+        FirebaseFirestore.instance.collection('wisata');
+    QuerySnapshot querySnapshot = await wisataCollection.get();
+    count = querySnapshot.size as double;
+    print('Jumlah dokumen di koleksi "wisata": $count');
+  }
+
+  @override
+  void initState() {
+    lenghtData();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<QuerySnapshot<Object?>>(
@@ -36,7 +51,7 @@ class _listViewAdminState extends State<ListViewAdmin> {
           var listAllDoc = snapshot.data!.docs;
           return SingleChildScrollView(
             child: SizedBox(
-              height: 500,
+              height: listAllDoc.length.toDouble() * 130,
               width: double.infinity,
               child: ListView.builder(
                 physics: NeverScrollableScrollPhysics(),
@@ -56,7 +71,7 @@ class _listViewAdminState extends State<ListViewAdmin> {
                           image: DecorationImage(
                             fit: BoxFit.cover,
                             image: Image.network(
-                              "${(listAllDoc[index].data() as Map<String, dynamic>)["image"]}",
+                              "${(listAllDoc[index].data() as Map<String, dynamic>)["image_1"]}",
                             ).image,
                           ),
                           borderRadius: BorderRadius.circular(20),
@@ -137,66 +152,81 @@ class _listViewAdminState extends State<ListViewAdmin> {
                                 ),
                               ),
                               Spacer(),
-                              Padding(
-                                // ignore: prefer_const_constructors
-                                padding: EdgeInsets.only(
-                                    left: 12, bottom: 10, right: 12),
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.max,
-                                  // ignore: prefer_const_literals_to_create_immutables
-                                  children: [
-                                    // ignore: prefer_const_constructors
-                                    Icon(
-                                      Icons.price_change,
-                                      color: Colors.blueGrey,
-                                      size: 12,
-                                    ),
-                                    // ignore: prefer_const_constructors
-                                    Padding(
+                              if (((listAllDoc[index].data()
+                                      as Map<String, dynamic>)["locatiton"]) !=
+                                  null)
+                                Padding(
+                                  // ignore: prefer_const_constructors
+                                  padding: EdgeInsets.only(
+                                      left: 12, bottom: 10, right: 12),
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    // ignore: prefer_const_literals_to_create_immutables
+                                    children: [
                                       // ignore: prefer_const_constructors
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          5, 0, 0, 0),
-                                      // ignore: prefer_const_constructors
-                                      child: Text(
-                                        "${(listAllDoc[index].data() as Map<String, dynamic>)["harga"]}",
-                                        // ignore: prefer_const_constructors
-                                        style: TextStyle(
-                                          fontFamily: 'Lexend Deca',
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.w300,
-                                        ),
-                                      ),
-                                    ),
-                                    Spacer(),
-                                    // ignore: prefer_const_constructors
-                                    Padding(
-                                      padding: EdgeInsets.only(left: 10),
-                                      // ignore: prefer_const_constructors
-                                      child: Icon(
-                                        Icons.timelapse,
+                                      Icon(
+                                        Icons.price_change,
                                         color: Colors.blueGrey,
                                         size: 12,
                                       ),
-                                    ),
-                                    // igčore: prefer_const_constructors
-                                    Padding(
                                       // ignore: prefer_const_constructors
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          5, 0, 0, 0),
-
-                                      // ignore: prefer_const_constructors
-                                      child: Text(
-                                        // ignore: prefer_interpolation_to_compose_strings
-                                        "${(listAllDoc[index].data() as Map<String, dynamic>)["time"]}",
+                                      Padding(
                                         // ignore: prefer_const_constructors
-                                        style: TextStyle(
-                                          fontFamily: 'Lexend Deca',
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.w300,
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            5, 0, 0, 0),
+                                        // ignore: prefer_const_constructors
+                                        child: Text(
+                                          "${(listAllDoc[index].data() as Map<String, dynamic>)["harga"]}",
+                                          // ignore: prefer_const_constructors
+                                          style: TextStyle(
+                                            fontFamily: 'Lexend Deca',
+                                            fontSize: 12,
+                                            fontWeight: FontWeight.w300,
+                                          ),
                                         ),
                                       ),
-                                    ),
-                                  ],
+                                      Spacer(),
+                                      // ignore: prefer_const_constructors
+                                      Padding(
+                                        padding: EdgeInsets.only(left: 10),
+                                        // ignore: prefer_const_constructors
+                                        child: Icon(
+                                          Icons.timelapse,
+                                          color: Colors.blueGrey,
+                                          size: 12,
+                                        ),
+                                      ),
+                                      // igčore: prefer_const_constructors
+                                      Padding(
+                                        // ignore: prefer_const_constructors
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            5, 0, 0, 0),
+
+                                        // ignore: prefer_const_constructors
+                                        child: Text(
+                                          // ignore: prefer_interpolation_to_compose_strings
+                                          "${(listAllDoc[index].data() as Map<String, dynamic>)["time"]}",
+                                          // ignore: prefer_const_constructors
+                                          style: TextStyle(
+                                            fontFamily: 'Lexend Deca',
+                                            fontSize: 12,
+                                            fontWeight: FontWeight.w300,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              Padding(
+                                padding: const EdgeInsets.only(
+                                    left: 12, bottom: 10, right: 12),
+                                child: Text(
+                                  "Lokasi dibutuhkan, ubah data sekarang !",
+                                  style: TextStyle(
+                                      fontFamily: 'Lexend Deca',
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.w500,
+                                      color: Colors.red),
                                 ),
                               ),
                             ],

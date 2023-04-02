@@ -1,14 +1,9 @@
 // ignore_for_file: non_constant_identifier_names
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:get/instance_manager.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:intl/intl.dart';
 import 'package:mysql1/mysql1.dart';
 import 'package:get/get.dart';
-import 'package:sqflite/sqflite.dart';
 import 'package:ticket_wisata_donorojo/app/modules/user/dashboard/detail_ticket.dart';
 
 class RiwayatTiket extends StatefulWidget {
@@ -139,21 +134,22 @@ class _RiwayatTiketState extends State<RiwayatTiket> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         backgroundColor: Colors.white,
-        title: const Text(
-          "Riwayat Tiket",
-          style: const TextStyle(color: Colors.black),
+        title: Row(
+          // ignore: prefer_const_literals_to_create_immutables
+          children: [
+            // ignore: prefer_const_constructors
+            Spacer(),
+            const Text(
+              "Riwayat Tiket",
+              style: const TextStyle(color: Colors.black),
+            ),
+            Spacer(),
+          ],
         ),
         actions: const [],
         elevation: 0,
-        leading: IconButton(
-          onPressed: () {},
-          icon: const Icon(
-            Icons.arrow_back,
-            color: Colors.black,
-            size: 24.0,
-          ),
-        ),
       ),
       body: FutureBuilder<List<Order>>(
         future: fetchData(),
@@ -281,15 +277,18 @@ class _RiwayatTiketState extends State<RiwayatTiket> {
                               Spacer(),
                               Text(
                                 "Jumlah : ${order.qty}",
+                                // ignore: prefer_const_constructors
                                 style: TextStyle(
                                   fontFamily: 'Lexend Deca',
                                   fontSize: 12,
                                   fontWeight: FontWeight.w300,
                                 ),
                               ),
+                              // ignore: prefer_const_constructors
                               Spacer(),
                               Row(
                                 children: [
+                                  // ignore: prefer_const_constructors
                                   Icon(
                                     Icons.price_change,
                                     color: Colors.blueGrey,
@@ -298,6 +297,7 @@ class _RiwayatTiketState extends State<RiwayatTiket> {
                                   SizedBox(width: 5),
                                   Text(
                                     'Rp.${order.total_price},00',
+                                    // ignore: prefer_const_constructors
                                     style: TextStyle(
                                       fontFamily: 'Lexend Deca',
                                       fontSize: 12,
@@ -309,6 +309,7 @@ class _RiwayatTiketState extends State<RiwayatTiket> {
                                   ),
                                   Text(
                                     'Berlaku sampai ${order.date_visit}',
+                                    // ignore: prefer_const_constructors
                                     style: TextStyle(
                                       fontFamily: 'Lexend Deca',
                                       fontSize: 12,

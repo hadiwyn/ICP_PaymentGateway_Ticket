@@ -144,7 +144,7 @@ class _UpdateDataState extends State<UpdateData> {
                             const EdgeInsets.only(top: 20, left: 12, right: 12),
                         margin: const EdgeInsets.only(),
                         child: TextFormField(
-                          maxLines: 5,
+                          maxLines: 8,
                           controller: deskripsi,
                           textAlign: TextAlign.justify,
                           decoration: const InputDecoration(
@@ -162,97 +162,87 @@ class _UpdateDataState extends State<UpdateData> {
                           onChanged: (value) {},
                         ),
                       ),
-                      Padding(
-                        padding:
-                            const EdgeInsets.only(top: 20, left: 12, right: 12),
-                        child: Container(
-                            padding: EdgeInsets.all(10),
-                            width: double.infinity,
-                            height: 150,
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              // ignore: prefer_const_literals_to_create_immutables
-                              boxShadow: [
-                                // ignore: prefer_const_constructors
-                                BoxShadow(
-                                  blurRadius: 6,
-                                  color: Color(0x34000000),
-                                  offset: Offset(0, 3),
-                                )
-                              ],
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                            child: Row(
-                              children: [
-                                Spacer(),
-                                ClipRRect(
-                                  borderRadius: BorderRadius.circular(10),
-                                  child: Image.network(
-                                    widget.detail['image'],
-                                    width: 100,
-                                    height: double.infinity,
-                                    fit: BoxFit.cover,
-                                  ),
-                                ),
-                                Spacer(),
-                                ClipRRect(
-                                  borderRadius: BorderRadius.circular(10),
-                                  child: Image.network(
-                                    widget.detail['image'],
-                                    width: 100,
-                                    height: double.infinity,
-                                    fit: BoxFit.cover,
-                                  ),
-                                ),
-                                Spacer(),
-                                ClipRRect(
-                                  borderRadius: BorderRadius.circular(10),
-                                  child: Image.network(
-                                    widget.detail['image'],
-                                    width: 100,
-                                    height: double.infinity,
-                                    fit: BoxFit.cover,
-                                  ),
-                                ),
-                                Spacer(),
-                              ],
-                            )),
-                      )
+                      // Padding(
+                      //   padding:
+                      //       const EdgeInsets.only(top: 20, left: 12, right: 12),
+                      //   child: Container(
+                      //       padding: EdgeInsets.all(10),
+                      //       width: double.infinity,
+                      //       height: 150,
+                      //       decoration: BoxDecoration(
+                      //         color: Colors.white,
+                      //         // ignore: prefer_const_literals_to_create_immutables
+                      //         boxShadow: [
+                      //           // ignore: prefer_const_constructors
+                      //           BoxShadow(
+                      //             blurRadius: 6,
+                      //             color: Color(0x34000000),
+                      //             offset: Offset(0, 3),
+                      //           )
+                      //         ],
+                      //         borderRadius: BorderRadius.circular(20),
+                      //       ),
+                      //       child: Row(
+                      //         children: [
+                      //           Spacer(),
+                      //           ClipRRect(
+                      //             borderRadius: BorderRadius.circular(10),
+                      //             child: Image.network(
+                      //               widget.detail['image_1'],
+                      //               width: 100,
+                      //               height: double.infinity,
+                      //               fit: BoxFit.cover,
+                      //             ),
+                      //           ),
+                      //           Spacer(),
+                      //           ClipRRect(
+                      //             borderRadius: BorderRadius.circular(10),
+                      //             child: Image.network(
+                      //               widget.detail['image_2'],
+                      //               width: 100,
+                      //               height: double.infinity,
+                      //               fit: BoxFit.cover,
+                      //             ),
+                      //           ),
+                      //           Spacer(),
+                      //         ],
+                      //       )),
+                      // )
                     ]),
                   ),
                 ),
-                Positioned.fill(
-                  bottom: 10,
-                  child: Align(
-                    alignment: Alignment.bottomCenter,
-                    child: InkWell(
-                      onTap: () {
-                        // to do list
-                      },
-                      child: Container(
-                        width: 40,
-                        height: 40,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          // ignore: prefer_const_literals_to_create_immutables
-                          boxShadow: [
-                            // ignore: prefer_const_constructors
-                            BoxShadow(
-                              blurRadius: 6,
-                              color: Color(0x34000000),
-                              offset: Offset(0, 3),
-                            )
-                          ],
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        child: const Icon(
-                          Icons.edit,
-                          size: 24.0,
-                        ),
-                      ),
-                    ),
-                  ),
-                )
+                // Positioned.fill(
+                //   bottom: 10,
+                //   child: Align(
+                //     alignment: Alignment.bottomCenter,
+                //     child: InkWell(
+                //       onTap: () {
+                //         // to do list
+                //       },
+                //       child: Container(
+                //         width: 40,
+                //         height: 40,
+                //         decoration: BoxDecoration(
+                //           color: Colors.white,
+                //           // ignore: prefer_const_literals_to_create_immutables
+                //           boxShadow: [
+                //             // ignore: prefer_const_constructors
+                //             BoxShadow(
+                //               blurRadius: 6,
+                //               color: Color(0x34000000),
+                //               offset: Offset(0, 3),
+                //             )
+                //           ],
+                //           borderRadius: BorderRadius.circular(20),
+                //         ),
+                //         child: const Icon(
+                //           Icons.edit,
+                //           size: 24.0,
+                //         ),
+                //       ),
+                //     ),
+                //   ),
+                // )
               ]),
             ),
             Spacer(),

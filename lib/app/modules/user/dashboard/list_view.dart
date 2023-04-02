@@ -34,194 +34,179 @@ class _listViewState extends State<listView> {
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.active) {
           var listAllDoc = snapshot.data!.docs;
-          int itemCount = listAllDoc.length;
-          return LayoutBuilder(
-            builder: (BuildContext context, BoxConstraints constraints) {
-              double height = constraints.maxHeight;
-              double totalListHeight = itemCount *
-                  125; // 106 height of image container + 15 bottom padding
-              double desiredHeight =
-                  totalListHeight > height ? totalListHeight : height;
-
-              print(height);
-
-              return SingleChildScrollView(
-                child: SizedBox(
-                  height: totalListHeight,
-                  width: double.infinity,
-                  child: ListView.builder(
-                    physics: NeverScrollableScrollPhysics(),
-                    //shrinkWrap: true,
-                    scrollDirection: Axis.vertical,
-                    itemCount: listAllDoc.length,
-                    itemBuilder: (BuildContext context, int index) => Padding(
-                      padding: const EdgeInsets.only(bottom: 15),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Container(
-                            width: 82,
-                            height: 106,
-                            decoration: BoxDecoration(
-                              color: Color(0xFFEEEEEE),
-                              image: DecorationImage(
-                                fit: BoxFit.cover,
-                                image: Image.network(
-                                  "${(listAllDoc[index].data() as Map<String, dynamic>)["image_1"]}",
-                                ).image,
-                              ),
-                              borderRadius: BorderRadius.circular(20),
-                              border: Border.all(
-                                color: Color(0xFF656565),
-                                width: 0.5,
-                              ),
-                            ),
+          return SingleChildScrollView(
+            child: SizedBox(
+              height: listAllDoc.length.toDouble() * 130,
+              width: double.infinity,
+              child: ListView.builder(
+                physics: NeverScrollableScrollPhysics(),
+                //shrinkWrap: true,
+                scrollDirection: Axis.vertical,
+                itemCount: listAllDoc.length,
+                itemBuilder: (BuildContext context, int index) => Padding(
+                  padding: const EdgeInsets.only(bottom: 15),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Container(
+                        width: 82,
+                        height: 106,
+                        decoration: BoxDecoration(
+                          color: Color(0xFFEEEEEE),
+                          image: DecorationImage(
+                            fit: BoxFit.cover,
+                            image: Image.network(
+                              "${(listAllDoc[index].data() as Map<String, dynamic>)["image_1"]}",
+                            ).image,
                           ),
-                          InkWell(
-                            onTap: () {
-                              var detail = listAllDoc[index].data()
-                                  as Map<String, dynamic>;
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(builder: (context) {
-                                  return DetailWisata(detail);
-                                }),
-                              );
-                            },
-                            child: Container(
-                              width: 260,
-                              height: 106,
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                // ignore: prefer_const_literals_to_create_immutables
-                                boxShadow: [
-                                  // ignore: prefer_const_constructors
-                                  BoxShadow(
-                                    blurRadius: 6,
-                                    color: Color(0x34000000),
-                                    offset: Offset(0, 3),
-                                  )
-                                ],
-                                borderRadius: BorderRadius.circular(20),
-                              ),
-                              child: Column(
-                                mainAxisSize: MainAxisSize.max,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  // ignore: prefer_const_constructors
-                                  Padding(
-                                    // ignore: prefer_const_constructors
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        12, 8, 0, 0),
-                                    // ignore: prefer_const_constructors
-                                    child: Text(
-                                      "${(listAllDoc[index].data() as Map<String, dynamic>)["nama"]}",
-                                      textAlign: TextAlign.start,
-                                      // ignore: prefer_const_constructors
-                                      style: TextStyle(
-                                        fontFamily: 'Lexend Deca',
-                                        color: Colors.blueGrey,
-                                        fontSize: 14,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                  ),
-                                  // ignore: prefer_const_constructors
-                                  Padding(
-                                    // ignore: prefer_const_constructors
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        12, 5, 12, 0),
-                                    // ignore: prefer_const_constructors
-                                    child: Text(
-                                      "${(listAllDoc[index].data() as Map<String, dynamic>)["deskripsi"]}",
-                                      // softWrap: false,
-                                      maxLines: 3,
-                                      overflow: TextOverflow.ellipsis,
-                                      // ignore: prefer_const_constructors
-                                      style: TextStyle(
-                                        fontFamily: 'Lexend Deca',
-                                        fontSize: 12,
-                                        fontWeight: FontWeight.normal,
-                                      ),
-                                      textAlign: TextAlign.justify,
-                                    ),
-                                  ),
-                                  Spacer(),
-                                  Padding(
-                                    // ignore: prefer_const_constructors
-                                    padding: EdgeInsets.only(
-                                        left: 12, bottom: 10, right: 12),
-                                    child: Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      // ignore: prefer_const_literals_to_create_immutables
-                                      children: [
-                                        // ignore: prefer_const_constructors
-                                        Icon(
-                                          Icons.price_change,
-                                          color: Colors.blueGrey,
-                                          size: 12,
-                                        ),
-                                        // ignore: prefer_const_constructors
-                                        Padding(
-                                          // ignore: prefer_const_constructors
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  5, 0, 0, 0),
-                                          // ignore: prefer_const_constructors
-                                          child: Text(
-                                            "${(listAllDoc[index].data() as Map<String, dynamic>)["harga"]}",
-                                            // ignore: prefer_const_constructors
-                                            style: TextStyle(
-                                              fontFamily: 'Lexend Deca',
-                                              fontSize: 12,
-                                              fontWeight: FontWeight.w300,
-                                            ),
-                                          ),
-                                        ),
-                                        Spacer(),
-                                        // ignore: prefer_const_constructors
-                                        Padding(
-                                          padding: EdgeInsets.only(left: 10),
-                                          // ignore: prefer_const_constructors
-                                          child: Icon(
-                                            Icons.timelapse,
-                                            color: Colors.blueGrey,
-                                            size: 12,
-                                          ),
-                                        ),
-                                        // igčore: prefer_const_constructors
-                                        Padding(
-                                          // ignore: prefer_const_constructors
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  5, 0, 0, 0),
-
-                                          // ignore: prefer_const_constructors
-                                          child: Text(
-                                            // ignore: prefer_interpolation_to_compose_strings
-                                            "${(listAllDoc[index].data() as Map<String, dynamic>)["time"]}",
-                                            // ignore: prefer_const_constructors
-                                            style: TextStyle(
-                                              fontFamily: 'Lexend Deca',
-                                              fontSize: 12,
-                                              fontWeight: FontWeight.w300,
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
+                          borderRadius: BorderRadius.circular(20),
+                          border: Border.all(
+                            color: Color(0xFF656565),
+                            width: 0.5,
                           ),
-                        ],
+                        ),
                       ),
-                    ),
+                      InkWell(
+                        onTap: () {
+                          var detail =
+                              listAllDoc[index].data() as Map<String, dynamic>;
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) {
+                              return DetailWisata(detail);
+                            }),
+                          );
+                        },
+                        child: Container(
+                          width: 260,
+                          height: 106,
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            // ignore: prefer_const_literals_to_create_immutables
+                            boxShadow: [
+                              // ignore: prefer_const_constructors
+                              BoxShadow(
+                                blurRadius: 6,
+                                color: Color(0x34000000),
+                                offset: Offset(0, 3),
+                              )
+                            ],
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.max,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              // ignore: prefer_const_constructors
+                              Padding(
+                                // ignore: prefer_const_constructors
+                                padding:
+                                    EdgeInsetsDirectional.fromSTEB(12, 8, 0, 0),
+                                // ignore: prefer_const_constructors
+                                child: Text(
+                                  "${(listAllDoc[index].data() as Map<String, dynamic>)["nama"]}",
+                                  textAlign: TextAlign.start,
+                                  // ignore: prefer_const_constructors
+                                  style: TextStyle(
+                                    fontFamily: 'Lexend Deca',
+                                    color: Colors.blueGrey,
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ),
+                              // ignore: prefer_const_constructors
+                              Padding(
+                                // ignore: prefer_const_constructors
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    12, 5, 12, 0),
+                                // ignore: prefer_const_constructors
+                                child: Text(
+                                  "${(listAllDoc[index].data() as Map<String, dynamic>)["deskripsi"]}",
+                                  // softWrap: false,
+                                  maxLines: 3,
+                                  overflow: TextOverflow.ellipsis,
+                                  // ignore: prefer_const_constructors
+                                  style: TextStyle(
+                                    fontFamily: 'Lexend Deca',
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.normal,
+                                  ),
+                                  textAlign: TextAlign.justify,
+                                ),
+                              ),
+                              Spacer(),
+                              Padding(
+                                // ignore: prefer_const_constructors
+                                padding: EdgeInsets.only(
+                                    left: 12, bottom: 10, right: 12),
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  // ignore: prefer_const_literals_to_create_immutables
+                                  children: [
+                                    // ignore: prefer_const_constructors
+                                    Icon(
+                                      Icons.price_change,
+                                      color: Colors.blueGrey,
+                                      size: 12,
+                                    ),
+                                    // ignore: prefer_const_constructors
+                                    Padding(
+                                      // ignore: prefer_const_constructors
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          5, 0, 0, 0),
+                                      // ignore: prefer_const_constructors
+                                      child: Text(
+                                        "${(listAllDoc[index].data() as Map<String, dynamic>)["harga"]}",
+                                        // ignore: prefer_const_constructors
+                                        style: TextStyle(
+                                          fontFamily: 'Lexend Deca',
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.w300,
+                                        ),
+                                      ),
+                                    ),
+                                    Spacer(),
+                                    // ignore: prefer_const_constructors
+                                    Padding(
+                                      padding: EdgeInsets.only(left: 10),
+                                      // ignore: prefer_const_constructors
+                                      child: Icon(
+                                        Icons.timelapse,
+                                        color: Colors.blueGrey,
+                                        size: 12,
+                                      ),
+                                    ),
+                                    // igčore: prefer_const_constructors
+                                    Padding(
+                                      // ignore: prefer_const_constructors
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          5, 0, 0, 0),
+
+                                      // ignore: prefer_const_constructors
+                                      child: Text(
+                                        // ignore: prefer_interpolation_to_compose_strings
+                                        "${(listAllDoc[index].data() as Map<String, dynamic>)["time"]}",
+                                        // ignore: prefer_const_constructors
+                                        style: TextStyle(
+                                          fontFamily: 'Lexend Deca',
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.w300,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
-              );
-            },
+              ),
+            ),
           );
         }
         return Center(
