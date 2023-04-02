@@ -1,13 +1,8 @@
-import 'package:firebase_auth/firebase_auth.dart';
+
 import 'package:flutter/material.dart';
-import 'package:get/instance_manager.dart';
 import 'package:ticket_wisata_donorojo/app/modules/user/account_user/account_user.dart';
-import 'package:ticket_wisata_donorojo/app/modules/user/dashboard/dashboard.dart';
 import 'package:ticket_wisata_donorojo/app/modules/user/dashboard/home_view.dart';
-import 'package:ticket_wisata_donorojo/app/modules/user/dashboard/list_view.dart';
 import 'package:ticket_wisata_donorojo/app/modules/user/dashboard/riwayat_tiket.dart';
-import 'package:ticket_wisata_donorojo/app/modules/splash/first_page.dart';
-import 'package:get/get.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});

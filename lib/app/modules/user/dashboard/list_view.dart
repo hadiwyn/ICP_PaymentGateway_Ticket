@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:ticket_wisata_donorojo/app/modules/user/dashboard/detail_wisata.dart';
+import 'package:ticket_wisata_donorojo/app/modules/user/dashboard/page_view.dart';
 import 'package:ticket_wisata_donorojo/app/modules/user/dashboard/pesan_tiket.dart';
 
 // ignore: camel_case_types, must_be_immutable
@@ -66,7 +67,7 @@ class _listViewState extends State<listView> {
                               image: DecorationImage(
                                 fit: BoxFit.cover,
                                 image: Image.network(
-                                  "${(listAllDoc[index].data() as Map<String, dynamic>)["image"]}",
+                                  "${(listAllDoc[index].data() as Map<String, dynamic>)["image_1"]}",
                                 ).image,
                               ),
                               borderRadius: BorderRadius.circular(20),
@@ -83,7 +84,6 @@ class _listViewState extends State<listView> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(builder: (context) {
-                                  // return DetailWisata(detail: detail);
                                   return DetailWisata(detail);
                                 }),
                               );

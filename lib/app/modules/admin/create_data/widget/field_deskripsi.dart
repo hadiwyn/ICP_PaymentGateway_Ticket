@@ -1,15 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:get/get_state_manager/src/simple/get_view.dart';
 
-import '../controllers/add_data_controller.dart';
+class FieldDeskripsi extends StatefulWidget {
+  var descC;
 
-class FieldDeskripsi extends GetView<AddDataController> {
+  FieldDeskripsi(this.descC, {super.key});
+
+  @override
+  State<FieldDeskripsi> createState() => _FieldDeskripsiState();
+}
+
+class _FieldDeskripsiState extends State<FieldDeskripsi> {
   @override
   Widget build(BuildContext context) {
     return Expanded(
       child: TextFormField(
+        controller: widget.descC,
         maxLines: 5,
-        controller: controller.deskripsiC,
         textInputAction: TextInputAction.next,
         decoration: InputDecoration(
           labelText: "Deskripsi",

@@ -1,6 +1,4 @@
 {
     "openai_key": "",
-    "modules": [
-        "splash_screen"
-    ]
+    "modules": []
 }

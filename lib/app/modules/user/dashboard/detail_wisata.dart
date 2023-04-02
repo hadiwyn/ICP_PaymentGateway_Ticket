@@ -1,14 +1,9 @@
 // ignore_for_file: must_be_immutable
 
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:ticket_wisata_donorojo/app/modules/user/dashboard/home.dart';
-import 'package:ticket_wisata_donorojo/app/modules/user/dashboard/midtrans_view.dart';
 import 'package:ticket_wisata_donorojo/app/modules/user/dashboard/page_view.dart';
 import 'package:ticket_wisata_donorojo/app/modules/user/dashboard/pesan_tiket.dart';
-import 'package:ticket_wisata_donorojo/app/routes/app_pages.dart';
 
 class DetailWisata extends StatefulWidget {
   var detail;
@@ -25,7 +20,7 @@ class _DetailWisataState extends State<DetailWisata> {
     return Scaffold(
         body: Stack(
       children: [
-        Container(height: 430, child: pageView()),
+        Container(height: 430, child: PageViewAutoSlide(widget.detail)),
         // Container(
         //   height: 430,
         //   width: double.infinity,
@@ -88,13 +83,13 @@ class _DetailWisataState extends State<DetailWisata> {
                       Spacer(),
                       const Icon(
                         Icons.location_pin,
-                        size: 24.0,
+                        size: 16.0,
                         color: Colors.black54,
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(left: 5, right: 20),
+                        padding: const EdgeInsets.only(top: 2, right: 20),
                         child: Text(
-                          "Location",
+                          "Lokasi",
                           style: const TextStyle(color: Colors.black54),
                         ),
                       ),

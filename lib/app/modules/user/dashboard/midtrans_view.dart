@@ -7,6 +7,8 @@ import 'package:webview_flutter/webview_flutter.dart';
 
 // ignore: must_be_immutable
 class MidtransView extends StatefulWidget {
+  // ignore: non_constant_identifier_names, prefer_typing_uninitialized_variables
+  var transaction_id;
   // ignore: prefer_typing_uninitialized_variables
   var count;
   // ignore: prefer_typing_uninitialized_variables
@@ -15,6 +17,8 @@ class MidtransView extends StatefulWidget {
   var name_product;
   // ignore: prefer_typing_uninitialized_variables
   var date;
+  // ignore: prefer_typing_uninitialized_variables
+  var dateAdd;
   // ignore: prefer_typing_uninitialized_variables
   var totalPrice;
   // ignore: prefer_typing_uninitialized_variables
@@ -26,12 +30,15 @@ class MidtransView extends StatefulWidget {
 
   MidtransView(
       {super.key,
+      // ignore: non_constant_identifier_names
+      required this.transaction_id,
       required this.count,
       // ignore: non_constant_identifier_names
       required this.name_product,
       required this.quantity,
       required this.totalPrice,
       required this.date,
+      required this.dateAdd,
       required this.name,
       required this.email,
       required this.phone});
@@ -48,6 +55,12 @@ class _MidtransViewState extends State<MidtransView> {
   String dateNow = DateTime.now().toIso8601String();
 
   @override
+  void initState() {
+    print(widget.transaction_id);
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
         body: Stack(
@@ -56,18 +69,18 @@ class _MidtransViewState extends State<MidtransView> {
           height: 500,
         ),
         WebView(
-          javascriptMode: JavascriptMode.unrestricted,
-          onProgress: (value) {
-            if (value == 100) {
-              setState(() {
-                isLoading = false;
-              });
-            }
-          },
-          initialUrl:
-              // 'https://apipayment.mr-code.my.id/'
-              'https://apipayment.mr-code.my.id/?name=${widget.name}&email=${widget.email}&no_tlp=${widget.phone}&count=${widget.count}&name_product=${widget.name_product}&jumlah=${widget.quantity}&sum=${widget.totalPrice}&date=${widget.date}&cDate=${cdate2}',
-        ),
+            javascriptMode: JavascriptMode.unrestricted,
+            onProgress: (value) {
+              if (value == 100) {
+                setState(() {
+                  isLoading = false;
+                });
+              }
+            },
+            initialUrl:
+                'https://2739-202-145-6-155.ap.ngrok.io/checkout?transaction_id=${widget.transaction_id}&nama=${widget.name}&harga=${widget.count}&telepon=${widget.phone}&quantity=${widget.quantity}&date_visit=${widget.date}&date_add=${widget.dateAdd}&tourname=${widget.name_product}'
+            // 'https://apipayment.mr-code.my.id/?name=${widget.name}&email=${widget.email}&no_tlp=${widget.phone}&count=${widget.count}&name_product=${widget.name_product}&jumlah=${widget.quantity}&sum=${widget.totalPrice}&date=${widget.date}&cDate=${cdate2}',
+            ),
         isLoading
             ? const Center(
                 child: CircularProgressIndicator(),

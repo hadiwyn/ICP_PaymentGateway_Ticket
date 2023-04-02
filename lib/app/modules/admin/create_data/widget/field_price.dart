@@ -1,15 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:get/get_state_manager/src/simple/get_view.dart';
 
-import '../controllers/add_data_controller.dart';
+class FieldPrice extends StatefulWidget {
+  var priceC;
 
-// ignore: use_key_in_widget_constructors
-class FieldTiket extends GetView<AddDataController> {
+  FieldPrice(this.priceC, {super.key});
+
+  @override
+  State<FieldPrice> createState() => _FieldPriceState();
+}
+
+class _FieldPriceState extends State<FieldPrice> {
   @override
   Widget build(BuildContext context) {
     return Expanded(
       child: TextField(
-        controller: controller.priceC,
+        controller: widget.priceC,
         textInputAction: TextInputAction.next,
         // ignore: prefer_const_constructors
         decoration: InputDecoration(

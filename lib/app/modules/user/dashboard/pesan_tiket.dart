@@ -24,14 +24,19 @@ class _PesanTiketState extends State<PesanTiket> {
   TextEditingController nama_pemesan = TextEditingController();
   TextEditingController nama_wisata = TextEditingController();
 
+  FirebaseFirestore firestore = FirebaseFirestore.instance;
+
   late String date;
+  // ignore: non_constant_identifier_names
+  var transaction_id = '';
 
   int _quantity = 1;
-  int totalPrice = 0;
+  // ignore: non_constant_identifier_names
+  int total_price = 0;
 
-  String? uName = "";
-  String? uEmail = "";
-  String? uPhone = "";
+  String uName = "";
+  String uEmail = "";
+  String uPhone = "";
 
   Future<void> getUsers() async {
     await FirebaseFirestore.instance
@@ -44,19 +49,27 @@ class _PesanTiketState extends State<PesanTiket> {
         uEmail = snapshot.data()!['email'];
         uPhone = snapshot.data()!['no_tlp'];
 
-        nama_pemesan.text = uName!;
+        // nama_pemesan.text = uName!;
       }
+      print(uName);
+      print(uEmail);
+      print(uPhone);
     });
   }
 
   @override
   void initState() {
-    getUsers();
+    getUsers().then((value) {
+      if (uName != null) {
+        nama_pemesan.text = uName;
+      }
+    }).catchError((error) {
+      print("Error getting user data: $error");
+    });
     dateInput.text = "";
     peopleInput.text = "1";
     totalHarga.text = "Rp. ${widget.detail["harga"]}";
-    totalPrice = int.parse(widget.detail["harga"]);
-    print(totalPrice);
+    total_price = int.parse(widget.detail["harga"]);
     nama_wisata.text = widget.detail['nama'];
     super.initState();
   }
@@ -249,16 +262,16 @@ class _PesanTiketState extends State<PesanTiket> {
                                 onPressed: () {
                                   setState(() {
                                     _quantity -= 1;
-                                    totalPrice = totalPrice - harga;
+                                    total_price = total_price - harga;
                                     peopleInput.text = _quantity.toString();
                                     totalHarga.text =
-                                        "Rp. ${totalPrice.toString()}";
+                                        "Rp. ${total_price.toString()}";
                                   });
                                   // for (int i = 0; i > _quantity; i--) {
                                   //   totalPrice -= harga;
                                   // }
                                   print(_quantity);
-                                  print(totalPrice);
+                                  print(total_price);
                                   print(harga);
                                 },
                                 child: Icon(
@@ -285,15 +298,15 @@ class _PesanTiketState extends State<PesanTiket> {
                               onPressed: () {
                                 setState(() {
                                   _quantity += 1;
-                                  totalPrice =
+                                  total_price =
                                       int.parse(widget.detail["harga"]);
-                                  totalPrice *= _quantity;
+                                  total_price *= _quantity;
                                   peopleInput.text = _quantity.toString();
                                   totalHarga.text =
-                                      "Rp. ${totalPrice.toString()}";
+                                      "Rp. ${total_price.toString()}";
                                 });
                                 print(_quantity);
-                                print(totalPrice);
+                                print(total_price);
                                 print(harga);
                               },
                               child: Icon(
@@ -329,18 +342,11 @@ class _PesanTiketState extends State<PesanTiket> {
               padding: const EdgeInsets.only(left: 40, right: 40),
               child: InkWell(
                 onTap: () {
+                  print(uName);
                   if (widget._formKey.currentState != null &&
                       widget._formKey.currentState!.validate()) {
-                    Get.off(MidtransView(
-                      count: harga,
-                      name_product: widget.detail["nama"],
-                      quantity: _quantity,
-                      totalPrice: totalPrice,
-                      date: date,
-                      name: uName!,
-                      email: uEmail!,
-                      phone: uPhone!,
-                    ));
+                    addProduct(uName, widget.detail['nama'], uPhone, _quantity,
+                        harga, total_price, date, "Unpaid");
                   }
                 },
                 child: Container(
@@ -383,5 +389,46 @@ class _PesanTiketState extends State<PesanTiket> {
     } else {
       return null;
     }
+  }
+
+  Future<void> addProduct(String name, String tourName, String phone, int qty,
+      int price, int totalPrice, String dateVisit, String status) async {
+    CollectionReference product = firestore.collection("transaction");
+    String dateAdd = DateFormat("dd MMM yyyy").format(DateTime.now());
+
+    final DocumentReference doc = await product.add({
+      "nama": name,
+      "nama_wisata": tourName,
+      "phone": phone,
+      "jumlah": qty,
+      "harga": price,
+      "total_harga": totalPrice,
+      "tanggal_kunjungan": dateVisit,
+      "tanggal_dibuat": dateAdd,
+      "status": status,
+    });
+
+    // ignore: non_constant_identifier_names
+    final String ID = doc.id;
+    doc.update({'transaction_id': ID});
+
+    setState(() {
+      transaction_id = ID;
+    });
+
+    int harga = int.parse(widget.detail["harga"]);
+
+    Get.off(MidtransView(
+      transaction_id: transaction_id,
+      count: harga,
+      name_product: widget.detail["nama"],
+      quantity: _quantity,
+      totalPrice: total_price,
+      date: date,
+      dateAdd: dateAdd,
+      name: name,
+      email: uEmail,
+      phone: uPhone,
+    ));
   }
 }

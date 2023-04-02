@@ -73,7 +73,7 @@ class _DashboardState extends State<Dashboard> {
                                   // ignore: prefer_const_literals_to_cre
                                   // ate_immutables
                                   children: [
-                                    pageView(),
+                                    // pageView(),
                                   ],
                                 ),
                               ),

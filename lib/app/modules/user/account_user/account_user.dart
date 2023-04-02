@@ -42,7 +42,6 @@ class _AccountUserState extends State<AccountUser> {
       print(uEmail);
       print(uPhone);
     });
-    
   }
 
   @override
@@ -147,11 +146,15 @@ class _AccountUserState extends State<AccountUser> {
                           SizedBox(
                             width: 20,
                           ),
-                          Text(
-                            uName!,
-                            style: TextStyle(
-                              fontFamily: 'Poppins',
-                              fontSize: 20,
+                          Expanded(
+                            child: Text(
+                              uName!,
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyle(
+                                fontWeight: FontWeight.w500,
+                                fontFamily: 'Poppins',
+                                fontSize: 18,
+                              ),
                             ),
                           ),
                         ],
@@ -167,11 +170,15 @@ class _AccountUserState extends State<AccountUser> {
                           SizedBox(
                             width: 20,
                           ),
-                          Text(
-                            uEmail!,
-                            style: TextStyle(
-                              fontSize: 20,
-                              fontFamily: 'Poppins',
+                          Expanded(
+                            child: Text(
+                              uEmail!,
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.w500,
+                                fontFamily: 'Poppins',
+                              ),
                             ),
                           ),
                         ],
@@ -190,7 +197,8 @@ class _AccountUserState extends State<AccountUser> {
                           Text(
                             uPhone!,
                             style: TextStyle(
-                              fontSize: 20,
+                              fontSize: 18,
+                              fontWeight: FontWeight.w500,
                               fontFamily: 'Poppins',
                             ),
                           ),

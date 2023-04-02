@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:mysql1/mysql1.dart';
 import 'package:ticket_wisata_donorojo/app/modules/splash/splash_screen.dart';
 // import 'package:ticket_wisata_donorojo/app/modules/home/views/home_view.dart';
 
@@ -17,6 +18,8 @@ Future<void> main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+
+  
 
   runApp(GetMaterialApp(
     

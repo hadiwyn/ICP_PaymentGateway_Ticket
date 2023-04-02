@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
+import 'package:ticket_wisata_donorojo/app/modules/admin/create_data/index.dart';
 import 'package:ticket_wisata_donorojo/app/modules/admin/dashboard/listView_admin.dart';
 import 'package:ticket_wisata_donorojo/app/modules/user/dashboard/list_view.dart';
 
@@ -175,7 +176,7 @@ class _HomeViewAdminState extends State<HomeViewAdmin> {
           visible: true,
           child: FloatingActionButton(
             backgroundColor: Color.fromARGB(255, 93, 193, 255),
-            onPressed: () => Get.toNamed(Routes.ADD_DATA),
+            onPressed: () => Get.to(CreateData()),
             child: Icon(Icons.add),
           )),
     );
