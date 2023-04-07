@@ -4,14 +4,15 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:ticket_wisata_donorojo/app/modules/admin/add_location/location.dart';
 import 'package:ticket_wisata_donorojo/app/modules/admin/update_data/update_data.dart';
 import 'package:ticket_wisata_donorojo/app/modules/user/dashboard/home.dart';
 import 'package:ticket_wisata_donorojo/app/modules/user/dashboard/page_view.dart';
 import 'package:ticket_wisata_donorojo/app/modules/user/dashboard/pesan_tiket.dart';
 import 'package:ticket_wisata_donorojo/app/routes/app_pages.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class DetailWisataAdmin extends StatefulWidget {
+  // ignore: prefer_typing_uninitialized_variables
   var detail;
 
   DetailWisataAdmin(this.detail, {super.key});
@@ -22,6 +23,14 @@ class DetailWisataAdmin extends StatefulWidget {
 
 class _DetailWisataAdminState extends State<DetailWisataAdmin> {
   CollectionReference users = FirebaseFirestore.instance.collection('wisata');
+
+  void launchMap(String url) async {
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -88,26 +97,27 @@ class _DetailWisataAdminState extends State<DetailWisataAdmin> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(top: 10),
+                    padding: const EdgeInsets.only(top: 15),
                     child: Row(
                       children: [
                         Spacer(),
                         Icon(
                           Icons.location_pin,
-                          size: 24.0,
+                          size: 16.0,
                           color: widget.detail['location'] != null
                               ? Colors.black54
                               : Colors.red,
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(left: 5, right: 20),
+                          padding: const EdgeInsets.only(left: 0, right: 20),
                           child: InkWell(
                             onTap: () {
-                              Get.off(AddScreenLocation());
+                              // Get.off(AddScreenLocation());
+                              launchMap(widget.detail['location']);
                             },
                             child: Text(
                               widget.detail['location'] != null
-                                  ? "Location"
+                                  ? "Dapatkan Arah"
                                   : "Location Required !",
                               style: TextStyle(
                                   fontWeight: FontWeight.bold,

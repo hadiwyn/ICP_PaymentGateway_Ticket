@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ticket_wisata_donorojo/app/modules/login/views/resetPassword.dart';
+import 'package:ticket_wisata_donorojo/app/modules/register/views/register_view.dart';
 
-import '../../user/register/register.dart';
 import '../controllers/login_controller.dart';
 
 class LoginView extends GetView<LoginController> {
@@ -127,7 +127,7 @@ class LoginView extends GetView<LoginController> {
                             children: [
                               TextButton(
                                 onPressed: () {
-                                  Get.off(ResetPassword());
+                                  Get.to(ResetPassword());
                                 },
                                 child: Text(
                                   "Lupa kata sandi",
@@ -167,7 +167,8 @@ class LoginView extends GetView<LoginController> {
                                                 password: controller.passC.text,
                                                 context: context);
                                         if (user != null) {
-                                          controller.getData();
+                                          // ignore: use_build_context_synchronously
+                                          controller.getData(context);
                                         } else {
                                           Get.defaultDialog(
                                             title: "Gagal Login",
@@ -203,7 +204,7 @@ class LoginView extends GetView<LoginController> {
                               ),
                             ),
                             InkWell(
-                              onTap: () => Get.to(const Register()),
+                              onTap: () => Get.to(RegisterView()),
                               child: Text(
                                 "Register",
                                 style: TextStyle(

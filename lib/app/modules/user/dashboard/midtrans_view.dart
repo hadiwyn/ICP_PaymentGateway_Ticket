@@ -1,6 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:webview_flutter/webview_flutter.dart';
@@ -56,7 +53,6 @@ class _MidtransViewState extends State<MidtransView> {
 
   @override
   void initState() {
-    print(widget.transaction_id);
     super.initState();
   }
 
@@ -65,6 +61,7 @@ class _MidtransViewState extends State<MidtransView> {
     return Scaffold(
         body: Stack(
       children: [
+        // ignore: prefer_const_constructors
         SizedBox(
           height: 500,
         ),
@@ -78,7 +75,7 @@ class _MidtransViewState extends State<MidtransView> {
               }
             },
             initialUrl:
-                'https://2739-202-145-6-155.ap.ngrok.io/checkout?transaction_id=${widget.transaction_id}&nama=${widget.name}&harga=${widget.count}&telepon=${widget.phone}&quantity=${widget.quantity}&date_visit=${widget.date}&date_add=${widget.dateAdd}&tourname=${widget.name_product}'
+                'https://bad7-182-2-82-142.ap.ngrok.io/checkout?transaction_id=${widget.transaction_id}&nama=${widget.name}&harga=${widget.count}&telepon=${widget.phone}&quantity=${widget.quantity}&date_visit=${widget.date}&date_add=${widget.dateAdd}&tourname=${widget.name_product}'
             // 'https://apipayment.mr-code.my.id/?name=${widget.name}&email=${widget.email}&no_tlp=${widget.phone}&count=${widget.count}&name_product=${widget.name_product}&jumlah=${widget.quantity}&sum=${widget.totalPrice}&date=${widget.date}&cDate=${cdate2}',
             ),
         isLoading

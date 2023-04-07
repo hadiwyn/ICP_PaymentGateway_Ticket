@@ -1,13 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:ticket_wisata_donorojo/app/modules/admin/create_data/index.dart';
 import 'package:ticket_wisata_donorojo/app/modules/admin/dashboard/listView_admin.dart';
-import 'package:ticket_wisata_donorojo/app/modules/user/dashboard/list_view.dart';
-
-import '../../../routes/app_pages.dart';
+import 'package:ticket_wisata_donorojo/app/modules/admin/scanner/barcode_scan.dart';
 
 class HomeViewAdmin extends StatefulWidget {
   const HomeViewAdmin({super.key});
@@ -18,6 +17,8 @@ class HomeViewAdmin extends StatefulWidget {
 
 class _HomeViewAdminState extends State<HomeViewAdmin> {
   String? nama = "";
+
+  ValueNotifier<bool> isDialOpen = ValueNotifier(false);
 
   Future<void> getData() async {
     await FirebaseFirestore.instance
@@ -30,6 +31,14 @@ class _HomeViewAdminState extends State<HomeViewAdmin> {
           nama = snapshot.data()!['nama_lengkap'];
         });
       }
+    });
+  }
+
+  bool _showFab = true;
+
+  void _toggleFabVisibility() {
+    setState(() {
+      _showFab = !_showFab;
     });
   }
 
@@ -172,13 +181,50 @@ class _HomeViewAdminState extends State<HomeViewAdmin> {
           ),
         ],
       )),
-      floatingActionButton: Visibility(
-          visible: true,
-          child: FloatingActionButton(
-            backgroundColor: Color.fromARGB(255, 93, 193, 255),
-            onPressed: () => Get.to(CreateData()),
-            child: Icon(Icons.add),
-          )),
+      floatingActionButton: SpeedDial(
+        // animatedIcon: AnimatedIcons.menu_close,
+        // animatedIconTheme: IconThemeData(size: 22.0),
+        // / This is ignored if animatedIcon is non null
+        // child: Text("open"),
+        // activeChild: Text("close"),
+        icon: Icons.add,
+        activeIcon: Icons.close,
+        spacing: 3,
+        openCloseDial: isDialOpen,
+        childPadding: const EdgeInsets.all(5),
+        spaceBetweenChildren: 4,
+
+        // overlayColor: Colors.black,
+        // overlayOpacity: 0.5,
+        onOpen: () => debugPrint('OPENING DIAL'),
+        onClose: () => debugPrint('DIAL CLOSED'),
+        tooltip: 'Open Speed Dial',
+        heroTag: 'speed-dial-hero-tag',
+        // foregroundColor: Colors.black,
+        // backgroundColor: Colors.white,
+        // activeForegroundColor: Colors.red,
+        // activeBackgroundColor: Colors.blue,
+        elevation: 8.0,
+        animationCurve: Curves.elasticInOut,
+        isOpenOnStart: false,
+
+        children: [
+          SpeedDialChild(
+            child: const Icon(Icons.add),
+            backgroundColor: Colors.red,
+            foregroundColor: Colors.white,
+            label: 'Tambah Data',
+            onTap: () => Get.to(CreateData()),
+          ),
+          SpeedDialChild(
+            child: Icon(Icons.camera),
+            backgroundColor: Colors.deepOrange,
+            foregroundColor: Colors.white,
+            label: 'Scan Tiket',
+            onTap: () => Get.to(BarcodeScan()),
+          ),
+        ],
+      ),
     );
   }
 }

@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../routes/app_pages.dart';
 import '../../admin/dashboard/home_admin.dart';
 import '../../user/dashboard/home.dart';
 
@@ -13,19 +14,24 @@ class LoginController extends GetxController {
   late TextEditingController passC;
   User? user;
 
-  Future<void> getData() async {
+  Future<void> getData(BuildContext context) async {
     User? userid = FirebaseAuth.instance.currentUser;
+    print("User id = $userid");
     FirebaseFirestore.instance
         .collection('users')
         .doc(userid!.uid)
         .get()
         .then((DocumentSnapshot snap) {
       if (snap.exists) {
+        print("ini adalah snap : $snap");
         if (snap.get('role') == 'admin') {
           Get.off(HomeAdmin());
         } else if (snap.get('role') == 'user') {
-          Get.off(Home());
+          Navigator.pushNamedAndRemoveUntil(
+              context, Routes.HOME, (route) => false);
         }
+      } else {
+        print("error snapnya");
       }
     });
   }

@@ -115,45 +115,60 @@ class _HomeViewState extends State<HomeView> {
                     ),
                   ],
                 ),
-                child: Builder(builder: (context) {
-                  List images = [
-                    "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
-                    "https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
-                    "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=781&q=80",
-                    "https://images.unsplash.com/photo-1565958011703-44f9829ba187?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=765&q=80",
-                    "https://images.unsplash.com/photo-1482049016688-2d3e1b311543?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=710&q=80",
-                  ];
+                child: StreamBuilder<QuerySnapshot>(
+                  stream: FirebaseFirestore.instance
+                      .collection('wisata')
+                      .snapshots(),
+                  builder: (BuildContext context,
+                      AsyncSnapshot<QuerySnapshot> snapshot) {
+                    if (!snapshot.hasData) {
+                      return CircularProgressIndicator();
+                    }
 
-                  return CarouselSlider(
-                    options: CarouselOptions(
-                      height: 160.0,
-                      autoPlay: true,
-                      enlargeCenterPage: true,
-                    ),
-                    items: images.map((imageUrl) {
-                      return Builder(
-                        builder: (BuildContext context) {
-                          return Container(
-                            width: MediaQuery.of(context).size.width,
-                            margin: const EdgeInsets.symmetric(horizontal: 5.0),
-                            decoration: BoxDecoration(
-                              color: Colors.amber,
-                              borderRadius: const BorderRadius.all(
-                                Radius.circular(6.0),
-                              ),
-                              image: DecorationImage(
-                                image: NetworkImage(
-                                  imageUrl,
+                    List<String> imageUrls = [];
+
+                    snapshot.data!.docs.forEach((doc) {
+                      Map<String, dynamic> data =
+                          doc.data() as Map<String, dynamic>;
+                      data.forEach((key, value) {
+                        if (key.contains('image_')) {
+                          imageUrls.add(value.toString());
+                        }
+                      });
+                    });
+
+                    return CarouselSlider(
+                      options: CarouselOptions(
+                        height: 160.0,
+                        autoPlay: true,
+                        enlargeCenterPage: true,
+                      ),
+                      items: imageUrls.map((imageUrl) {
+                        return Builder(
+                          builder: (BuildContext context) {
+                            return Container(
+                              width: MediaQuery.of(context).size.width,
+                              margin:
+                                  const EdgeInsets.symmetric(horizontal: 5.0),
+                              decoration: BoxDecoration(
+                                color: Color.fromARGB(255, 255, 255, 255),
+                                borderRadius: const BorderRadius.all(
+                                  Radius.circular(6.0),
                                 ),
-                                fit: BoxFit.cover,
+                                image: DecorationImage(
+                                  image: NetworkImage(
+                                    imageUrl,
+                                  ),
+                                  fit: BoxFit.cover,
+                                ),
                               ),
-                            ),
-                          );
-                        },
-                      );
-                    }).toList(),
-                  );
-                }),
+                            );
+                          },
+                        );
+                      }).toList(),
+                    );
+                  },
+                ),
               )),
           Padding(
             padding: const EdgeInsets.only(top: 110, left: 15, right: 15),

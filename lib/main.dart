@@ -7,6 +7,7 @@ import 'package:ticket_wisata_donorojo/app/modules/splash/splash_screen.dart';
 
 // import 'app/modules/home/views/snap_view.dart';
 import 'app/modules/login/controllers/login_controller.dart';
+import 'app/modules/user/dashboard/home.dart';
 import 'app/routes/app_pages.dart';
 
 import 'package:firebase_core/firebase_core.dart';
@@ -19,12 +20,12 @@ Future<void> main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  
-
   runApp(GetMaterialApp(
-    
-    theme: ThemeData(
-        scaffoldBackgroundColor: Color.fromARGB(255, 255, 255, 255)),
+    routes: {
+      '/home': (context) => Home(),
+    },
+    theme:
+        ThemeData(scaffoldBackgroundColor: Color.fromARGB(255, 255, 255, 255)),
     debugShowCheckedModeBanner: false,
     title: "Application",
     home: SplashScreen(),

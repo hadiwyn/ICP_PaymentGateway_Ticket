@@ -47,8 +47,6 @@ class _DetailTicketState extends State<DetailTicket> {
 // Mengubah tanggal yang ditentukan menjadi DateTime object
     final targetDate = formatter.parse(widget.date_visit);
 
-    print(now);
-    print(targetDate);
 // Menentukan teks yang akan ditampilkan
     final textToShow = now.compareTo(targetDate) > 0 ? 'expired !' : '';
 
@@ -295,8 +293,10 @@ class _DetailTicketState extends State<DetailTicket> {
                                               width: double.infinity,
                                               height: 60,
                                               decoration: BoxDecoration(
-                                                color: Color.fromARGB(
-                                                    255, 110, 188, 251),
+                                                color: widget.status != "Paid"
+                                                    ? Colors.red
+                                                    : Color.fromARGB(
+                                                        255, 110, 188, 251),
                                                 // ignore: prefer_const_literals_to_create_immutables
                                                 boxShadow: [
                                                   // ignore: prefer_const_constructors
@@ -310,7 +310,9 @@ class _DetailTicketState extends State<DetailTicket> {
                                               ),
                                               child: Center(
                                                   child: Text(
-                                                "LUNAS",
+                                                widget.status != "Paid"
+                                                    ? "Belum Bayar"
+                                                    : "LUNAS",
                                                 style: GoogleFonts.poppins(
                                                   fontWeight: FontWeight.w800,
                                                   fontSize: 28,
@@ -416,29 +418,32 @@ class _DetailTicketState extends State<DetailTicket> {
                                             ),
                                           ),
                                         ),
-                                        Padding(
-                                          padding: const EdgeInsets.only(
-                                              bottom: 15, left: 20, right: 20),
-                                          child: Container(
-                                            width: MediaQuery.of(context)
-                                                .size
-                                                .width,
-                                            height: 90,
-                                            decoration: BoxDecoration(
-                                              color: Color(0x00FFFFFF),
-                                              // image: DecorationImage(
-                                              //   fit: BoxFit.fitHeight,
-                                              //   image: Image.network(
-                                              //     'https://scanbot.io/wp-content/uploads/2022/03/gs1-128-barcode-460x145.png',
-                                              //   ).image,
-                                              // ),
-                                            ),
-                                            child: BarcodeWidget(
-                                              barcode: Barcode.code128(),
-                                              data: widget.id_trancaction,
+                                        if (widget.status == 'Paid')
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                                bottom: 15,
+                                                left: 20,
+                                                right: 20),
+                                            child: Container(
+                                              width: MediaQuery.of(context)
+                                                  .size
+                                                  .width,
+                                              height: 90,
+                                              decoration: BoxDecoration(
+                                                color: Color(0x00FFFFFF),
+                                                // image: DecorationImage(
+                                                //   fit: BoxFit.fitHeight,
+                                                //   image: Image.network(
+                                                //     'https://scanbot.io/wp-content/uploads/2022/03/gs1-128-barcode-460x145.png',
+                                                //   ).image,
+                                                // ),
+                                              ),
+                                              child: BarcodeWidget(
+                                                barcode: Barcode.code128(),
+                                                data: widget.id_trancaction,
+                                              ),
                                             ),
                                           ),
-                                        ),
                                       ],
                                     ),
                                   ),

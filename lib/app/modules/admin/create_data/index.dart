@@ -8,6 +8,7 @@ import 'package:get/get.dart';
 import 'package:multi_image_picker2/multi_image_picker2.dart';
 import 'package:ticket_wisata_donorojo/app/modules/admin/create_data/widget/field_deskripsi.dart';
 import 'package:ticket_wisata_donorojo/app/modules/admin/create_data/widget/field_image.dart';
+import 'package:ticket_wisata_donorojo/app/modules/admin/create_data/widget/field_location.dart';
 import 'package:ticket_wisata_donorojo/app/modules/admin/create_data/widget/field_name.dart';
 import 'package:ticket_wisata_donorojo/app/modules/admin/create_data/widget/field_price.dart';
 
@@ -23,6 +24,7 @@ class _CreateDataState extends State<CreateData> {
   TextEditingController nameC = TextEditingController();
   TextEditingController priceC = TextEditingController();
   TextEditingController DescC = TextEditingController();
+  TextEditingController LocC = TextEditingController();
 
   CollectionReference? dbRef;
 
@@ -62,6 +64,10 @@ class _CreateDataState extends State<CreateData> {
               FieldPrice(priceC),
               SizedBox(
                 height: 20,
+              ),
+              FieldLocation(LocC),
+              SizedBox(
+                height: 30,
               ),
               FieldDeskripsi(DescC),
               SizedBox(

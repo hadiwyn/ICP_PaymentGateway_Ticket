@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ticket_wisata_donorojo/app/modules/user/dashboard/page_view.dart';
 import 'package:ticket_wisata_donorojo/app/modules/user/dashboard/pesan_tiket.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class DetailWisata extends StatefulWidget {
   var detail;
@@ -15,6 +16,14 @@ class DetailWisata extends StatefulWidget {
 }
 
 class _DetailWisataState extends State<DetailWisata> {
+  void launchMap(String url) async {
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -77,7 +86,7 @@ class _DetailWisataState extends State<DetailWisata> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(top: 10),
+                  padding: const EdgeInsets.only(top: 15),
                   child: Row(
                     children: [
                       Spacer(),
@@ -86,11 +95,16 @@ class _DetailWisataState extends State<DetailWisata> {
                         size: 16.0,
                         color: Colors.black54,
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 2, right: 20),
-                        child: Text(
-                          "Lokasi",
-                          style: const TextStyle(color: Colors.black54),
+                      InkWell(
+                        onTap: () {
+                          launchMap(widget.detail['location']);
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.only(top: 2, right: 20),
+                          child: Text(
+                            "Dapatkan Arah",
+                            style: const TextStyle(color: Colors.black54),
+                          ),
                         ),
                       ),
                     ],

@@ -54,6 +54,7 @@ android {
         targetSdkVersion 30
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
+        multiDexEnabled true
     }
 
     // productFlavors {
@@ -88,6 +89,7 @@ flutter {
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation 'com.android.support:multidex:1.0.3'
     // implementation 'com.midtrans:uikit:1.34.0-SANDBOX'
     // implementation 'com.midtrans:uikit:1.34.0'
     

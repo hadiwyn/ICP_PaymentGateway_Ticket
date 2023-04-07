@@ -153,7 +153,7 @@ class _listViewAdminState extends State<ListViewAdmin> {
                               ),
                               Spacer(),
                               if (((listAllDoc[index].data()
-                                      as Map<String, dynamic>)["locatiton"]) !=
+                                      as Map<String, dynamic>)["location"]) !=
                                   null)
                                 Padding(
                                   // ignore: prefer_const_constructors
@@ -217,18 +217,6 @@ class _listViewAdminState extends State<ListViewAdmin> {
                                     ],
                                   ),
                                 ),
-                              Padding(
-                                padding: const EdgeInsets.only(
-                                    left: 12, bottom: 10, right: 12),
-                                child: Text(
-                                  "Lokasi dibutuhkan, ubah data sekarang !",
-                                  style: TextStyle(
-                                      fontFamily: 'Lexend Deca',
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.w500,
-                                      color: Colors.red),
-                                ),
-                              ),
                             ],
                           ),
                         ),

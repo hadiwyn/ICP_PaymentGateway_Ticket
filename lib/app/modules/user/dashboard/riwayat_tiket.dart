@@ -1,6 +1,7 @@
 // ignore_for_file: non_constant_identifier_names
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mysql1/mysql1.dart';
 import 'package:get/get.dart';
@@ -15,6 +16,7 @@ class RiwayatTiket extends StatefulWidget {
 
 class _RiwayatTiketState extends State<RiwayatTiket> {
   FirebaseFirestore firestore = FirebaseFirestore.instance;
+  FirebaseAuth auth = FirebaseAuth.instance;
 
   CollectionReference data_transaction =
       FirebaseFirestore.instance.collection('transaction');
@@ -24,13 +26,6 @@ class _RiwayatTiketState extends State<RiwayatTiket> {
     fetchData();
     super.initState();
   }
-
-  // Future<List<Order>> fetchData() async {
-  //   MySqlConnection connection = await getConnection();
-  //   Results results = await connection.query('SELECT * FROM orders');
-  //   await connection.close();
-  //   return results.map((r) => Order.fromMap(r.fields)).toList();
-  // }
 
   Future<List<Order>> fetchData() async {
     MySqlConnection connection = await getConnection();
@@ -98,13 +93,14 @@ class _RiwayatTiketState extends State<RiwayatTiket> {
       String date_visit,
       String date_add,
       String status) async {
-    CollectionReference product = firestore.collection("wisata");
+    // CollectionReference product = firestore.collection("wisata");
 
-    final DocumentReference doc = await product.add({
+    final DocumentReference doc = await data_transaction.add({
       "transaction_id": id,
-      "nama": name,
       "nama_wisata": tour_name,
+      "nama": name,
       "phone": phone,
+      // 'email': emailCurrentUser,
       "jumlah": qty,
       "harga": price,
       "total_harga": total_price,
@@ -126,6 +122,16 @@ class _RiwayatTiketState extends State<RiwayatTiket> {
     await conn.query('DELETE FROM orders WHERE id = ?', [id]);
 
     await conn.close();
+
+    try {
+      await FirebaseFirestore.instance
+          .collection('transaction')
+          .doc(id)
+          .delete();
+      print('Dokumen berhasil dihapus!');
+    } catch (e) {
+      print('Error: $e');
+    }
   }
 
   List<Order> _orders = [];
@@ -160,6 +166,13 @@ class _RiwayatTiketState extends State<RiwayatTiket> {
               itemCount: orders?.length,
               itemBuilder: (BuildContext context, int index) {
                 Order order = orders![index];
+
+                if (order.status != 'Paid') {
+                  return Container(); // jika tidak sama, maka tidak ditampilkan
+                }
+                if (auth.currentUser!.displayName != order.name) {
+                  return Container(); // jika tidak sama, maka tidak ditampilkan
+                }
                 return InkWell(
                   onTap: () {
                     Get.to(DetailTicket(
@@ -247,7 +260,6 @@ class _RiwayatTiketState extends State<RiwayatTiket> {
                                                       Colors.blueGrey,
                                                 ),
                                                 onPressed: () {
-                                                  //Fungsi Menghapus
                                                   confirm = true;
                                                   Navigator.pop(context);
                                                 },
