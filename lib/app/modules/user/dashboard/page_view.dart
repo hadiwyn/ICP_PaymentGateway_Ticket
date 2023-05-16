@@ -25,7 +25,9 @@ class _PageViewAutoSlideState extends State<PageViewAutoSlide> {
         }
 
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return CircularProgressIndicator();
+          return Center(
+            child: CircularProgressIndicator(),
+          );
         }
 
         if (!snapshot.hasData) {

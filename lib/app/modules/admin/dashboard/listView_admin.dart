@@ -32,7 +32,7 @@ class _listViewAdminState extends State<ListViewAdmin> {
     CollectionReference wisataCollection =
         FirebaseFirestore.instance.collection('wisata');
     QuerySnapshot querySnapshot = await wisataCollection.get();
-    count = querySnapshot.size as double;
+    count = querySnapshot.size.toDouble();
     print('Jumlah dokumen di koleksi "wisata": $count');
   }
 

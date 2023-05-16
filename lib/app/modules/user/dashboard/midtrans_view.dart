@@ -75,7 +75,7 @@ class _MidtransViewState extends State<MidtransView> {
               }
             },
             initialUrl:
-                'https://bad7-182-2-82-142.ap.ngrok.io/checkout?transaction_id=${widget.transaction_id}&nama=${widget.name}&harga=${widget.count}&telepon=${widget.phone}&quantity=${widget.quantity}&date_visit=${widget.date}&date_add=${widget.dateAdd}&tourname=${widget.name_product}'
+                'https://642f-182-4-103-140.ngrok-free.app/checkout?transaction_id=${widget.transaction_id}&nama=${widget.name}&harga=${widget.count}&telepon=${widget.phone}&quantity=${widget.quantity}&date_visit=${widget.date}&date_add=${widget.dateAdd}&tourname=${widget.name_product}'
             // 'https://apipayment.mr-code.my.id/?name=${widget.name}&email=${widget.email}&no_tlp=${widget.phone}&count=${widget.count}&name_product=${widget.name_product}&jumlah=${widget.quantity}&sum=${widget.totalPrice}&date=${widget.date}&cDate=${cdate2}',
             ),
         isLoading

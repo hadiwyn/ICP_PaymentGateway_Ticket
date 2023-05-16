@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:ticket_wisata_donorojo/app/modules/user/dashboard/list_view.dart';
+import 'package:ticket_wisata_donorojo/app/modules/user/dashboard/search_page.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -14,6 +15,8 @@ class HomeView extends StatefulWidget {
 
 class _HomeViewState extends State<HomeView> {
   String? nama = "";
+
+  final _searchController = TextEditingController();
 
   Future<void> getData() async {
     await FirebaseFirestore.instance
@@ -33,6 +36,12 @@ class _HomeViewState extends State<HomeView> {
   void initState() {
     getData();
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    _searchController.dispose();
+    super.dispose();
   }
 
   @override
@@ -193,19 +202,37 @@ class _HomeViewState extends State<HomeView> {
                     ),
                   ),
                   Expanded(
-                    child: TextFormField(
-                      style: TextStyle(color: Colors.white),
-                      initialValue: null,
-                      decoration: InputDecoration.collapsed(
-                        filled: true,
-                        fillColor: Color.fromARGB(0, 248, 245, 245),
-                        hintText: "Kamu mau wisata kemana?",
-                        hintStyle: TextStyle(
-                          color: Color.fromARGB(255, 255, 255, 255),
+                    child: InkWell(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => SearchPage(
+                                  searchQuery: _searchController.text)),
+                        );
+                      },
+                      child: TextFormField(
+                        controller:
+                            _searchController, // controller untuk mengambil nilai dari TextFormField
+                        style: TextStyle(color: Colors.white),
+                        decoration: InputDecoration.collapsed(
+                          filled: true,
+                          fillColor: Color.fromARGB(0, 248, 245, 245),
+                          hintText: "Kamu mau wisata kemana?",
+                          hintStyle: TextStyle(
+                            color: Color.fromARGB(255, 255, 255, 255),
+                          ),
+                          hoverColor: Color.fromARGB(0, 248, 245, 245),
                         ),
-                        hoverColor: Color.fromARGB(0, 248, 245, 245),
+                        onFieldSubmitted: (value) {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    SearchPage(searchQuery: value)),
+                          );
+                        },
                       ),
-                      onFieldSubmitted: (value) {},
                     ),
                   ),
                 ],

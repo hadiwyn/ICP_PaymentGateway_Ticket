@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:ticket_wisata_donorojo/app/modules/admin/location/location.dart';
 import 'package:ticket_wisata_donorojo/app/modules/admin/update_data/update_data.dart';
 import 'package:ticket_wisata_donorojo/app/modules/user/dashboard/home.dart';
 import 'package:ticket_wisata_donorojo/app/modules/user/dashboard/page_view.dart';
@@ -112,7 +113,7 @@ class _DetailWisataAdminState extends State<DetailWisataAdmin> {
                           padding: const EdgeInsets.only(left: 0, right: 20),
                           child: InkWell(
                             onTap: () {
-                              // Get.off(AddScreenLocation());
+                              // Get.off(Location());
                               launchMap(widget.detail['location']);
                             },
                             child: Text(

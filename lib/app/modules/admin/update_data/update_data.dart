@@ -19,6 +19,7 @@ class _UpdateDataState extends State<UpdateData> {
   TextEditingController deskripsi = TextEditingController();
   TextEditingController nama_wisata = TextEditingController();
   TextEditingController harga_tiket = TextEditingController();
+  TextEditingController locC = TextEditingController();
 
   CollectionReference users = FirebaseFirestore.instance.collection('wisata');
 
@@ -27,6 +28,7 @@ class _UpdateDataState extends State<UpdateData> {
     nama_wisata.text = widget.detail['nama'];
     harga_tiket.text = widget.detail['harga'];
     deskripsi.text = widget.detail['deskripsi'];
+    locC.text = widget.detail['location'];
     super.initState();
   }
 
@@ -150,6 +152,26 @@ class _UpdateDataState extends State<UpdateData> {
                           decoration: const InputDecoration(
                             labelText: "Deskripsi",
                             border: OutlineInputBorder(),
+                            labelStyle: TextStyle(
+                              color: Colors.blueGrey,
+                            ),
+                            enabledBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Colors.blueGrey,
+                              ),
+                            ),
+                          ),
+                          onChanged: (value) {},
+                        ),
+                      ),
+                      Container(
+                        padding:
+                            const EdgeInsets.only(top: 20, left: 12, right: 12),
+                        margin: const EdgeInsets.only(),
+                        child: TextFormField(
+                          controller: locC,
+                          decoration: const InputDecoration(
+                            labelText: "URL Lokasi",
                             labelStyle: TextStyle(
                               color: Colors.blueGrey,
                             ),
@@ -323,7 +345,8 @@ class _UpdateDataState extends State<UpdateData> {
         .update({
           'nama': nama_wisata.text,
           'harga': harga_tiket.text,
-          'deskripsi': deskripsi.text
+          'deskripsi': deskripsi.text,
+          'location': locC.text
         })
         .then((value) => print("User Updated"))
         .catchError((error) => print("Failed to update user: $error"));

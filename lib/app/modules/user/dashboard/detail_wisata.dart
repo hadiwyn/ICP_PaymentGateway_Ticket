@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:ticket_wisata_donorojo/app/modules/user/dashboard/page_view.dart';
 import 'package:ticket_wisata_donorojo/app/modules/user/dashboard/pesan_tiket.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 class DetailWisata extends StatefulWidget {
   var detail;
@@ -20,7 +21,7 @@ class _DetailWisataState extends State<DetailWisata> {
     if (await canLaunch(url)) {
       await launch(url);
     } else {
-      throw 'Could not launch $url';
+      print('Could not launch $url');
     }
   }
 

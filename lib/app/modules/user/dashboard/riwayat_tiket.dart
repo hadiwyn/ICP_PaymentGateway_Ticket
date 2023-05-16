@@ -161,193 +161,191 @@ class _RiwayatTiketState extends State<RiwayatTiket> {
         future: fetchData(),
         builder: (BuildContext context, AsyncSnapshot<List<Order>> snapshot) {
           if (snapshot.hasData) {
-            List<Order>? orders = snapshot.data;
-            return ListView.builder(
-              itemCount: orders?.length,
-              itemBuilder: (BuildContext context, int index) {
-                Order order = orders![index];
+            List<Order>? orders = snapshot.data?.reversed.toList();
+            return Align(
+              alignment: Alignment.topCenter,
+              child: ListView.builder(
+                itemCount: orders?.length,
+                itemBuilder: (BuildContext context, int index) {
+                  Order order = orders![index];
 
-                if (order.status != 'Paid') {
-                  return Container(); // jika tidak sama, maka tidak ditampilkan
-                }
-                if (auth.currentUser!.displayName != order.name) {
-                  return Container(); // jika tidak sama, maka tidak ditampilkan
-                }
-                return InkWell(
-                  onTap: () {
-                    Get.to(DetailTicket(
-                        order.tour_name,
-                        order.id,
-                        order.name,
-                        order.phone,
-                        order.date_add,
-                        order.date_visit,
-                        order.qty,
-                        order.status));
-                  },
-                  child: Container(
-                    padding: EdgeInsets.all(10),
-                    margin: EdgeInsets.all(10),
-                    height: 100,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      boxShadow: [
-                        BoxShadow(
-                          blurRadius: 6,
-                          color: Color(0x34000000),
-                          offset: Offset(0, 3),
-                        )
-                      ],
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        // Padding(
-                        //   padding: const EdgeInsets.all(12),
-                        //   child: CircleAvatar(
-                        //     radius: 30,
-                        //     backgroundImage: NetworkImage(order.imageUrl),
-                        //   ),
-                        // ),
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Row(
-                                children: [
-                                  Text(
-                                    "Tiket Wisata ${order.tour_name}",
-                                    style: TextStyle(
-                                      fontFamily: 'Lexend Deca',
-                                      color: Colors.blueGrey,
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.bold,
+                  if (order.status != 'Paid') {
+                    return Container(); // jika tidak sama, maka tidak ditampilkan
+                  }
+                  if (auth.currentUser!.displayName != order.name) {
+                    return Container(); // jika tidak sama, maka tidak ditampilkan
+                  }
+                  return InkWell(
+                    onTap: () {
+                      Get.to(DetailTicket(
+                          order.tour_name,
+                          order.id,
+                          order.name,
+                          order.phone,
+                          order.date_add,
+                          order.date_visit,
+                          order.qty,
+                          order.status));
+                    },
+                    child: Container(
+                      padding: EdgeInsets.all(10),
+                      margin: EdgeInsets.all(10),
+                      height: 100,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        boxShadow: [
+                          BoxShadow(
+                            blurRadius: 6,
+                            color: Color(0x34000000),
+                            offset: Offset(0, 3),
+                          )
+                        ],
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Row(
+                                  children: [
+                                    Text(
+                                      "Tiket Wisata ${order.tour_name}",
+                                      style: TextStyle(
+                                        fontFamily: 'Lexend Deca',
+                                        color: Colors.blueGrey,
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.bold,
+                                      ),
                                     ),
-                                  ),
-                                  Spacer(),
-                                  InkWell(
-                                    onTap: () async {
-                                      bool confirm = false;
-                                      await showDialog<void>(
-                                        context: context,
-                                        barrierDismissible: true,
-                                        builder: (BuildContext context) {
-                                          return AlertDialog(
-                                            title: const Text('Confirm'),
-                                            content: SingleChildScrollView(
-                                              child: ListBody(
-                                                children: const <Widget>[
-                                                  Text(
-                                                      'Are you sure you want to delete this item?'),
-                                                ],
-                                              ),
-                                            ),
-                                            actions: <Widget>[
-                                              ElevatedButton(
-                                                style: ElevatedButton.styleFrom(
-                                                  backgroundColor:
-                                                      Colors.grey[600],
+                                    Spacer(),
+                                    InkWell(
+                                      onTap: () async {
+                                        bool confirm = false;
+                                        await showDialog<void>(
+                                          context: context,
+                                          barrierDismissible: true,
+                                          builder: (BuildContext context) {
+                                            return AlertDialog(
+                                              title: const Text('Confirm'),
+                                              content: SingleChildScrollView(
+                                                child: ListBody(
+                                                  children: const <Widget>[
+                                                    Text(
+                                                        'Are you sure you want to delete this item?'),
+                                                  ],
                                                 ),
-                                                onPressed: () {
-                                                  Navigator.pop(context);
-                                                },
-                                                child: const Text("No"),
                                               ),
-                                              ElevatedButton(
-                                                style: ElevatedButton.styleFrom(
-                                                  backgroundColor:
-                                                      Colors.blueGrey,
+                                              actions: <Widget>[
+                                                ElevatedButton(
+                                                  style:
+                                                      ElevatedButton.styleFrom(
+                                                    backgroundColor:
+                                                        Colors.grey[600],
+                                                  ),
+                                                  onPressed: () {
+                                                    Navigator.pop(context);
+                                                  },
+                                                  child: const Text("No"),
                                                 ),
-                                                onPressed: () {
-                                                  confirm = true;
-                                                  Navigator.pop(context);
-                                                },
-                                                child: const Text("Yes"),
-                                              ),
-                                            ],
-                                          );
-                                        },
-                                      );
+                                                ElevatedButton(
+                                                  style:
+                                                      ElevatedButton.styleFrom(
+                                                    backgroundColor:
+                                                        Colors.blueGrey,
+                                                  ),
+                                                  onPressed: () {
+                                                    confirm = true;
+                                                    Navigator.pop(context);
+                                                  },
+                                                  child: const Text("Yes"),
+                                                ),
+                                              ],
+                                            );
+                                          },
+                                        );
 
-                                      if (confirm) {
-                                        deleteData(order.id);
-                                        setState(() {
-                                          fetchData();
-                                        });
-                                        print("Confirmed!");
-                                      }
-                                    },
-                                    child: const Icon(
-                                      Icons.delete,
-                                      size: 24.0,
-                                      color: Colors.red,
+                                        if (confirm) {
+                                          deleteData(order.id);
+                                          setState(() {
+                                            fetchData();
+                                          });
+                                          print("Confirmed!");
+                                        }
+                                      },
+                                      child: const Icon(
+                                        Icons.delete,
+                                        size: 24.0,
+                                        color: Colors.red,
+                                      ),
                                     ),
-                                  ),
-                                ],
-                              ),
-                              Spacer(),
-                              Text(
-                                "Jumlah : ${order.qty}",
-                                // ignore: prefer_const_constructors
-                                style: TextStyle(
-                                  fontFamily: 'Lexend Deca',
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.w300,
+                                  ],
                                 ),
-                              ),
-                              // ignore: prefer_const_constructors
-                              Spacer(),
-                              Row(
-                                children: [
+                                Spacer(),
+                                Text(
+                                  "Jumlah : ${order.qty}",
                                   // ignore: prefer_const_constructors
-                                  Icon(
-                                    Icons.price_change,
-                                    color: Colors.blueGrey,
-                                    size: 12,
+                                  style: TextStyle(
+                                    fontFamily: 'Lexend Deca',
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.w300,
                                   ),
-                                  SizedBox(width: 5),
-                                  Text(
-                                    'Rp.${order.total_price},00',
+                                ),
+                                // ignore: prefer_const_constructors
+                                Spacer(),
+                                Row(
+                                  children: [
                                     // ignore: prefer_const_constructors
-                                    style: TextStyle(
-                                      fontFamily: 'Lexend Deca',
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.w300,
+                                    Icon(
+                                      Icons.price_change,
+                                      color: Colors.blueGrey,
+                                      size: 12,
                                     ),
-                                  ),
-                                  Spacer(
-                                    flex: 6,
-                                  ),
-                                  Text(
-                                    'Berlaku sampai ${order.date_visit}',
-                                    // ignore: prefer_const_constructors
-                                    style: TextStyle(
-                                      fontFamily: 'Lexend Deca',
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.w300,
+                                    SizedBox(width: 5),
+                                    Text(
+                                      'Rp.${order.total_price},00',
+                                      // ignore: prefer_const_constructors
+                                      style: TextStyle(
+                                        fontFamily: 'Lexend Deca',
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.w300,
+                                      ),
                                     ),
-                                  ),
-                                  Spacer(),
-                                  Icon(
-                                    order.status == 'Paid'
-                                        ? Icons.verified
-                                        : Icons.timelapse,
-                                    color: order.status == 'Paid'
-                                        ? Colors.blue
-                                        : Colors.red,
-                                    size: 24,
-                                  ),
-                                ],
-                              ),
-                            ],
+                                    Spacer(
+                                      flex: 6,
+                                    ),
+                                    Text(
+                                      'Berlaku sampai ${order.date_visit}',
+                                      // ignore: prefer_const_constructors
+                                      style: TextStyle(
+                                        fontFamily: 'Lexend Deca',
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.w300,
+                                      ),
+                                    ),
+                                    Spacer(),
+                                    Icon(
+                                      order.status == 'Paid'
+                                          ? Icons.verified
+                                          : Icons.timelapse,
+                                      color: order.status == 'Paid'
+                                          ? Colors.blue
+                                          : Colors.red,
+                                      size: 24,
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
-                  ),
-                );
-              },
+                  );
+                },
+              ),
             );
           } else if (snapshot.hasError) {
             return Text('Error: ${snapshot.error}');
