@@ -1,18 +1,16 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:page_transition/page_transition.dart';
-import 'package:ticket_wisata_donorojo/app/routes/app_pages.dart';
 
-import '../admin/dashboard/home_admin.dart';
+import '../../routes/app_pages.dart';
 import '../animations/fade_animations.dart';
-import '../user/dashboard/home.dart';
-import 'first_page.dart';
 
 class FirstPage extends StatefulWidget {
+  const FirstPage({super.key});
+
   @override
+  // ignore: library_private_types_in_public_api
   _FirstPageState createState() => _FirstPageState();
 }
 
@@ -35,7 +33,7 @@ class _FirstPageState extends State<FirstPage> with TickerProviderStateMixin {
     super.initState();
 
     _scaleController =
-        AnimationController(vsync: this, duration: Duration(milliseconds: 300));
+        AnimationController(vsync: this, duration: const Duration(milliseconds: 300));
 
     _scaleAnimation =
         Tween<double>(begin: 1.0, end: 0.8).animate(_scaleController!)
@@ -46,7 +44,7 @@ class _FirstPageState extends State<FirstPage> with TickerProviderStateMixin {
           });
 
     _widthController =
-        AnimationController(vsync: this, duration: Duration(milliseconds: 600));
+        AnimationController(vsync: this, duration: const Duration(milliseconds: 600));
 
     _widthAnimation =
         Tween<double>(begin: 80.0, end: 300.0).animate(_widthController!)
@@ -57,7 +55,7 @@ class _FirstPageState extends State<FirstPage> with TickerProviderStateMixin {
           });
 
     _positionController = AnimationController(
-        vsync: this, duration: Duration(milliseconds: 1000));
+        vsync: this, duration: const Duration(milliseconds: 1000));
 
     _positionAnimation =
         Tween<double>(begin: 0.0, end: 215.0).animate(_positionController!)
@@ -71,7 +69,7 @@ class _FirstPageState extends State<FirstPage> with TickerProviderStateMixin {
           });
 
     _scale2Controller =
-        AnimationController(vsync: this, duration: Duration(milliseconds: 300));
+        AnimationController(vsync: this, duration: const Duration(milliseconds: 300));
 
     _scale2Animation =
         Tween<double>(begin: 1.0, end: 32.0).animate(_scale2Controller!)
@@ -107,7 +105,7 @@ class _FirstPageState extends State<FirstPage> with TickerProviderStateMixin {
     final double width = MediaQuery.of(context).size.width;
 
     return Scaffold(
-        backgroundColor: Color.fromRGBO(3, 9, 23, 1),
+        backgroundColor: const Color.fromRGBO(3, 9, 23, 1),
         body: Stack(
           children: [
             Image.asset(
@@ -116,7 +114,7 @@ class _FirstPageState extends State<FirstPage> with TickerProviderStateMixin {
               height: double.infinity,
               fit: BoxFit.fill,
             ),
-            Container(
+            SizedBox(
               width: double.infinity,
               child: Stack(
                 children: <Widget>[
@@ -128,7 +126,7 @@ class _FirstPageState extends State<FirstPage> with TickerProviderStateMixin {
                         Container(
                           width: width,
                           height: 400,
-                          decoration: BoxDecoration(
+                          decoration: const BoxDecoration(
                               image: DecorationImage(
                                   image: AssetImage('assets/image/one.png'),
                                   fit: BoxFit.cover)),
@@ -142,7 +140,7 @@ class _FirstPageState extends State<FirstPage> with TickerProviderStateMixin {
                         Container(
                           width: width,
                           height: 400,
-                          decoration: BoxDecoration(
+                          decoration: const BoxDecoration(
                               image: DecorationImage(
                                   image: AssetImage('assets/image/one.png'),
                                   fit: BoxFit.cover)),
@@ -156,14 +154,14 @@ class _FirstPageState extends State<FirstPage> with TickerProviderStateMixin {
                         Container(
                           width: width,
                           height: 400,
-                          decoration: BoxDecoration(
+                          decoration: const BoxDecoration(
                               image: DecorationImage(
                                   image: AssetImage('assets/image/one.png'),
                                   fit: BoxFit.cover)),
                         )),
                   ),
                   Container(
-                    padding: EdgeInsets.all(20.0),
+                    padding: const EdgeInsets.all(20.0),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.end,
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -172,12 +170,12 @@ class _FirstPageState extends State<FirstPage> with TickerProviderStateMixin {
                           1,
                           Text("Selamat Datang",
                               style: GoogleFonts.patuaOne(
-                                  textStyle: TextStyle(
+                                  textStyle: const TextStyle(
                                 color: Colors.white,
                                 fontSize: 60,
                               ))),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 50,
                         ),
                         FadeAnimation(
@@ -189,7 +187,7 @@ class _FirstPageState extends State<FirstPage> with TickerProviderStateMixin {
                                   height: 1.4,
                                   fontSize: 20),
                             )),
-                        SizedBox(
+                        const SizedBox(
                           height: 180,
                         ),
                         FadeAnimation(
@@ -204,7 +202,7 @@ class _FirstPageState extends State<FirstPage> with TickerProviderStateMixin {
                                       builder: (context, child) => Container(
                                         width: _widthAnimation?.value,
                                         height: 80,
-                                        padding: EdgeInsets.all(10),
+                                        padding: const EdgeInsets.all(10),
                                         decoration: BoxDecoration(
                                             borderRadius:
                                                 BorderRadius.circular(50),
@@ -230,14 +228,14 @@ class _FirstPageState extends State<FirstPage> with TickerProviderStateMixin {
                                                             width: 60,
                                                             height: 60,
                                                             decoration:
-                                                                BoxDecoration(
+                                                                const BoxDecoration(
                                                                     shape: BoxShape
                                                                         .circle,
                                                                     color: Colors
                                                                         .blue),
                                                             child: hideIcon ==
                                                                     false
-                                                                ? Icon(
+                                                                ? const Icon(
                                                                     Icons
                                                                         .arrow_forward,
                                                                     color: Colors
@@ -254,7 +252,7 @@ class _FirstPageState extends State<FirstPage> with TickerProviderStateMixin {
                                     ),
                                   )),
                             )),
-                        SizedBox(
+                        const SizedBox(
                           height: 60,
                         ),
                       ],

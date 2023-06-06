@@ -25,21 +25,21 @@ class _PageViewAutoSlideState extends State<PageViewAutoSlide> {
         }
 
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return Center(
+          return const Center(
             child: CircularProgressIndicator(),
           );
         }
 
         if (!snapshot.hasData) {
-          return Text('No data found');
+          return const Text('No data found');
         }
 
         final data = snapshot.data!.data() as Map<String, dynamic>?;
         if (data == null) {
-          return Text('Data is null');
+          return const Text('Data is null');
         }
 
-        final nImages = 2;
+        const nImages = 2;
 
         List<String> imageUrls = [];
         for (int i = 1; i <= nImages; i++) {

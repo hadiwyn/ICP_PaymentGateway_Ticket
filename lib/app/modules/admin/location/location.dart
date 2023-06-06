@@ -11,9 +11,9 @@ class Location extends StatefulWidget {
 }
 
 class _LocationState extends State<Location> {
-  Completer<GoogleMapController> _controller = Completer();
+  final Completer<GoogleMapController> _controller = Completer();
 
-  static const LatLng _center = const LatLng(-6.21462, 106.84513);
+  static const LatLng _center = LatLng(-6.21462, 106.84513);
   final Set<Marker> _markers = {};
 
   void _onMapCreated(GoogleMapController controller) {
@@ -21,7 +21,7 @@ class _LocationState extends State<Location> {
 
     setState(() {
       _markers.add(
-        Marker(
+        const Marker(
           markerId: MarkerId('id'),
           position: _center,
           infoWindow: InfoWindow(

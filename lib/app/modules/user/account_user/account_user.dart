@@ -11,7 +11,7 @@ import 'package:image_picker/image_picker.dart';
 import '../../splash/first_page.dart';
 
 class AccountUser extends StatefulWidget {
-  AccountUser({super.key});
+  const AccountUser({super.key});
 
   @override
   State<AccountUser> createState() => _AccountUserState();
@@ -51,8 +51,8 @@ class _AccountUserState extends State<AccountUser> {
   }
 
   Future<void> uploadImg() async {
-    final ImagePicker _picker = ImagePicker();
-    final XFile? img = await _picker.pickImage(source: ImageSource.gallery);
+    final ImagePicker picker = ImagePicker();
+    final XFile? img = await picker.pickImage(source: ImageSource.gallery);
 
     String fileName = DateTime.now().millisecondsSinceEpoch.toString();
 
@@ -77,13 +77,13 @@ class _AccountUserState extends State<AccountUser> {
         appBar: AppBar(
           automaticallyImplyLeading: false,
           centerTitle: true,
-          iconTheme: IconThemeData(color: Color.fromARGB(255, 93, 193, 255)),
+          iconTheme: const IconThemeData(color: Color.fromARGB(255, 93, 193, 255)),
           // title: Image.asset(
           //   'assets/image/logo-pacitan.webp',
           //   height: 40,
           //   fit: BoxFit.fitWidth,
           // ),
-          backgroundColor: Color.fromARGB(255, 255, 255, 255),
+          backgroundColor: const Color.fromARGB(255, 255, 255, 255),
           elevation: 0,
           actions: [
             // ignore: prefer_const_constructors
@@ -96,14 +96,14 @@ class _AccountUserState extends State<AccountUser> {
                 onPressed: () {
                   FirebaseAuth.instance.signOut();
                   Get.deleteAll();
-                  Get.off(FirstPage());
+                  Get.off(const FirstPage());
                 },
-                icon: Icon(Icons.logout)),
+                icon: const Icon(Icons.logout)),
             // )
           ],
         ),
         body: Container(
-          padding: EdgeInsets.all(20.0),
+          padding: const EdgeInsets.all(20.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
@@ -121,7 +121,7 @@ class _AccountUserState extends State<AccountUser> {
                   Container(
                       child: ElevatedButton(
                           onPressed: uploadImg,
-                          child: Icon(Icons.photo_camera)))
+                          child: const Icon(Icons.photo_camera)))
                 ]),
               ),
               PhysicalModel(
@@ -129,7 +129,7 @@ class _AccountUserState extends State<AccountUser> {
                 elevation: 3,
                 borderRadius: BorderRadius.circular(30),
                 child: Container(
-                  padding: EdgeInsets.all(20.0),
+                  padding: const EdgeInsets.all(20.0),
                   width: double.infinity,
                   height: 300,
                   child: Column(
@@ -138,19 +138,19 @@ class _AccountUserState extends State<AccountUser> {
                       Container(
                           child: Row(
                         children: [
-                          Icon(
+                          const Icon(
                             Icons.person_outline,
                             color: Colors.blue,
                             size: 30,
                           ),
-                          SizedBox(
+                          const SizedBox(
                             width: 20,
                           ),
                           Expanded(
                             child: Text(
                               uName!,
                               overflow: TextOverflow.ellipsis,
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontWeight: FontWeight.w500,
                                 fontFamily: 'Poppins',
                                 fontSize: 18,
@@ -162,19 +162,19 @@ class _AccountUserState extends State<AccountUser> {
                       Container(
                           child: Row(
                         children: [
-                          Icon(
+                          const Icon(
                             Icons.email_outlined,
                             color: Colors.blue,
                             size: 30,
                           ),
-                          SizedBox(
+                          const SizedBox(
                             width: 20,
                           ),
                           Expanded(
                             child: Text(
                               uEmail!,
                               overflow: TextOverflow.ellipsis,
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontSize: 18,
                                 fontWeight: FontWeight.w500,
                                 fontFamily: 'Poppins',
@@ -186,17 +186,17 @@ class _AccountUserState extends State<AccountUser> {
                       Container(
                           child: Row(
                         children: [
-                          Icon(
+                          const Icon(
                             Icons.phone,
                             color: Colors.blue,
                             size: 30,
                           ),
-                          SizedBox(
+                          const SizedBox(
                             width: 20,
                           ),
                           Text(
                             uPhone!,
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 18,
                               fontWeight: FontWeight.w500,
                               fontFamily: 'Poppins',
@@ -216,21 +216,21 @@ class _AccountUserState extends State<AccountUser> {
   void editData(value, data) {
     showModalBottomSheet(
         // isScrollControlled: true,
-        shape: RoundedRectangleBorder(
+        shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.vertical(top: Radius.circular(20))),
         context: context,
         builder: (contexy) => Container(
-              padding: EdgeInsets.all(20),
+              padding: const EdgeInsets.all(20),
               child: Column(
                 children: [
                   Text(
-                    "Ubah ${data} Kamu",
+                    "Ubah $data Kamu",
                     style: GoogleFonts.inter(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
                         color: Colors.blueGrey),
                   ),
-                  Spacer(
+                  const Spacer(
                     flex: 1,
                   ),
                   Container(
@@ -251,7 +251,7 @@ class _AccountUserState extends State<AccountUser> {
                       ),
                     ),
                   ),
-                  Spacer(),
+                  const Spacer(),
                   InkWell(
                     onTap: () {},
                     child: Container(
@@ -264,8 +264,8 @@ class _AccountUserState extends State<AccountUser> {
                           // ignore: prefer_const_constructors
                           BoxShadow(
                             blurRadius: 6,
-                            color: Color(0x34000000),
-                            offset: Offset(0, 3),
+                            color: const Color(0x34000000),
+                            offset: const Offset(0, 3),
                           )
                         ],
                         borderRadius: BorderRadius.circular(20),
@@ -279,7 +279,7 @@ class _AccountUserState extends State<AccountUser> {
                       )),
                     ),
                   ),
-                  Spacer(
+                  const Spacer(
                     flex: 3,
                   )
                 ],

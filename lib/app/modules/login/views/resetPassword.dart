@@ -1,8 +1,7 @@
+import 'package:WisataKU/app/modules/login/views/login_view.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:ticket_wisata_donorojo/app/modules/login/views/login_view.dart';
-import 'package:ticket_wisata_donorojo/app/routes/app_pages.dart';
+
 
 class ResetPassword extends StatefulWidget {
   const ResetPassword({super.key});
@@ -28,7 +27,7 @@ class _ResetPasswordState extends State<ResetPassword> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text("Masukkan email anda untuk melakukan reset password !"),
+              const Text("Masukkan email anda untuk melakukan reset password !"),
               Container(
                 padding: const EdgeInsets.only(top: 20),
                 margin: const EdgeInsets.only(),
@@ -64,8 +63,8 @@ class _ResetPasswordState extends State<ResetPassword> {
                       await showDialog(
                           context: context,
                           builder: (context) => AlertDialog(
-                                  title: Text('Reset Password'),
-                                  content: Text(
+                                  title: const Text('Reset Password'),
+                                  content: const Text(
                                       "Link berhasil dikirim ke email kamu, Segera lakukan pengubahan password !"),
                                   actions: [
                                     TextButton(
@@ -76,7 +75,7 @@ class _ResetPasswordState extends State<ResetPassword> {
                                                 builder: (context) =>
                                                     LoginView()));
                                       },
-                                      child: Text("Oke"),
+                                      child: const Text("Oke"),
                                     )
                                   ]));
                     } on FirebaseAuthException catch (e) {
@@ -116,12 +115,12 @@ class _ResetPasswordState extends State<ResetPassword> {
     showDialog(
         context: context,
         builder: (context) => AlertDialog(
-                title: Text("Pendaftaran Gagal"),
+                title: const Text("Pendaftaran Gagal"),
                 content: Text(messageToDisplay),
                 actions: [
                   TextButton(
                     onPressed: () => Navigator.of(context).pop(),
-                    child: Text("Oke"),
+                    child: const Text("Oke"),
                   )
                 ]));
   }

@@ -1,8 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:ticket_wisata_donorojo/app/modules/user/dashboard/page_view.dart';
 
-import 'list_view.dart';
 
 class Dashboard extends StatefulWidget {
   const Dashboard({super.key});
@@ -36,7 +34,7 @@ class _DashboardState extends State<Dashboard> {
               child: Column(
                 children: [
                   Container(
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       borderRadius: BorderRadius.only(
                           bottomLeft: Radius.circular(20),
                           bottomRight: Radius.circular(20)),
@@ -65,11 +63,11 @@ class _DashboardState extends State<Dashboard> {
                         children: [
                           Expanded(
                             child: Padding(
-                              padding: EdgeInsetsDirectional.only(top: 12),
-                              child: Container(
+                              padding: const EdgeInsetsDirectional.only(top: 12),
+                              child: SizedBox(
                                 width: MediaQuery.of(context).size.width * 0.5,
                                 height: 150,
-                                child: Stack(
+                                child: const Stack(
                                   // ignore: prefer_const_literals_to_cre
                                   // ate_immutables
                                   children: [
@@ -81,19 +79,19 @@ class _DashboardState extends State<Dashboard> {
                           ),
                         ],
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 30,
                       )
                     ]),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 30,
                   ),
-                  Row(
+                  const Row(
                     // ignore: prefer_const_literals_to_create_immutables
                     children: [
                       Padding(
-                        padding: const EdgeInsets.only(left: 20, bottom: 10),
+                        padding: EdgeInsets.only(left: 20, bottom: 10),
                         child: Text(
                           "Daftar Wisata",
                           style: TextStyle(
@@ -114,7 +112,7 @@ class _DashboardState extends State<Dashboard> {
               ),
             );
           }
-          return Center(
+          return const Center(
             child: CircularProgressIndicator(),
           );
         });

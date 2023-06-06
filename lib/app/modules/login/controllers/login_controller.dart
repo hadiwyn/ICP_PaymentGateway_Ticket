@@ -1,4 +1,3 @@
-import 'dart:convert';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -7,7 +6,6 @@ import 'package:get/get.dart';
 
 import '../../../routes/app_pages.dart';
 import '../../admin/dashboard/home_admin.dart';
-import '../../user/dashboard/home.dart';
 
 class LoginController extends GetxController {
   late TextEditingController emailC;
@@ -25,7 +23,7 @@ class LoginController extends GetxController {
       if (snap.exists) {
         print("ini adalah snap : $snap");
         if (snap.get('role') == 'admin') {
-          Get.off(HomeAdmin());
+          Get.off(const HomeAdmin());
         } else if (snap.get('role') == 'user') {
           Navigator.pushNamedAndRemoveUntil(
               context, Routes.HOME, (route) => false);
@@ -74,13 +72,5 @@ class LoginController extends GetxController {
     super.onInit();
   }
 
-  @override
-  void onReady() {
-    super.onReady();
-  }
 
-  @override
-  void onClose() {
-    super.onClose();
-  }
 }

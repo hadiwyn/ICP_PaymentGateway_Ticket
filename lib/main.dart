@@ -1,8 +1,7 @@
+import 'package:WisataKU/app/modules/splash/splash_screen.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:mysql1/mysql1.dart';
-import 'package:ticket_wisata_donorojo/app/modules/splash/splash_screen.dart';
 // import 'package:ticket_wisata_donorojo/app/modules/home/views/home_view.dart';
 
 // import 'app/modules/home/views/snap_view.dart';
@@ -22,13 +21,13 @@ Future<void> main() async {
 
   runApp(GetMaterialApp(
     routes: {
-      '/home': (context) => Home(),
+      '/home': (context) => const Home(),
     },
     theme:
-        ThemeData(scaffoldBackgroundColor: Color.fromARGB(255, 255, 255, 255)),
+        ThemeData(scaffoldBackgroundColor: const Color.fromARGB(255, 255, 255, 255)),
     debugShowCheckedModeBanner: false,
     title: "Application",
-    home: SplashScreen(),
+    home: const SplashScreen(),
     getPages: AppPages.routes,
   ));
   // MaterialApp(

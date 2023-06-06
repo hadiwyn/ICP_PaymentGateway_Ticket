@@ -1,10 +1,8 @@
+import 'package:WisataKU/app/modules/admin/scanner/result.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
-import 'package:get/instance_manager.dart';
 import 'package:get/get.dart';
-import 'package:ticket_wisata_donorojo/app/modules/admin/scanner/result.dart';
-
 class BarcodeScan extends StatefulWidget {
   const BarcodeScan({Key? key}) : super(key: key);
 
@@ -45,7 +43,7 @@ class _BarcodeScanState extends State<BarcodeScan> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Tiket Wisata Scanner'),
+        title: const Text('Tiket Wisata Scanner'),
       ),
       body: Center(
         child: Column(
@@ -53,7 +51,7 @@ class _BarcodeScanState extends State<BarcodeScan> {
           children: [
             ElevatedButton(
               onPressed: _scanBarcode,
-              child: Text('Scan Tiket Wisata'),
+              child: const Text('Scan Tiket Wisata'),
             ),
           ],
         ),

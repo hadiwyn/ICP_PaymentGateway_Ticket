@@ -19,7 +19,7 @@ class _FieldLocationState extends State<FieldLocation> {
         textInputAction: TextInputAction.next,
         // ignore: prefer_const_constructors
         decoration: const InputDecoration(
-          icon: const Icon(
+          icon: Icon(
             Icons.location_on_outlined,
             size: 24.0,
           ),

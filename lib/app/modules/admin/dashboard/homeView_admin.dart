@@ -1,12 +1,11 @@
+import 'package:WisataKU/app/modules/admin/create_data/index.dart';
+import 'package:WisataKU/app/modules/admin/dashboard/listView_admin.dart';
+import 'package:WisataKU/app/modules/admin/scanner/barcode_scan.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:get/get.dart';
-import 'package:get/get_state_manager/get_state_manager.dart';
-import 'package:ticket_wisata_donorojo/app/modules/admin/create_data/index.dart';
-import 'package:ticket_wisata_donorojo/app/modules/admin/dashboard/listView_admin.dart';
-import 'package:ticket_wisata_donorojo/app/modules/admin/scanner/barcode_scan.dart';
 
 class HomeViewAdmin extends StatefulWidget {
   const HomeViewAdmin({super.key});
@@ -55,7 +54,7 @@ class _HomeViewAdminState extends State<HomeViewAdmin> {
           child: Stack(
         children: [
           Container(
-            color: Color.fromARGB(255, 93, 193, 255),
+            color: const Color.fromARGB(255, 93, 193, 255),
             height: 300,
           ),
           // Positioned(
@@ -68,7 +67,7 @@ class _HomeViewAdminState extends State<HomeViewAdmin> {
           //     fit: BoxFit.fill,
           //   ),
           // ),
-          Positioned(
+          const Positioned(
             top: 40,
             left: 15,
             child: Text(
@@ -80,8 +79,8 @@ class _HomeViewAdminState extends State<HomeViewAdmin> {
             top: 60,
             left: 15,
             child: Text(
-              nama! + " - Admin",
-              style: TextStyle(
+              "${nama!} - Admin",
+              style: const TextStyle(
                 fontSize: 24,
                 color: Colors.white,
                 fontWeight: FontWeight.bold,
@@ -91,13 +90,13 @@ class _HomeViewAdminState extends State<HomeViewAdmin> {
           Padding(
             padding: const EdgeInsets.only(top: 250),
             child: Container(
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                   borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(40),
                       topRight: Radius.circular(40)),
                   color: Colors.white),
-              child: Padding(
-                padding: const EdgeInsets.only(top: 130),
+              child: const Padding(
+                padding: EdgeInsets.only(top: 130),
                 child: ListViewAdmin(),
               ),
             ),
@@ -112,7 +111,7 @@ class _HomeViewAdminState extends State<HomeViewAdmin> {
                       color: Colors.grey.withOpacity(0.5),
                       spreadRadius: 5,
                       blurRadius: 7,
-                      offset: Offset(0, 3), // changes position of shadow
+                      offset: const Offset(0, 3), // changes position of shadow
                     ),
                   ],
                 ),
@@ -168,12 +167,12 @@ class _HomeViewAdminState extends State<HomeViewAdmin> {
           //     ),
           //   ),
           // ),
-          Positioned(
+          const Positioned(
             top: 370,
             left: 15,
             child: Text(
               "Daftar Wisata",
-              style: const TextStyle(
+              style: TextStyle(
                 fontSize: 14,
                 fontWeight: FontWeight.bold,
               ),
@@ -214,14 +213,14 @@ class _HomeViewAdminState extends State<HomeViewAdmin> {
             backgroundColor: Colors.red,
             foregroundColor: Colors.white,
             label: 'Tambah Data',
-            onTap: () => Get.to(CreateData()),
+            onTap: () => Get.to(const CreateData()),
           ),
           SpeedDialChild(
-            child: Icon(Icons.camera),
+            child: const Icon(Icons.camera),
             backgroundColor: Colors.deepOrange,
             foregroundColor: Colors.white,
             label: 'Scan Tiket',
-            onTap: () => Get.to(BarcodeScan()),
+            onTap: () => Get.to(const BarcodeScan()),
           ),
         ],
       ),

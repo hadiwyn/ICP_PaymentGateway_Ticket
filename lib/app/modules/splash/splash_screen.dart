@@ -1,10 +1,9 @@
+import 'package:WisataKU/app/modules/splash/first_page.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:ticket_wisata_donorojo/app/modules/splash/first_page.dart';
 
-import '../../routes/app_pages.dart';
 import '../admin/dashboard/home_admin.dart';
 import '../user/dashboard/home.dart';
 
@@ -27,8 +26,8 @@ class _SplashScreenState extends State<SplashScreen> {
     return Scaffold(
       backgroundColor: Image.asset('assets/background/bg.jpg').color,
       body: Column(children: [
-        Spacer(),
-        Spacer(),
+        const Spacer(),
+        const Spacer(),
         Padding(
           padding: const EdgeInsets.only(
             left: 40,
@@ -38,15 +37,15 @@ class _SplashScreenState extends State<SplashScreen> {
             'assets/image/logo-pacitan.webp',
           ),
         ),
-        Spacer(),
+        const Spacer(),
         Padding(
-          padding: EdgeInsets.only(left: 40, right: 40),
+          padding: const EdgeInsets.only(left: 40, right: 40),
           child: Image.asset(
             'assets/image/logo.png',
           ),
         ),
-        Spacer(),
-        Spacer(),
+        const Spacer(),
+        const Spacer(),
       ]),
     );
   }
@@ -64,13 +63,13 @@ class _SplashScreenState extends State<SplashScreen> {
               .get()
               .then((DocumentSnapshot snapshot) {
             if (snapshot.get('role') == 'admin') {
-              Get.off(HomeAdmin());
+              Get.off(const HomeAdmin());
             } else if (snapshot.get('role') == 'user') {
-              Get.off(Home());
+              Get.off(const Home());
             }
           });
         } else {
-          Get.off(FirstPage());
+          Get.off(const FirstPage());
         }
       });
     });

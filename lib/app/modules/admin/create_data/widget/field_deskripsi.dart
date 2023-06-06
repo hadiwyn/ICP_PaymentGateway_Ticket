@@ -17,10 +17,10 @@ class _FieldDeskripsiState extends State<FieldDeskripsi> {
         controller: widget.descC,
         maxLines: 5,
         textInputAction: TextInputAction.next,
-        decoration: InputDecoration(
+        decoration: const InputDecoration(
           labelText: "Deskripsi",
           border: OutlineInputBorder(),
-          icon: const Icon(
+          icon: Icon(
             Icons.description,
             size: 24.0,
           ),

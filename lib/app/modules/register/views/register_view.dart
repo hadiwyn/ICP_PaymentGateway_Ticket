@@ -106,12 +106,13 @@ class RegisterView extends StatelessWidget {
                                             cursorColor:
                                                 const Color(0xFF6F35A5),
                                             decoration: const InputDecoration(
-                                              hintText: "Nama Lengkap",
+                                              hintText: "Nama Depan",
                                               prefixIcon: Padding(
                                                 padding: EdgeInsets.all(16.0),
-                                                child: Icon(Icons.person),
+                                                child: Icon(Icons.abc),
                                               ),
                                             ),
+                                            maxLength: 10,
                                             validator:
                                                 controller.requiredValidator,
                                           ),
@@ -130,9 +131,10 @@ class RegisterView extends StatelessWidget {
                                                 hintText: "Nomor Telepon",
                                                 prefixIcon: Padding(
                                                   padding: EdgeInsets.all(16.0),
-                                                  child: Icon(Icons.person),
+                                                  child: Icon(Icons.numbers),
                                                 ),
                                               ),
+                                              maxLength: 13,
                                               validator:
                                                   controller.requiredValidator,
                                             ),
@@ -152,7 +154,7 @@ class RegisterView extends StatelessWidget {
                                                 hintText: "Email",
                                                 prefixIcon: Padding(
                                                   padding: EdgeInsets.all(16.0),
-                                                  child: Icon(Icons.person),
+                                                  child: Icon(Icons.email),
                                                 ),
                                               ),
                                               validator:
@@ -173,7 +175,7 @@ class RegisterView extends StatelessWidget {
                                                 hintText: "Password",
                                                 prefixIcon: Padding(
                                                   padding: EdgeInsets.all(16.0),
-                                                  child: Icon(Icons.person),
+                                                  child: Icon(Icons.password),
                                                 ),
                                               ),
                                               validator:
@@ -195,7 +197,8 @@ class RegisterView extends StatelessWidget {
                                                 hintText: "Konfirmasi Password",
                                                 prefixIcon: Padding(
                                                   padding: EdgeInsets.all(16.0),
-                                                  child: Icon(Icons.lock),
+                                                  child: Icon(
+                                                      Icons.confirmation_num),
                                                 ),
                                               ),
                                               validator:
@@ -217,7 +220,7 @@ class RegisterView extends StatelessWidget {
                                               height: 50,
                                               decoration: BoxDecoration(
                                                 gradient: LinearGradient(
-                                                  colors: [
+                                                  colors: const [
                                                     Color.fromARGB(
                                                         255, 28, 153, 255),
                                                     Color.fromARGB(

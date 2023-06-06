@@ -78,7 +78,7 @@ class RegisterController extends GetxController {
       print(messageToDisplay);
 
       Get.back(); // dismiss progress indicator
-      await Future.delayed(Duration(milliseconds: 500)); // add delay
+      await Future.delayed(const Duration(milliseconds: 500)); // add delay
 
       Get.dialog(
         AlertDialog(
@@ -136,15 +136,7 @@ class RegisterController extends GetxController {
     super.onInit();
   }
 
-  @override
-  void onReady() {
-    super.onReady();
-  }
 
-  @override
-  void onClose() {
-    super.onClose();
-  }
 
   String? Function(String?) get requiredValidator =>
       (value) => value?.trim().isEmpty ?? true ? 'Form ini dibutuhkan !' : null;

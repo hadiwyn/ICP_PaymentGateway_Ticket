@@ -1,7 +1,6 @@
 // ignore_for_file: prefer_typing_uninitialized_variables, non_constant_identifier_names
 
 import 'package:flutter/material.dart';
-import 'package:get/route_manager.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 
@@ -64,11 +63,15 @@ class _ResultState extends State<Result> {
 // Menentukan teks yang akan ditampilkan
     final textToShow = now.compareTo(targetDate) > 0 ? 'expired' : '';
 
+    print(now);
+    print(targetDate);
+    print(textToShow);
+
     return Scaffold(
       body: SafeArea(
         child: Column(
           children: [
-            Spacer(),
+            const Spacer(),
             Padding(
               padding: const EdgeInsets.all(10.0),
               child: Container(
@@ -98,15 +101,15 @@ class _ResultState extends State<Result> {
                           child: Text(
                             widget.nama_wisata,
                             style: GoogleFonts.poppins(
-                                textStyle: TextStyle(
+                                textStyle: const TextStyle(
                                     fontSize: 20, fontWeight: FontWeight.w600)),
                           ),
                         ),
-                        Spacer(),
+                        const Spacer(),
                         Text(
                           "Nama Pembeli",
                           style: GoogleFonts.poppins(
-                              textStyle: TextStyle(
+                              textStyle: const TextStyle(
                                   fontSize: 16, fontWeight: FontWeight.w600)),
                         ),
                         TextFormField(
@@ -120,11 +123,11 @@ class _ResultState extends State<Result> {
                           keyboardType: TextInputType.text,
                           textInputAction: TextInputAction.next,
                         ),
-                        Spacer(),
+                        const Spacer(),
                         Text(
                           "Tanggal Kunjungan",
                           style: GoogleFonts.poppins(
-                              textStyle: TextStyle(
+                              textStyle: const TextStyle(
                                   fontSize: 16, fontWeight: FontWeight.w600)),
                         ),
                         TextFormField(
@@ -138,11 +141,11 @@ class _ResultState extends State<Result> {
                           keyboardType: TextInputType.text,
                           textInputAction: TextInputAction.next,
                         ),
-                        Spacer(),
+                        const Spacer(),
                         Text(
                           "Jumlah Orang",
                           style: GoogleFonts.poppins(
-                              textStyle: TextStyle(
+                              textStyle: const TextStyle(
                                   fontSize: 16, fontWeight: FontWeight.w600)),
                         ),
                         TextFormField(
@@ -156,11 +159,11 @@ class _ResultState extends State<Result> {
                           keyboardType: TextInputType.text,
                           textInputAction: TextInputAction.next,
                         ),
-                        Spacer(),
+                        const Spacer(),
                         Text(
                           "Total Harga",
                           style: GoogleFonts.poppins(
-                              textStyle: TextStyle(
+                              textStyle: const TextStyle(
                                   fontSize: 16, fontWeight: FontWeight.w600)),
                         ),
                         TextFormField(
@@ -174,17 +177,20 @@ class _ResultState extends State<Result> {
                           keyboardType: TextInputType.text,
                           textInputAction: TextInputAction.next,
                         ),
-                        if (textToShow == 'expired') Spacer(),
-                        Center(
-                            child: Text(
-                          'Expired !',
-                          style: TextStyle(
-                              fontFamily: 'Lexend Deca',
-                              fontSize: 20,
-                              fontWeight: FontWeight.w800,
-                              color: Colors.red),
-                        )),
-                        Spacer(),
+                        if (textToShow == 'expired')
+                          Padding(
+                            padding: const EdgeInsets.only(top: 20),
+                            child: const Center(
+                                child: Text(
+                              'Expired !',
+                              style: TextStyle(
+                                  fontFamily: 'Lexend Deca',
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w800,
+                                  color: Colors.red),
+                            )),
+                          ),
+                        const Spacer(),
                         InkWell(
                           onTap: () => Navigator.of(context).pop(),
                           child: Center(
@@ -195,17 +201,17 @@ class _ResultState extends State<Result> {
                               size: 100.0,
                               color: widget.status != "Paid"
                                   ? Colors.red
-                                  : Color.fromARGB(255, 17, 246, 44),
+                                  : const Color.fromARGB(255, 17, 246, 44),
                             ),
                           ),
                         ),
-                        Spacer(),
+                        const Spacer(),
                       ]),
                 ),
               ),
             ),
-            Spacer(),
-            Spacer(
+            const Spacer(),
+            const Spacer(
               flex: 2,
             )
           ],

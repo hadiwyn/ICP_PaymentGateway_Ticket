@@ -1,10 +1,9 @@
+import 'package:WisataKU/app/modules/user/dashboard/list_view.dart';
+import 'package:WisataKU/app/modules/user/dashboard/search_page.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get_state_manager/get_state_manager.dart';
-import 'package:ticket_wisata_donorojo/app/modules/user/dashboard/list_view.dart';
-import 'package:ticket_wisata_donorojo/app/modules/user/dashboard/search_page.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -51,7 +50,7 @@ class _HomeViewState extends State<HomeView> {
           child: Stack(
         children: [
           Container(
-            color: Color.fromARGB(255, 93, 193, 255),
+            color: const Color.fromARGB(255, 93, 193, 255),
             height: 300,
           ),
           // Positioned(
@@ -64,29 +63,29 @@ class _HomeViewState extends State<HomeView> {
           //     fit: BoxFit.fill,
           //   ),
           // ),
-          Positioned(
+          const Positioned(
             top: 50,
-            left: 15,
+            right: 20,
             child: Text(
               "Selamat Datang",
               style: TextStyle(color: Colors.white),
             ),
           ),
           Positioned(
-            top: 65,
-            left: 15,
+            top: 70,
+            right: 20,
             child: Text(
               nama!,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 24,
                 color: Colors.white,
                 fontWeight: FontWeight.bold,
               ),
             ),
           ),
-          Positioned(
+          const Positioned(
             top: 55,
-            right: 40,
+            left: 15,
             child: Text(
               "WisataKu",
               style: TextStyle(
@@ -99,13 +98,13 @@ class _HomeViewState extends State<HomeView> {
           Padding(
             padding: const EdgeInsets.only(top: 250),
             child: Container(
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                   borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(40),
                       topRight: Radius.circular(40)),
                   color: Colors.white),
-              child: Padding(
-                padding: const EdgeInsets.only(top: 130),
+              child: const Padding(
+                padding: EdgeInsets.only(top: 130),
                 child: listView(),
               ),
             ),
@@ -117,10 +116,10 @@ class _HomeViewState extends State<HomeView> {
                   borderRadius: BorderRadius.circular(10),
                   boxShadow: [
                     BoxShadow(
-                      color: Color.fromARGB(255, 0, 0, 0).withOpacity(0.3),
+                      color: const Color.fromARGB(255, 0, 0, 0).withOpacity(0.3),
                       spreadRadius: 5,
                       blurRadius: 7,
-                      offset: Offset(0, 3), // changes position of shadow
+                      offset: const Offset(0, 3), // changes position of shadow
                     ),
                   ],
                 ),
@@ -131,12 +130,12 @@ class _HomeViewState extends State<HomeView> {
                   builder: (BuildContext context,
                       AsyncSnapshot<QuerySnapshot> snapshot) {
                     if (!snapshot.hasData) {
-                      return CircularProgressIndicator();
+                      return const CircularProgressIndicator();
                     }
 
                     List<String> imageUrls = [];
 
-                    snapshot.data!.docs.forEach((doc) {
+                    for (var doc in snapshot.data!.docs) {
                       Map<String, dynamic> data =
                           doc.data() as Map<String, dynamic>;
                       data.forEach((key, value) {
@@ -144,7 +143,7 @@ class _HomeViewState extends State<HomeView> {
                           imageUrls.add(value.toString());
                         }
                       });
-                    });
+                    }
 
                     return CarouselSlider(
                       options: CarouselOptions(
@@ -160,7 +159,7 @@ class _HomeViewState extends State<HomeView> {
                               margin:
                                   const EdgeInsets.symmetric(horizontal: 5.0),
                               decoration: BoxDecoration(
-                                color: Color.fromARGB(255, 255, 255, 255),
+                                color: const Color.fromARGB(255, 255, 255, 255),
                                 borderRadius: const BorderRadius.all(
                                   Radius.circular(6.0),
                                 ),
@@ -194,8 +193,8 @@ class _HomeViewState extends State<HomeView> {
               ),
               child: Row(
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
+                  const Padding(
+                    padding: EdgeInsets.all(8.0),
                     child: Icon(
                       Icons.travel_explore,
                       color: Color.fromARGB(255, 255, 255, 255),
@@ -214,8 +213,8 @@ class _HomeViewState extends State<HomeView> {
                       child: TextFormField(
                         controller:
                             _searchController, // controller untuk mengambil nilai dari TextFormField
-                        style: TextStyle(color: Colors.white),
-                        decoration: InputDecoration.collapsed(
+                        style: const TextStyle(color: Colors.white),
+                        decoration: const InputDecoration.collapsed(
                           filled: true,
                           fillColor: Color.fromARGB(0, 248, 245, 245),
                           hintText: "Kamu mau wisata kemana?",
@@ -239,12 +238,12 @@ class _HomeViewState extends State<HomeView> {
               ),
             ),
           ),
-          Positioned(
+          const Positioned(
             top: 370,
             left: 15,
             child: Text(
               "Pilih Wisata",
-              style: const TextStyle(
+              style: TextStyle(
                 fontSize: 14,
                 fontWeight: FontWeight.bold,
               ),

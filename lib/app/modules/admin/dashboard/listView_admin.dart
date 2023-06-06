@@ -1,12 +1,11 @@
+import 'package:WisataKU/app/modules/admin/detail%20wisata/detailWisata_admin.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:ticket_wisata_donorojo/app/modules/admin/detail%20wisata/detailWisata_admin.dart';
-import 'package:ticket_wisata_donorojo/app/modules/user/dashboard/detail_wisata.dart';
-import 'package:ticket_wisata_donorojo/app/modules/user/dashboard/pesan_tiket.dart';
 
 // ignore: camel_case_types, must_be_immutable
 class ListViewAdmin extends StatefulWidget {
+  const ListViewAdmin({super.key});
+
   // ignore: prefer_typing_uninitialized_variables
 
   @override
@@ -54,7 +53,7 @@ class _listViewAdminState extends State<ListViewAdmin> {
               height: listAllDoc.length.toDouble() * 130,
               width: double.infinity,
               child: ListView.builder(
-                physics: NeverScrollableScrollPhysics(),
+                physics: const NeverScrollableScrollPhysics(),
                 //shrinkWrap: true,
                 scrollDirection: Axis.vertical,
                 itemCount: listAllDoc.length,
@@ -67,7 +66,7 @@ class _listViewAdminState extends State<ListViewAdmin> {
                         width: 82,
                         height: 106,
                         decoration: BoxDecoration(
-                          color: Color(0xFFEEEEEE),
+                          color: const Color(0xFFEEEEEE),
                           image: DecorationImage(
                             fit: BoxFit.cover,
                             image: Image.network(
@@ -76,7 +75,7 @@ class _listViewAdminState extends State<ListViewAdmin> {
                           ),
                           borderRadius: BorderRadius.circular(20),
                           border: Border.all(
-                            color: Color(0xFF656565),
+                            color: const Color(0xFF656565),
                             width: 0.5,
                           ),
                         ),
@@ -103,8 +102,8 @@ class _listViewAdminState extends State<ListViewAdmin> {
                               // ignore: prefer_const_constructors
                               BoxShadow(
                                 blurRadius: 6,
-                                color: Color(0x34000000),
-                                offset: Offset(0, 3),
+                                color: const Color(0x34000000),
+                                offset: const Offset(0, 3),
                               )
                             ],
                             borderRadius: BorderRadius.circular(20),
@@ -117,7 +116,7 @@ class _listViewAdminState extends State<ListViewAdmin> {
                               Padding(
                                 // ignore: prefer_const_constructors
                                 padding:
-                                    EdgeInsetsDirectional.fromSTEB(12, 8, 0, 0),
+                                    const EdgeInsetsDirectional.fromSTEB(12, 8, 0, 0),
                                 // ignore: prefer_const_constructors
                                 child: Text(
                                   "${(listAllDoc[index].data() as Map<String, dynamic>)["nama"]}",
@@ -151,7 +150,7 @@ class _listViewAdminState extends State<ListViewAdmin> {
                                   textAlign: TextAlign.justify,
                                 ),
                               ),
-                              Spacer(),
+                              const Spacer(),
                               if (((listAllDoc[index].data()
                                       as Map<String, dynamic>)["location"]) !=
                                   null)
@@ -185,10 +184,10 @@ class _listViewAdminState extends State<ListViewAdmin> {
                                           ),
                                         ),
                                       ),
-                                      Spacer(),
+                                      const Spacer(),
                                       // ignore: prefer_const_constructors
                                       Padding(
-                                        padding: EdgeInsets.only(left: 10),
+                                        padding: const EdgeInsets.only(left: 10),
                                         // ignore: prefer_const_constructors
                                         child: Icon(
                                           Icons.timelapse,
@@ -228,7 +227,7 @@ class _listViewAdminState extends State<ListViewAdmin> {
             ),
           );
         }
-        return Center(
+        return const Center(
           child: CircularProgressIndicator(),
         );
       },

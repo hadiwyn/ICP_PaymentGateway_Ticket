@@ -1,11 +1,11 @@
 // ignore_for_file: non_constant_identifier_names
 
+import 'package:WisataKU/app/modules/user/dashboard/detail_ticket.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mysql1/mysql1.dart';
 import 'package:get/get.dart';
-import 'package:ticket_wisata_donorojo/app/modules/user/dashboard/detail_ticket.dart';
 
 class RiwayatTiket extends StatefulWidget {
   const RiwayatTiket({Key? key}) : super(key: key);
@@ -45,17 +45,15 @@ class _RiwayatTiketState extends State<RiwayatTiket> {
       docRef.get().then((DocumentSnapshot documentSnapshot) {
         if (documentSnapshot.exists) {
           var data = documentSnapshot.data() as Map<String, dynamic>;
-          if (data != null) {
-            if (data['status'] != 'Paid') {
-              data_transaction
-                  .doc(order.id)
-                  .update({
-                    'status': order.status,
-                  })
-                  .then((value) => print("Data Transaction Updated"))
-                  .catchError((error) =>
-                      print("Failed to update Data Transaction: $error"));
-            }
+          if (data['status'] != 'Paid') {
+            data_transaction
+                .doc(order.id)
+                .update({
+                  'status': order.status,
+                })
+                .then((value) => print("Data Transaction Updated"))
+                .catchError((error) =>
+                    print("Failed to update Data Transaction: $error"));
           }
         } else {
           // Document doesn't exist in Firestore
@@ -73,7 +71,7 @@ class _RiwayatTiketState extends State<RiwayatTiket> {
   }
 
   Future<MySqlConnection> getConnection() async {
-    var settings = new ConnectionSettings(
+    var settings = ConnectionSettings(
         host: 'mr-code.my.id',
         port: 3306,
         user: 'root',
@@ -111,7 +109,6 @@ class _RiwayatTiketState extends State<RiwayatTiket> {
   }
 
   Future<void> deleteData(String id) async {
-    // Delete data from MySQL
     final conn = await MySqlConnection.connect(ConnectionSettings(
         host: 'mr-code.my.id',
         port: 3306,
@@ -132,9 +129,11 @@ class _RiwayatTiketState extends State<RiwayatTiket> {
     } catch (e) {
       print('Error: $e');
     }
+
+    // Delete data from MySQL
   }
 
-  List<Order> _orders = [];
+  final List<Order> _orders = [];
 
   @override
   Widget build(BuildContext context) {
@@ -142,14 +141,14 @@ class _RiwayatTiketState extends State<RiwayatTiket> {
       appBar: AppBar(
         automaticallyImplyLeading: false,
         backgroundColor: Colors.white,
-        title: Row(
+        title: const Row(
           // ignore: prefer_const_literals_to_create_immutables
           children: [
             // ignore: prefer_const_constructors
             Spacer(),
-            const Text(
+            Text(
               "Riwayat Tiket",
-              style: const TextStyle(color: Colors.black),
+              style: TextStyle(color: Colors.black),
             ),
             Spacer(),
           ],
@@ -188,12 +187,12 @@ class _RiwayatTiketState extends State<RiwayatTiket> {
                           order.status));
                     },
                     child: Container(
-                      padding: EdgeInsets.all(10),
-                      margin: EdgeInsets.all(10),
+                      padding: const EdgeInsets.all(10),
+                      margin: const EdgeInsets.all(10),
                       height: 100,
                       decoration: BoxDecoration(
                         color: Colors.white,
-                        boxShadow: [
+                        boxShadow: const [
                           BoxShadow(
                             blurRadius: 6,
                             color: Color(0x34000000),
@@ -213,14 +212,14 @@ class _RiwayatTiketState extends State<RiwayatTiket> {
                                   children: [
                                     Text(
                                       "Tiket Wisata ${order.tour_name}",
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                         fontFamily: 'Lexend Deca',
                                         color: Colors.blueGrey,
                                         fontSize: 16,
                                         fontWeight: FontWeight.bold,
                                       ),
                                     ),
-                                    Spacer(),
+                                    const Spacer(),
                                     InkWell(
                                       onTap: () async {
                                         bool confirm = false;
@@ -229,12 +228,13 @@ class _RiwayatTiketState extends State<RiwayatTiket> {
                                           barrierDismissible: true,
                                           builder: (BuildContext context) {
                                             return AlertDialog(
-                                              title: const Text('Confirm'),
-                                              content: SingleChildScrollView(
+                                              title: const Text('Konfirmasi'),
+                                              content:
+                                                  const SingleChildScrollView(
                                                 child: ListBody(
-                                                  children: const <Widget>[
+                                                  children: <Widget>[
                                                     Text(
-                                                        'Are you sure you want to delete this item?'),
+                                                        'Apakah kamu ingin menghapus item ini?'),
                                                   ],
                                                 ),
                                               ),
@@ -248,7 +248,7 @@ class _RiwayatTiketState extends State<RiwayatTiket> {
                                                   onPressed: () {
                                                     Navigator.pop(context);
                                                   },
-                                                  child: const Text("No"),
+                                                  child: const Text("Tidak"),
                                                 ),
                                                 ElevatedButton(
                                                   style:
@@ -260,7 +260,7 @@ class _RiwayatTiketState extends State<RiwayatTiket> {
                                                     confirm = true;
                                                     Navigator.pop(context);
                                                   },
-                                                  child: const Text("Yes"),
+                                                  child: const Text("Iya"),
                                                 ),
                                               ],
                                             );
@@ -268,11 +268,50 @@ class _RiwayatTiketState extends State<RiwayatTiket> {
                                         );
 
                                         if (confirm) {
-                                          deleteData(order.id);
-                                          setState(() {
-                                            fetchData();
-                                          });
-                                          print("Confirmed!");
+                                          try {
+                                            showDialog(
+                                              context: context,
+                                              barrierDismissible: false,
+                                              builder: (BuildContext context) {
+                                                return const AlertDialog(
+                                                  content: Row(
+                                                    children: [
+                                                      CircularProgressIndicator(),
+                                                      SizedBox(width: 20),
+                                                      Text(
+                                                        "Menghapus Tiket...",
+                                                        style: TextStyle(
+                                                          fontSize: 16,
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                );
+                                              },
+                                            );
+                                            await deleteData(order.id);
+                                            setState(() async {
+                                              await fetchData();
+                                            });
+                                            Navigator.of(context).pop();
+                                            ScaffoldMessenger.of(context)
+                                                .showSnackBar(
+                                              const SnackBar(
+                                                content:
+                                                    Text("Berhasil Dihapus"),
+                                              ),
+                                            );
+                                          } catch (e) {
+                                            Navigator.of(context).pop();
+
+                                            ScaffoldMessenger.of(context)
+                                                .showSnackBar(
+                                              const SnackBar(
+                                                content: Text(
+                                                    "Terjadi kesalahan saat menghapus tiket"),
+                                              ),
+                                            );
+                                          }
                                         }
                                       },
                                       child: const Icon(
@@ -283,7 +322,7 @@ class _RiwayatTiketState extends State<RiwayatTiket> {
                                     ),
                                   ],
                                 ),
-                                Spacer(),
+                                const Spacer(),
                                 Text(
                                   "Jumlah : ${order.qty}",
                                   // ignore: prefer_const_constructors
@@ -303,7 +342,7 @@ class _RiwayatTiketState extends State<RiwayatTiket> {
                                       color: Colors.blueGrey,
                                       size: 12,
                                     ),
-                                    SizedBox(width: 5),
+                                    const SizedBox(width: 5),
                                     Text(
                                       'Rp.${order.total_price},00',
                                       // ignore: prefer_const_constructors
@@ -313,7 +352,7 @@ class _RiwayatTiketState extends State<RiwayatTiket> {
                                         fontWeight: FontWeight.w300,
                                       ),
                                     ),
-                                    Spacer(
+                                    const Spacer(
                                       flex: 6,
                                     ),
                                     Text(
@@ -325,7 +364,7 @@ class _RiwayatTiketState extends State<RiwayatTiket> {
                                         fontWeight: FontWeight.w300,
                                       ),
                                     ),
-                                    Spacer(),
+                                    const Spacer(),
                                     Icon(
                                       order.status == 'Paid'
                                           ? Icons.verified
@@ -347,10 +386,8 @@ class _RiwayatTiketState extends State<RiwayatTiket> {
                 },
               ),
             );
-          } else if (snapshot.hasError) {
-            return Text('Error: ${snapshot.error}');
           } else {
-            return Center(
+            return const Center(
               child: CircularProgressIndicator(),
             );
           }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:webview_flutter/webview_flutter.dart';
+// import 'package:webview_flutter/webview_flutter.dart';
 
 // ignore: must_be_immutable
 class MidtransView extends StatefulWidget {
@@ -45,7 +46,8 @@ class MidtransView extends StatefulWidget {
 }
 
 class _MidtransViewState extends State<MidtransView> {
-  late WebViewController webViewController;
+  // late WebViewController webViewController;
+  // late final WebViewController controller;
   bool isLoading = true;
 
   String cdate2 = DateFormat("MMMM, dd, yyyy").format(DateTime.now());
@@ -54,18 +56,38 @@ class _MidtransViewState extends State<MidtransView> {
   @override
   void initState() {
     super.initState();
+    // controller = WebViewController()
+    //   ..setJavaScriptMode(JavaScriptMode.unrestricted)
+    //   ..setBackgroundColor(const Color(0x00000000))
+    //   ..setNavigationDelegate(
+    //     NavigationDelegate(
+    //       onProgress: (int progress) {
+    //         // Update loading bar.
+    //       },
+    //       onPageStarted: (String url) {},
+    //       onPageFinished: (String url) {},
+    //       onWebResourceError: (WebResourceError error) {},
+    //       onNavigationRequest: (NavigationRequest request) {
+    //         if (request.url.startsWith('https://www.youtube.com/')) {
+    //           return NavigationDecision.prevent;
+    //         }
+    //         return NavigationDecision.navigate;
+    //       },
+    //     ),
+    //   )
+    //   ..loadRequest(Uri.parse('https://flutter.dev'));
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Stack(
-      children: [
-        // ignore: prefer_const_constructors
-        SizedBox(
-          height: 500,
-        ),
-        WebView(
+      body: Stack(
+        children: [
+          // ignore: prefer_const_constructors
+          SizedBox(
+            height: 500,
+          ),
+          WebView(
             javascriptMode: JavascriptMode.unrestricted,
             onProgress: (value) {
               if (value == 100) {
@@ -75,15 +97,16 @@ class _MidtransViewState extends State<MidtransView> {
               }
             },
             initialUrl:
-                'https://642f-182-4-103-140.ngrok-free.app/checkout?transaction_id=${widget.transaction_id}&nama=${widget.name}&harga=${widget.count}&telepon=${widget.phone}&quantity=${widget.quantity}&date_visit=${widget.date}&date_add=${widget.dateAdd}&tourname=${widget.name_product}'
-            // 'https://apipayment.mr-code.my.id/?name=${widget.name}&email=${widget.email}&no_tlp=${widget.phone}&count=${widget.count}&name_product=${widget.name_product}&jumlah=${widget.quantity}&sum=${widget.totalPrice}&date=${widget.date}&cDate=${cdate2}',
-            ),
-        isLoading
-            ? const Center(
-                child: CircularProgressIndicator(),
-              )
-            : Stack(),
-      ],
-    ));
+                'https://ab95-140-213-173-211.ngrok-free.app/checkout?transaction_id=${widget.transaction_id}&nama=${widget.name}&harga=${widget.count}&telepon=${widget.phone}&quantity=${widget.quantity}&date_visit=${widget.date}&date_add=${widget.dateAdd}&tourname=${widget.name_product}',
+          ),
+          // WebViewWidget(controller: controller),
+          isLoading
+              ? const Center(
+                  child: CircularProgressIndicator(),
+                )
+              : const Stack(),
+        ],
+      ),
+    );
   }
 }

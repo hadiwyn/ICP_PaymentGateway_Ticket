@@ -1,11 +1,11 @@
+import 'package:WisataKU/app/modules/user/dashboard/detail_wisata.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:ticket_wisata_donorojo/app/modules/user/dashboard/detail_wisata.dart';
 
 class SearchPage extends StatefulWidget {
   final String searchQuery;
 
-  SearchPage({required this.searchQuery});
+  const SearchPage({super.key, required this.searchQuery});
 
   @override
   _SearchPageState createState() => _SearchPageState();
@@ -16,7 +16,7 @@ class _SearchPageState extends State<SearchPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Hasil Pencarian'),
+        title: const Text('Hasil Pencarian'),
       ),
       body: StreamBuilder<QuerySnapshot>(
         stream: FirebaseFirestore.instance
@@ -28,11 +28,11 @@ class _SearchPageState extends State<SearchPage> {
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
           print(snapshot);
           if (!snapshot.hasData) {
-            return Center(
+            return const Center(
               child: CircularProgressIndicator(),
             );
-          } else if (snapshot.data!.docs.length == 0) {
-            return Center(
+          } else if (snapshot.data!.docs.isEmpty) {
+            return const Center(
               child: Text("Data tidak ditemukan"),
             );
           } else {
@@ -63,8 +63,8 @@ class _SearchPageState extends State<SearchPage> {
                           // ignore: prefer_const_constructors
                           BoxShadow(
                             blurRadius: 6,
-                            color: Color(0x34000000),
-                            offset: Offset(0, 3),
+                            color: const Color(0x34000000),
+                            offset: const Offset(0, 3),
                           )
                         ],
                         borderRadius: BorderRadius.circular(20),
@@ -77,7 +77,7 @@ class _SearchPageState extends State<SearchPage> {
                           Padding(
                             // ignore: prefer_const_constructors
                             padding:
-                                EdgeInsetsDirectional.fromSTEB(12, 8, 0, 0),
+                                const EdgeInsetsDirectional.fromSTEB(12, 8, 0, 0),
                             // ignore: prefer_const_constructors
                             child: Text(
                               document["nama"],
@@ -95,7 +95,7 @@ class _SearchPageState extends State<SearchPage> {
                           Padding(
                             // ignore: prefer_const_constructors
                             padding:
-                                EdgeInsetsDirectional.fromSTEB(12, 5, 12, 0),
+                                const EdgeInsetsDirectional.fromSTEB(12, 5, 12, 0),
                             // ignore: prefer_const_constructors
                             child: Text(
                               document["deskripsi"],
@@ -111,7 +111,7 @@ class _SearchPageState extends State<SearchPage> {
                               textAlign: TextAlign.justify,
                             ),
                           ),
-                          Spacer(),
+                          const Spacer(),
                           Padding(
                             // ignore: prefer_const_constructors
                             padding: EdgeInsets.only(
@@ -142,10 +142,10 @@ class _SearchPageState extends State<SearchPage> {
                                     ),
                                   ),
                                 ),
-                                Spacer(),
+                                const Spacer(),
                                 // ignore: prefer_const_constructors
                                 Padding(
-                                  padding: EdgeInsets.only(left: 10),
+                                  padding: const EdgeInsets.only(left: 10),
                                   // ignore: prefer_const_constructors
                                   child: Icon(
                                     Icons.timelapse,
@@ -188,7 +188,7 @@ class _SearchPageState extends State<SearchPage> {
   }
 
   String toTitleCase(String text) {
-    if (text == null || text.isEmpty) {
+    if (text.isEmpty) {
       return '';
     }
     final words = text.split(' ');

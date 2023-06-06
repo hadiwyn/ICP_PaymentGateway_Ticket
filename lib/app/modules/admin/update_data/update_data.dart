@@ -1,9 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
 
+// ignore: must_be_immutable
 class UpdateData extends StatefulWidget {
   var detail;
 
@@ -46,7 +45,7 @@ class _UpdateDataState extends State<UpdateData> {
         //   Icons.arrow_back_ios,
         //   color: Colors.black,
         // ),
-        iconTheme: IconThemeData(color: Colors.black),
+        iconTheme: const IconThemeData(color: Colors.black),
         elevation: 0,
         actions: const [],
       ),
@@ -64,8 +63,8 @@ class _UpdateDataState extends State<UpdateData> {
                   // ignore: prefer_const_constructors
                   BoxShadow(
                     blurRadius: 6,
-                    color: Color(0x34000000),
-                    offset: Offset(0, 3),
+                    color: const Color(0x34000000),
+                    offset: const Offset(0, 3),
                   )
                 ],
                 borderRadius: BorderRadius.circular(20),
@@ -78,7 +77,7 @@ class _UpdateDataState extends State<UpdateData> {
                       Container(
                         height: 60,
                         width: double.infinity,
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                             borderRadius: BorderRadius.only(
                                 topLeft: Radius.circular(20),
                                 topRight: Radius.circular(20)),
@@ -91,10 +90,10 @@ class _UpdateDataState extends State<UpdateData> {
                                 offset: Offset(0, 3),
                               )
                             ]),
-                        child: Center(
+                        child: const Center(
                             child: Text(
                           "Pastikan data valid !",
-                          style: const TextStyle(
+                          style: TextStyle(
                             color: Colors.white,
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
@@ -267,7 +266,7 @@ class _UpdateDataState extends State<UpdateData> {
                 // )
               ]),
             ),
-            Spacer(),
+            const Spacer(),
             Padding(
               padding: const EdgeInsets.only(left: 40, right: 40),
               child: InkWell(
@@ -281,14 +280,14 @@ class _UpdateDataState extends State<UpdateData> {
                   width: double.infinity,
                   height: 50,
                   decoration: BoxDecoration(
-                    color: Color.fromARGB(255, 93, 193, 255),
+                    color: const Color.fromARGB(255, 93, 193, 255),
                     // ignore: prefer_const_literals_to_create_immutables
                     boxShadow: [
                       // ignore: prefer_const_constructors
                       BoxShadow(
                         blurRadius: 6,
-                        color: Color(0x34000000),
-                        offset: Offset(0, 3),
+                        color: const Color(0x34000000),
+                        offset: const Offset(0, 3),
                       )
                     ],
                     borderRadius: BorderRadius.circular(30),
@@ -297,7 +296,7 @@ class _UpdateDataState extends State<UpdateData> {
                     onTap: () {
                       Get.defaultDialog(
                         title: 'Ubah Data',
-                        content: Text('Yakin ingin mengubah data ?'),
+                        content: const Text('Yakin ingin mengubah data ?'),
                         confirm: ElevatedButton(
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.blueGrey,
@@ -320,10 +319,10 @@ class _UpdateDataState extends State<UpdateData> {
                         ),
                       );
                     },
-                    child: Center(
+                    child: const Center(
                         child: Text(
                       "Ubah Data",
-                      style: const TextStyle(
+                      style: TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
                           fontSize: 18),
@@ -332,7 +331,7 @@ class _UpdateDataState extends State<UpdateData> {
                 ),
               ),
             ),
-            Spacer()
+            const Spacer()
           ],
         ),
       ),

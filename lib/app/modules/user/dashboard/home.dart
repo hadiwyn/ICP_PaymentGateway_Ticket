@@ -1,8 +1,8 @@
 
+import 'package:WisataKU/app/modules/user/account_user/account_user.dart';
+import 'package:WisataKU/app/modules/user/dashboard/home_view.dart';
+import 'package:WisataKU/app/modules/user/dashboard/riwayat_tiket.dart';
 import 'package:flutter/material.dart';
-import 'package:ticket_wisata_donorojo/app/modules/user/account_user/account_user.dart';
-import 'package:ticket_wisata_donorojo/app/modules/user/dashboard/home_view.dart';
-import 'package:ticket_wisata_donorojo/app/modules/user/dashboard/riwayat_tiket.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -13,13 +13,11 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   int _selectedIndex = 0;
-  static const TextStyle optionStyle =
-      TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   // ignore: prefer_final_fields
   static List<Widget> _widgetOptions = <Widget>[
-    HomeView(),
-    RiwayatTiket(),
-    AccountUser()
+    const HomeView(),
+    const RiwayatTiket(),
+    const AccountUser()
   ];
 
   void _onItemTapped(int index) {
@@ -52,7 +50,7 @@ class _HomeState extends State<Home> {
           ),
         ],
         currentIndex: _selectedIndex,
-        selectedItemColor: Color.fromARGB(255, 93, 193, 255),
+        selectedItemColor: const Color.fromARGB(255, 93, 193, 255),
         onTap: _onItemTapped,
       ),
     );

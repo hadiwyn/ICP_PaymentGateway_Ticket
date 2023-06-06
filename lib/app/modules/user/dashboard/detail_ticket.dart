@@ -76,7 +76,7 @@ class _DetailTicketState extends State<DetailTicket> {
               alignment: AlignmentDirectional(0, 0),
               child: Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(10, 0, 10, 0),
-                child: Container(
+                child: SizedBox(
                   height: MediaQuery.of(context).size.height * 0.80,
                   child: Stack(
                     children: [

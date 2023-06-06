@@ -21,7 +21,7 @@ class _FieldNameState extends State<FieldName> {
         textInputAction: TextInputAction.next,
         // ignore: prefer_const_constructors
         decoration: const InputDecoration(
-          icon: const Icon(
+          icon: Icon(
             Icons.abc,
             size: 24.0,
           ),

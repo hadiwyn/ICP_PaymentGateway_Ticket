@@ -1,17 +1,15 @@
 import 'dart:typed_data';
 
+import 'package:WisataKU/app/modules/admin/create_data/widget/field_deskripsi.dart';
+import 'package:WisataKU/app/modules/admin/create_data/widget/field_location.dart';
+import 'package:WisataKU/app/modules/admin/create_data/widget/field_name.dart';
+import 'package:WisataKU/app/modules/admin/create_data/widget/field_price.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:get/get.dart';
 import 'package:multi_image_picker2/multi_image_picker2.dart';
-import 'package:ticket_wisata_donorojo/app/modules/admin/create_data/widget/field_deskripsi.dart';
-import 'package:ticket_wisata_donorojo/app/modules/admin/create_data/widget/field_image.dart';
-import 'package:ticket_wisata_donorojo/app/modules/admin/create_data/widget/field_location.dart';
-import 'package:ticket_wisata_donorojo/app/modules/admin/create_data/widget/field_name.dart';
-import 'package:ticket_wisata_donorojo/app/modules/admin/create_data/widget/field_price.dart';
-
 class CreateData extends StatefulWidget {
   const CreateData({super.key, this.dataNotifier});
 
@@ -38,7 +36,7 @@ class _CreateDataState extends State<CreateData> {
     return Scaffold(
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
-          iconTheme: IconThemeData(
+          iconTheme: const IconThemeData(
             color: Colors.blueGrey,
           ),
           backgroundColor: Colors.white,
@@ -56,43 +54,43 @@ class _CreateDataState extends State<CreateData> {
           ),
           child: Column(
             children: [
-              Spacer(),
+              const Spacer(),
               FieldName(nameC),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               FieldPrice(priceC),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               FieldLocation(LocC),
-              SizedBox(
+              const SizedBox(
                 height: 30,
               ),
               FieldDeskripsi(DescC),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  Spacer(
+                  const Spacer(
                     flex: 10,
                   ),
                   Padding(
                     padding: const EdgeInsets.only(left: 20),
                     child: ElevatedButton(
-                      child: Text("Upload Foto"),
+                      child: const Text("Upload Foto"),
                       onPressed: () {
                         // Get.to(FieldImage());
                         loadAssets();
                       },
                     ),
                   ),
-                  Spacer(),
+                  const Spacer(),
                   if (images.isNotEmpty)
                     const Icon(
                       Icons.verified,
@@ -101,16 +99,16 @@ class _CreateDataState extends State<CreateData> {
                     ),
                 ],
               ),
-              SizedBox(
+              const SizedBox(
                 height: 100,
               ),
               ElevatedButton(
                 onPressed: () {
                   createData(nameC.text, priceC.text, DescC.text);
                 },
-                child: Text("Tambah Data"),
+                child: const Text("Tambah Data"),
               ),
-              Spacer(
+              const Spacer(
                 flex: 2,
               ),
             ],
@@ -197,11 +195,11 @@ class _CreateDataState extends State<CreateData> {
       resultList = await MultiImagePicker.pickImages(
         maxImages: 10,
         enableCamera: true,
-        cupertinoOptions: CupertinoOptions(
+        cupertinoOptions: const CupertinoOptions(
           takePhotoIcon: "chat",
           doneButtonTitle: "Fatto",
         ),
-        materialOptions: MaterialOptions(
+        materialOptions: const MaterialOptions(
           actionBarColor: "#abcdef",
           actionBarTitle: "WisataKu",
           allViewTitle: "All Photos",

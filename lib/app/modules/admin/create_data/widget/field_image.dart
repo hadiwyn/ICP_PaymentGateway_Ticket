@@ -3,7 +3,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:multi_image_picker2/multi_image_picker2.dart';
-import 'package:ticket_wisata_donorojo/app/modules/admin/create_data/index.dart';
 
 class FieldImage extends StatefulWidget {
   const FieldImage({Key? key}) : super(key: key);
@@ -31,11 +30,11 @@ class _FieldImageState extends State<FieldImage> {
   Widget buildGridView() {
     return GridView.count(
       crossAxisCount: 2,
-      padding: EdgeInsets.all(8.0), // Tambahkan properti padding di sini
+      padding: const EdgeInsets.all(8.0), // Tambahkan properti padding di sini
       children: List.generate(images.length, (index) {
         Asset asset = images[index];
         return Padding(
-          padding: EdgeInsets.all(8.0), // Tambahkan padding di sini
+          padding: const EdgeInsets.all(8.0), // Tambahkan padding di sini
           child: AssetThumb(
             asset: asset,
             width: 300,
@@ -53,7 +52,7 @@ class _FieldImageState extends State<FieldImage> {
         leading: null,
         actions: [
           Padding(
-            padding: EdgeInsets.only(right: 16, top: 9, bottom: 9),
+            padding: const EdgeInsets.only(right: 16, top: 9, bottom: 9),
             child: InkWell(
               onTap: () async {
                 uploadImages();
@@ -63,20 +62,20 @@ class _FieldImageState extends State<FieldImage> {
                     _isLoading = true;
                   });
                   await Future.delayed(
-                      Duration(seconds: 2)); // Simulasikan loading
+                      const Duration(seconds: 2)); // Simulasikan loading
                   setState(() {
                     _isLoading = false;
                   });
                 } else {
                   print(imageUrl);
-                  await Future.delayed(Duration(seconds: 10));
+                  await Future.delayed(const Duration(seconds: 10));
                   await showDialog<void>(
                     context: context,
                     barrierDismissible: true,
                     builder: (BuildContext context) {
                       return AlertDialog(
                         title: const Text('Info'),
-                        content: Text("Gambar berhasil disimpan"),
+                        content: const Text("Gambar berhasil disimpan"),
                         actions: <Widget>[
                           ElevatedButton(
                             style: ElevatedButton.styleFrom(
@@ -104,13 +103,13 @@ class _FieldImageState extends State<FieldImage> {
                     // ignore: prefer_const_constructors
                     BoxShadow(
                       blurRadius: 6,
-                      color: Color(0x34000000),
-                      offset: Offset(0, 3),
+                      color: const Color(0x34000000),
+                      offset: const Offset(0, 3),
                     )
                   ],
                   borderRadius: BorderRadius.circular(15),
                 ),
-                child: Row(
+                child: const Row(
                   children: [
                     Spacer(
                       flex: 2,
@@ -155,11 +154,11 @@ class _FieldImageState extends State<FieldImage> {
       resultList = await MultiImagePicker.pickImages(
         maxImages: 10,
         enableCamera: true,
-        cupertinoOptions: CupertinoOptions(
+        cupertinoOptions: const CupertinoOptions(
           takePhotoIcon: "chat",
           doneButtonTitle: "Fatto",
         ),
-        materialOptions: MaterialOptions(
+        materialOptions: const MaterialOptions(
           actionBarColor: "#abcdef",
           actionBarTitle: "WisataKu",
           allViewTitle: "All Photos",

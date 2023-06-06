@@ -1,15 +1,11 @@
 // ignore_for_file: must_be_immutable
 
+import 'package:WisataKU/app/modules/admin/update_data/update_data.dart';
+import 'package:WisataKU/app/modules/user/dashboard/page_view.dart';
+import 'package:WisataKU/app/modules/user/dashboard/pesan_tiket.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:ticket_wisata_donorojo/app/modules/admin/location/location.dart';
-import 'package:ticket_wisata_donorojo/app/modules/admin/update_data/update_data.dart';
-import 'package:ticket_wisata_donorojo/app/modules/user/dashboard/home.dart';
-import 'package:ticket_wisata_donorojo/app/modules/user/dashboard/page_view.dart';
-import 'package:ticket_wisata_donorojo/app/modules/user/dashboard/pesan_tiket.dart';
-import 'package:ticket_wisata_donorojo/app/routes/app_pages.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class DetailWisataAdmin extends StatefulWidget {
@@ -38,7 +34,7 @@ class _DetailWisataAdminState extends State<DetailWisataAdmin> {
     return Scaffold(
       body: Stack(
         children: [
-          Container(
+          SizedBox(
             height: 430,
             child: PageViewAutoSlide(widget.detail),
           ),
@@ -64,8 +60,8 @@ class _DetailWisataAdminState extends State<DetailWisataAdmin> {
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(30),
                     color: Colors.black.withOpacity(0.2)),
-                child: Center(
-                  child: const Icon(
+                child: const Center(
+                  child: Icon(
                     Icons.arrow_back,
                     color: Colors.white,
                   ),
@@ -74,10 +70,10 @@ class _DetailWisataAdminState extends State<DetailWisataAdmin> {
             ),
           ),
           Container(
-            margin: EdgeInsets.only(top: 380),
+            margin: const EdgeInsets.only(top: 380),
             height: double.infinity,
             width: double.infinity,
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(40),
                   topRight: Radius.circular(40),
@@ -101,7 +97,7 @@ class _DetailWisataAdminState extends State<DetailWisataAdmin> {
                     padding: const EdgeInsets.only(top: 15),
                     child: Row(
                       children: [
-                        Spacer(),
+                        const Spacer(),
                         Icon(
                           Icons.location_pin,
                           size: 16.0,
@@ -131,16 +127,16 @@ class _DetailWisataAdminState extends State<DetailWisataAdmin> {
                       ],
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 10, left: 10),
+                  const Padding(
+                    padding: EdgeInsets.only(top: 10, left: 10),
                     child: Text(
                       "Overview",
-                      style: const TextStyle(
+                      style: TextStyle(
                           color: Color.fromARGB(255, 93, 193, 255),
                           fontSize: 16),
                     ),
                   ),
-                  Container(
+                  SizedBox(
                     height: 200,
                     width: double.infinity,
                     child: Padding(
@@ -151,7 +147,7 @@ class _DetailWisataAdminState extends State<DetailWisataAdmin> {
                       ),
                     ),
                   ),
-                  Spacer(),
+                  const Spacer(),
                   Padding(
                     padding: const EdgeInsets.only(left: 10, right: 10),
                     child: Row(
@@ -174,10 +170,10 @@ class _DetailWisataAdminState extends State<DetailWisataAdmin> {
                                 ),
                               ],
                             ),
-                            Text("Per Orang"),
+                            const Text("Per Orang"),
                           ],
                         ),
-                        Spacer(),
+                        const Spacer(),
                         InkWell(
                           onTap: () {
                             Get.off(PesanTiket(widget.detail));
@@ -207,16 +203,16 @@ class _DetailWisataAdminState extends State<DetailWisataAdmin> {
                                   // ignore: prefer_const_constructors
                                   BoxShadow(
                                     blurRadius: 6,
-                                    color: Color(0x34000000),
-                                    offset: Offset(0, 3),
+                                    color: const Color(0x34000000),
+                                    offset: const Offset(0, 3),
                                   )
                                 ],
                                 borderRadius: BorderRadius.circular(20),
                               ),
-                              child: Center(
+                              child: const Center(
                                 child: Text(
                                   "Hapus Data",
-                                  style: const TextStyle(
+                                  style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       color: Color.fromARGB(255, 0, 0, 0)),
                                 ),
@@ -224,7 +220,7 @@ class _DetailWisataAdminState extends State<DetailWisataAdmin> {
                             ),
                           ),
                         ),
-                        Spacer(),
+                        const Spacer(),
                         InkWell(
                           onTap: () {
                             Get.off(UpdateData(widget.detail));
@@ -233,22 +229,22 @@ class _DetailWisataAdminState extends State<DetailWisataAdmin> {
                             width: 100,
                             height: 40,
                             decoration: BoxDecoration(
-                              color: Color.fromARGB(255, 93, 193, 255),
+                              color: const Color.fromARGB(255, 93, 193, 255),
                               // ignore: prefer_const_literals_to_create_immutables
                               boxShadow: [
                                 // ignore: prefer_const_constructors
                                 BoxShadow(
                                   blurRadius: 6,
-                                  color: Color(0x34000000),
-                                  offset: Offset(0, 3),
+                                  color: const Color(0x34000000),
+                                  offset: const Offset(0, 3),
                                 )
                               ],
                               borderRadius: BorderRadius.circular(20),
                             ),
-                            child: Center(
+                            child: const Center(
                               child: Text(
                                 "Ubah Data",
-                                style: const TextStyle(
+                                style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     color: Colors.white),
                               ),
@@ -258,7 +254,7 @@ class _DetailWisataAdminState extends State<DetailWisataAdmin> {
                       ],
                     ),
                   ),
-                  Spacer()
+                  const Spacer()
                 ],
               ),
             ),

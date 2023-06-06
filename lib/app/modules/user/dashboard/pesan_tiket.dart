@@ -60,9 +60,7 @@ class _PesanTiketState extends State<PesanTiket> {
   @override
   void initState() {
     getUsers().then((value) {
-      if (uName != null) {
-        nama_pemesan.text = uName;
-      }
+      nama_pemesan.text = uName;
     }).catchError((error) {
       print("Error getting user data: $error");
     });
@@ -89,7 +87,7 @@ class _PesanTiketState extends State<PesanTiket> {
         //   Icons.arrow_back_ios,
         //   color: Colors.black,
         // ),
-        iconTheme: IconThemeData(color: Colors.black),
+        iconTheme: const IconThemeData(color: Colors.black),
         elevation: 0,
         actions: const [],
       ),
@@ -107,8 +105,8 @@ class _PesanTiketState extends State<PesanTiket> {
                   // ignore: prefer_const_constructors
                   BoxShadow(
                     blurRadius: 6,
-                    color: Color(0x34000000),
-                    offset: Offset(0, 3),
+                    color: const Color(0x34000000),
+                    offset: const Offset(0, 3),
                   )
                 ],
                 borderRadius: BorderRadius.circular(20),
@@ -120,7 +118,7 @@ class _PesanTiketState extends State<PesanTiket> {
                     Container(
                       height: 60,
                       width: double.infinity,
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                           borderRadius: BorderRadius.only(
                               topLeft: Radius.circular(20),
                               topRight: Radius.circular(20)),
@@ -133,10 +131,10 @@ class _PesanTiketState extends State<PesanTiket> {
                               offset: Offset(0, 3),
                             )
                           ]),
-                      child: Center(
+                      child: const Center(
                           child: Text(
                         "Mohon isi data dibawah ini !",
-                        style: const TextStyle(
+                        style: TextStyle(
                           color: Colors.white,
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
@@ -185,8 +183,8 @@ class _PesanTiketState extends State<PesanTiket> {
                         onChanged: (value) {},
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 40, left: 12),
+                    const Padding(
+                      padding: EdgeInsets.only(top: 40, left: 12),
                       child: Align(
                           alignment: Alignment.topLeft,
                           child: Text("Jadwal Wisata")),
@@ -239,14 +237,14 @@ class _PesanTiketState extends State<PesanTiket> {
                               decoration:
                                   // ignore: prefer_const_constructors
                                   InputDecoration(
-                                      icon: Icon(Icons.people),
+                                      icon: const Icon(Icons.people),
                                       labelText:
                                           "Jumlah Orang"), // Only numbers can be entered
                             ),
                           ),
                           Padding(
                             padding: const EdgeInsets.only(right: 15, left: 20),
-                            child: Container(
+                            child: SizedBox(
                               width: 50,
                               height: 50,
                               child: OutlinedButton(
@@ -255,7 +253,7 @@ class _PesanTiketState extends State<PesanTiket> {
                                       RoundedRectangleBorder>(
                                     RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(50.0),
-                                      side: BorderSide(color: Colors.red),
+                                      side: const BorderSide(color: Colors.red),
                                     ),
                                   ),
                                 ),
@@ -274,7 +272,7 @@ class _PesanTiketState extends State<PesanTiket> {
                                   print(total_price);
                                   print(harga);
                                 },
-                                child: Icon(
+                                child: const Icon(
                                   Icons.remove,
                                   size: 15,
                                   color: Colors.black,
@@ -282,7 +280,7 @@ class _PesanTiketState extends State<PesanTiket> {
                               ),
                             ),
                           ),
-                          Container(
+                          SizedBox(
                             width: 50,
                             height: 50,
                             child: OutlinedButton(
@@ -291,7 +289,7 @@ class _PesanTiketState extends State<PesanTiket> {
                                     RoundedRectangleBorder>(
                                   RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(50.0),
-                                    side: BorderSide(color: Colors.red),
+                                    side: const BorderSide(color: Colors.red),
                                   ),
                                 ),
                               ),
@@ -309,7 +307,7 @@ class _PesanTiketState extends State<PesanTiket> {
                                 print(total_price);
                                 print(harga);
                               },
-                              child: Icon(
+                              child: const Icon(
                                 Icons.add,
                                 size: 20,
                                 color: Colors.black,
@@ -337,7 +335,7 @@ class _PesanTiketState extends State<PesanTiket> {
                 ),
               ),
             ),
-            Spacer(),
+            const Spacer(),
             Padding(
               padding: const EdgeInsets.only(left: 40, right: 40),
               child: InkWell(
@@ -353,22 +351,22 @@ class _PesanTiketState extends State<PesanTiket> {
                   width: double.infinity,
                   height: 50,
                   decoration: BoxDecoration(
-                    color: Color.fromARGB(255, 93, 193, 255),
+                    color: const Color.fromARGB(255, 93, 193, 255),
                     // ignore: prefer_const_literals_to_create_immutables
                     boxShadow: [
                       // ignore: prefer_const_constructors
                       BoxShadow(
                         blurRadius: 6,
-                        color: Color(0x34000000),
-                        offset: Offset(0, 3),
+                        color: const Color(0x34000000),
+                        offset: const Offset(0, 3),
                       )
                     ],
                     borderRadius: BorderRadius.circular(30),
                   ),
-                  child: Center(
+                  child: const Center(
                       child: Text(
                     "Pesan Sekarang",
-                    style: const TextStyle(
+                    style: TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
                         fontSize: 18),
@@ -376,7 +374,7 @@ class _PesanTiketState extends State<PesanTiket> {
                 ),
               ),
             ),
-            Spacer()
+            const Spacer()
           ],
         ),
       ),

@@ -1,10 +1,10 @@
+import 'package:WisataKU/app/modules/login/views/resetPassword.dart';
+import 'package:WisataKU/app/modules/register/views/register_view.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:ticket_wisata_donorojo/app/modules/login/views/resetPassword.dart';
-import 'package:ticket_wisata_donorojo/app/modules/register/views/register_view.dart';
 
 import '../controllers/login_controller.dart';
 
@@ -25,7 +25,7 @@ class LoginView extends GetView<LoginController> {
               Container(
                 height: 120,
                 width: MediaQuery.of(context).size.width,
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   color: Color.fromARGB(255, 93, 193, 255),
                 ),
                 child: Padding(
@@ -121,17 +121,17 @@ class LoginView extends GetView<LoginController> {
                           ),
                         ),
                         Padding(
-                          padding: EdgeInsets.only(right: 14.0),
+                          padding: const EdgeInsets.only(right: 14.0),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: [
                               TextButton(
                                 onPressed: () {
-                                  Get.to(ResetPassword());
+                                  Get.to(const ResetPassword());
                                 },
-                                child: Text(
+                                child: const Text(
                                   "Lupa kata sandi",
-                                  style: const TextStyle(
+                                  style: TextStyle(
                                       color: Colors.black, fontSize: 12),
                                 ),
                               )
@@ -155,31 +155,64 @@ class LoginView extends GetView<LoginController> {
                                       shape: RoundedRectangleBorder(
                                         borderRadius: BorderRadius.circular(12),
                                       ),
-                                      backgroundColor:
-                                          Color.fromARGB(255, 93, 193, 255),
+                                      backgroundColor: const Color.fromARGB(
+                                          255, 93, 193, 255),
                                     ),
                                     onPressed: () async {
                                       if (_formKey.currentState != null &&
                                           _formKey.currentState!.validate()) {
-                                        User? user = await controller
-                                            .loginUsingEmailPassword(
-                                                email: controller.emailC.text,
-                                                password: controller.passC.text,
-                                                context: context);
-                                        if (user != null) {
-                                          // ignore: use_build_context_synchronously
-                                          controller.getData(context);
-                                        } else {
-                                          Get.defaultDialog(
-                                            title: "Gagal Login",
-                                            middleText:
-                                                "Email atau kata sandi salah",
-                                            onConfirm: () {
-                                              // controller.emailC.clear();
-                                              // controller.passC.clear();
-                                              Get.back();
+                                        try {
+                                          showDialog(
+                                            context: context,
+                                            barrierDismissible: false,
+                                            builder: (BuildContext context) {
+                                              return const AlertDialog(
+                                                content: Row(
+                                                  children: [
+                                                    CircularProgressIndicator(),
+                                                    SizedBox(width: 20),
+                                                    Text(
+                                                      "Tunggu Sebentar...",
+                                                      style: TextStyle(
+                                                        fontSize: 16,
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              );
                                             },
-                                            textConfirm: "Okey",
+                                          );
+                                          User? user = await controller
+                                              .loginUsingEmailPassword(
+                                                  email: controller.emailC.text,
+                                                  password:
+                                                      controller.passC.text,
+                                                  context: context);
+                                          if (user != null) {
+                                            // ignore: use_build_context_synchronously
+                                            controller.getData(context);
+                                          } else {
+                                            Get.defaultDialog(
+                                              title: "Gagal Login",
+                                              middleText:
+                                                  "Email atau kata sandi salah",
+                                              onConfirm: () {
+                                                // controller.emailC.clear();
+                                                // controller.passC.clear();
+                                                Get.back();
+                                              },
+                                              textConfirm: "Okey",
+                                            );
+                                          }
+                                        } catch (e) {
+                                          Navigator.of(context).pop();
+
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(
+                                            const SnackBar(
+                                              content: Text(
+                                                  "Terjadi kesalahan saat mendekripsi file"),
+                                            ),
                                           );
                                         }
                                       }
@@ -191,7 +224,7 @@ class LoginView extends GetView<LoginController> {
                             ],
                           ),
                         ),
-                        Spacer(
+                        const Spacer(
                           flex: 1,
                         ),
                         Row(
@@ -205,7 +238,7 @@ class LoginView extends GetView<LoginController> {
                             ),
                             InkWell(
                               onTap: () => Get.to(RegisterView()),
-                              child: Text(
+                              child: const Text(
                                 "Register",
                                 style: TextStyle(
                                   color: Colors.blue,
