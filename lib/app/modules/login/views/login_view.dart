@@ -192,6 +192,8 @@ class LoginView extends GetView<LoginController> {
                                             // ignore: use_build_context_synchronously
                                             controller.getData(context);
                                           } else {
+                                            // ignore: use_build_context_synchronously
+                                            Navigator.of(context).pop();
                                             Get.defaultDialog(
                                               title: "Gagal Login",
                                               middleText:
@@ -211,7 +213,7 @@ class LoginView extends GetView<LoginController> {
                                               .showSnackBar(
                                             const SnackBar(
                                               content: Text(
-                                                  "Terjadi kesalahan saat mendekripsi file"),
+                                                  "Terjadi kesalahan saat Masuk"),
                                             ),
                                           );
                                         }

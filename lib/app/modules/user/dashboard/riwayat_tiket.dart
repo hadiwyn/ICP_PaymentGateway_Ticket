@@ -303,14 +303,6 @@ class _RiwayatTiketState extends State<RiwayatTiket> {
                                             );
                                           } catch (e) {
                                             Navigator.of(context).pop();
-
-                                            ScaffoldMessenger.of(context)
-                                                .showSnackBar(
-                                              const SnackBar(
-                                                content: Text(
-                                                    "Terjadi kesalahan saat menghapus tiket"),
-                                              ),
-                                            );
                                           }
                                         }
                                       },

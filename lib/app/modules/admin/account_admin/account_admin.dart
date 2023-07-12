@@ -77,7 +77,8 @@ class _AccountAdminState extends State<AccountAdmin> {
         appBar: AppBar(
           automaticallyImplyLeading: false,
           centerTitle: true,
-          iconTheme: const IconThemeData(color: Color.fromARGB(255, 93, 193, 255)),
+          iconTheme:
+              const IconThemeData(color: Color.fromARGB(255, 93, 193, 255)),
           // title: Image.asset(
           //   'assets/image/logo-pacitan.webp',
           //   height: 40,
@@ -166,11 +167,14 @@ class _AccountAdminState extends State<AccountAdmin> {
                           const SizedBox(
                             width: 20,
                           ),
-                          Text(
-                            uEmail!,
-                            style: const TextStyle(
-                              fontSize: 20,
-                              fontFamily: 'Poppins',
+                          Expanded(
+                            child: Text(
+                              uEmail!,
+                              overflow: TextOverflow.ellipsis,
+                              style: const TextStyle(
+                                fontSize: 20,
+                                fontFamily: 'Poppins',
+                              ),
                             ),
                           ),
                         ],
