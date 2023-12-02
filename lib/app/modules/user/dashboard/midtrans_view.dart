@@ -97,7 +97,7 @@ class _MidtransViewState extends State<MidtransView> {
               }
             },
             initialUrl:
-                'https://1b28-140-213-165-169.ngrok-free.app/checkout?transaction_id=${widget.transaction_id}&nama=${widget.name}&harga=${widget.count}&telepon=${widget.phone}&quantity=${widget.quantity}&date_visit=${widget.date}&date_add=${widget.dateAdd}&tourname=${widget.name_product}',
+                'https://ffb7-182-4-102-30.ngrok-free.app/checkout?transaction_id=${widget.transaction_id}&nama=${widget.name}&harga=${widget.count}&telepon=${widget.phone}&quantity=${widget.quantity}&date_visit=${widget.date}&date_add=${widget.dateAdd}&tourname=${widget.name_product}',
           ),
           // WebViewWidget(controller: controller),
           isLoading

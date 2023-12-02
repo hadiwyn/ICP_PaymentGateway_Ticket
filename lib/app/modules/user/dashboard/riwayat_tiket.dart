@@ -72,11 +72,11 @@ class _RiwayatTiketState extends State<RiwayatTiket> {
 
   Future<MySqlConnection> getConnection() async {
     var settings = ConnectionSettings(
-        host: 'mr-code.my.id',
-        port: 3306,
-        user: 'root',
-        password: 'Sinoman86!',
-        db: 'belajar_midtrans');
+        host: 'stg-myadmin.deraly.id',
+        port: 18987,
+        user: 'hadi',
+        password: 'pfmwKz)kkW-rqfu6',
+        db: 'midtrans_payment');
     return await MySqlConnection.connect(settings);
   }
 
@@ -110,11 +110,11 @@ class _RiwayatTiketState extends State<RiwayatTiket> {
 
   Future<void> deleteData(String id) async {
     final conn = await MySqlConnection.connect(ConnectionSettings(
-        host: 'mr-code.my.id',
+        host: 'localhost',
         port: 3306,
         user: 'root',
-        password: 'Sinoman86!',
-        db: 'belajar_midtrans'));
+        password: '',
+        db: 'midtrans_payment'));
 
     await conn.query('DELETE FROM orders WHERE id = ?', [id]);
 
